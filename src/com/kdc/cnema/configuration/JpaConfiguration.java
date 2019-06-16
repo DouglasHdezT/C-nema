@@ -20,7 +20,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableTransactionManagement
-@EnableJpaRepositories(basePackages = "com.uca.capas.repositories")
+@EnableJpaRepositories(basePackages = "com.kdc.cnema.repositories")
 public class JpaConfiguration {
 
 	@Bean
@@ -28,8 +28,8 @@ public class JpaConfiguration {
 		LocalContainerEntityManagerFactoryBean em =  new LocalContainerEntityManagerFactoryBean();
 		
 		em.setDataSource(dataSource());
-		em.setPersistenceUnitName("capas");
-		em.setPackagesToScan("com.uca.capas.domain");
+		em.setPersistenceUnitName("kdc");
+		em.setPackagesToScan("com.kdc.cnema.domain");
 		
 		JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
 		em.setJpaVendorAdapter(vendorAdapter);
