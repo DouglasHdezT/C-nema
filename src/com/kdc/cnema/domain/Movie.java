@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.kdc.cnema.domain.audit.MovieAudit;
+
 /**
  * Clase que mapea la entidad "pelicula" en la base de datos del proyecto.
  * @author DeusHdezT
@@ -41,7 +43,10 @@ public class Movie {
 	private Category category;
 	
 	@OneToMany(mappedBy = "movie", fetch = FetchType.LAZY)
-	private List<Schedule> schedulesList;
+	private List<Schedule> schedules;
+
+	@OneToMany(mappedBy = "movie", fetch = FetchType.LAZY)
+	private List<MovieAudit> movieAudits;
 
 	public Integer get_id() {
 		return _id;
@@ -91,12 +96,20 @@ public class Movie {
 		this.category = category;
 	}
 
-	public List<Schedule> getSchedulesList() {
-		return schedulesList;
+	public List<Schedule> getSchedules() {
+		return schedules;
 	}
 
-	public void setSchedulesList(List<Schedule> schedulesList) {
-		this.schedulesList = schedulesList;
+	public void setSchedules(List<Schedule> schedules) {
+		this.schedules = schedules;
+	}
+
+	public List<MovieAudit> getMovieAudits() {
+		return movieAudits;
+	}
+
+	public void setMovieAudits(List<MovieAudit> movieAudits) {
+		this.movieAudits = movieAudits;
 	}
 	
 }

@@ -8,6 +8,8 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.kdc.cnema.domain.audit.CountryAudit;
+
 /**
  * Clase que mapea la entidad "pais" en la base de datos del proyecto.
  * @author DeusHdezT
@@ -24,10 +26,13 @@ public class Country {
 	private String name;
 	
 	@OneToMany(mappedBy = "country", fetch = FetchType.LAZY)
-	private List<User> usersList;
+	private List<User> users;
 	
 	@OneToMany(mappedBy = "country", fetch = FetchType.LAZY)
-	private List<Depto> deptosList;
+	private List<Depto> deptos;
+
+	@OneToMany(mappedBy = "country", fetch = FetchType.LAZY)
+	private List<CountryAudit> countryAudits;
 
 	public Integer get_id() {
 		return _id;
@@ -45,21 +50,28 @@ public class Country {
 		this.name = name;
 	}
 
-	public List<User> getUsersList() {
-		return usersList;
+	public List<User> getUsers() {
+		return users;
 	}
 
-	public void setUsersList(List<User> usersList) {
-		this.usersList = usersList;
+	public void setUsers(List<User> users) {
+		this.users = users;
 	}
 
-	public List<Depto> getDeptosList() {
-		return deptosList;
+	public List<Depto> getDeptos() {
+		return deptos;
 	}
 
-	public void setDeptosList(List<Depto> deptosList) {
-		this.deptosList = deptosList;
+	public void setDeptos(List<Depto> deptos) {
+		this.deptos = deptos;
 	}
-	
+
+	public List<CountryAudit> getCountryAudits() {
+		return countryAudits;
+	}
+
+	public void setCountryAudits(List<CountryAudit> countryAudits) {
+		this.countryAudits = countryAudits;
+	} 
 	
 }

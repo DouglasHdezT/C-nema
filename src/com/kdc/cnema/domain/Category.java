@@ -8,6 +8,8 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.kdc.cnema.domain.audit.CategoryAudit;
+
 /**
  * Clase que mapea la entidad "categoria" en la base de datos del proyecto.
  * @author DeusHdezT
@@ -25,6 +27,9 @@ public class Category {
 	
 	@OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
 	private List<Movie> movies;
+
+	@OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
+	private List<CategoryAudit> categoryAudits;
 
 	public Integer get_id() {
 		return _id;
@@ -49,6 +54,13 @@ public class Category {
 	public void setMovies(List<Movie> movies) {
 		this.movies = movies;
 	}
-	
+
+	public List<CategoryAudit> getCategoryAudits() {
+		return categoryAudits;
+	}
+
+	public void setCategoryAudits(List<CategoryAudit> categoryAudits) {
+		this.categoryAudits = categoryAudits;
+	} 
 	
 }

@@ -32,6 +32,45 @@ public class Cinema {
 	@OneToMany(mappedBy = "cinema", fetch = FetchType.LAZY)
 	private List<Schedule> schedules;
 
-	
+	public Integer get_id() {
+		return _id;
+	}
+
+	public void set_id(Integer _id) {
+		this._id = _id;
+	}
+
+	public Integer getRoomNumber() {
+		return roomNumber;
+	}
+
+	public void setRoomNumber(Integer roomNumber) {
+		this.roomNumber = roomNumber;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public Integer getCapacity() {
+		return capacity;
+	}
+
+	public void setCapacity(Integer capacity) {
+		this.capacity = capacity;
+	}
+
+	public List<Schedule> getSchedules() {
+		return schedules;
+	}
+
+	public void setSchedules(List<Schedule> schedules) {
+		this.schedules = schedules;
+	}
+
 	
 }
