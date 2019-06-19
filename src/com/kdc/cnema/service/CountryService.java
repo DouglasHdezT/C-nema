@@ -1,5 +1,17 @@
 package com.kdc.cnema.service;
 
+import java.util.List;
+
+import org.springframework.dao.DataAccessException;
+
+import com.kdc.cnema.domain.Country;
+
+
 public interface CountryService {
+	
+	public Country findOneById() throws DataAccessException;
+	List<Country> findAll() throws DataAccessException;
+	Country save(Country country) throws DataAccessException;
+	void deleteById(Integer id) throws DataAccessException;
 
 }
