@@ -1,20 +1,23 @@
 package com.kdc.cnema.controllers;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
+
+import com.kdc.cnema.domain.User;
 
 @Controller
 public class mainController {
 
 	@RequestMapping("/")
-	public ModelAndView main() {
-		ModelAndView mav =  new ModelAndView();
-		
-		mav.setViewName("index");
-		
-		return mav;
+	@ResponseBody
+	public String main(@ModelAttribute User user) {
+		if(user.getFistname() != null) {
+			return user.getFistname();
+		}else {
+			return "No sirvio esta mierda";
+		}
 	}
 	
 }
