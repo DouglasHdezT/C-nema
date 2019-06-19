@@ -36,14 +36,15 @@ public class JpaConfiguration {
 		em.setJpaProperties(hibernateProperties());
 		
 		return em;
-	}
+	}  
 	
 	@Bean
 	public DataSource dataSource() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		
 		dataSource.setDriverClassName("org.postgresql.Driver");
-		dataSource.setUrl("jdbc:postgresql://127.0.0.1:5432/tareaNCapas");
+		//dataSource.setUrl("jdbc:postgresql://127.0.0.1:5432/tareaNCapas");
+		dataSource.setUrl("postgres://nhdkmarcnbdzbv:fbbb2d2d94099c537b5cb5716da5f6fb59342b98d243ecc10f5ac9b843ac8cf1@ec2-75-101-147-226.compute-1.amazonaws.com:5432/d8vp4ld2aaqaer");
 		dataSource.setUsername("postgres");
 		dataSource.setPassword("root");
 		
