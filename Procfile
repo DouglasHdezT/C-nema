@@ -1,1 +1,0 @@
-web: java -war $JAVA_OPTS -Dserver.port$PORT target/cnema.war
