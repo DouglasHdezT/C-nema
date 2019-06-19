@@ -36,7 +36,7 @@ public class JpaConfiguration {
 		em.setJpaProperties(hibernateProperties());
 		
 		return em;
-	} 
+	}  
 	
 	@Bean
 	public DataSource dataSource() {
