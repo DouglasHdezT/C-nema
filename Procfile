@@ -1,1 +1,1 @@
-web: java -jar $JAVA_OPTS -Dserver.port$PORT target/cnema.jar
+web: java -war $JAVA_OPTS -Dserver.port$PORT target/cnema.war
