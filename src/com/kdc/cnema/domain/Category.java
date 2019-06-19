@@ -1,8 +1,12 @@
 package com.kdc.cnema.domain;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 /**
  * Clase que mapea la entidad "categoria" en la base de datos del proyecto.
@@ -19,4 +23,6 @@ public class Category {
 	@Column(name = "nombre_categoria")
 	private String name;
 	
+	@OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
+	private List<Movie> movies;
 }

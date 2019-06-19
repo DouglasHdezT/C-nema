@@ -25,4 +25,7 @@ public class Country {
 	
 	@OneToMany(mappedBy = "country", fetch = FetchType.LAZY)
 	private List<User> usersList;
+	
+	@OneToMany(mappedBy = "country", fetch = FetchType.LAZY)
+	private List<Depto> deptosList;
 }

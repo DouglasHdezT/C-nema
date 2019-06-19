@@ -2,6 +2,7 @@ package com.kdc.cnema.domain;
 
 import java.math.BigDecimal;
 import java.sql.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -10,6 +11,7 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 /**
  * Clase que mapea la entidad "usuario" en la base de datos del proyecto.
@@ -50,7 +52,11 @@ public class User {
 	@Column(name = "saldo")
 	private BigDecimal currCredit;
 	
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_pais")
 	private Country country;
+	
+	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+	private List<Reservation> reservationsList;
+	
 }

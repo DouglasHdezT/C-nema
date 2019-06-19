@@ -1,8 +1,12 @@
 package com.kdc.cnema.domain;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 /**
  * Clase que mapea la entidad "sala" en la base de datos del proyecto.
@@ -24,5 +28,8 @@ public class Cinema {
 	
 	@Column(name= "capacidad")
 	private Integer capacity;
+	
+	@OneToMany(mappedBy = "cinema", fetch = FetchType.LAZY)
+	private List<Schedule> schedulesList;
 	
 }

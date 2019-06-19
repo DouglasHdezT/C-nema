@@ -2,9 +2,13 @@ package com.kdc.cnema.domain;
 
 import java.math.BigDecimal;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 /**
  * Clase que mapea la entidad "reservacion" en la base de datos del proyecto.
@@ -26,5 +30,13 @@ public class Reservation {
 	
 	@Column(name = "precio_total")
 	private BigDecimal totalPrice;
-
+	
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "id_horario")
+	private Schedule schedule;
+	
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "id_usuario")
+	private User user;
+	
 }
