@@ -12,7 +12,7 @@ public class mainController {
 
 	@RequestMapping("/")
 	@ResponseBody
-	public String main(@ModelAttribute User user) {
+	public String main() {
 		
 		
 		
