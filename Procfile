@@ -1,1 +1,0 @@
-web: java -jar build/libs/C-nema-1.0.jar
