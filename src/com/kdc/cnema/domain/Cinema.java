@@ -30,6 +30,8 @@ public class Cinema {
 	private Integer capacity;
 	
 	@OneToMany(mappedBy = "cinema", fetch = FetchType.LAZY)
-	private List<Schedule> schedulesList;
+	private List<Schedule> schedules;
+
+	
 	
 }

@@ -13,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.kdc.cnema.domain.audit.ProfileAudit;
+
 /**
  * Clase que mapea la entidad "usuario" en la base de datos del proyecto.
  * @author DeusHdezT
@@ -57,6 +59,113 @@ public class User {
 	private Country country;
 	
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-	private List<Reservation> reservationsList;
+	private List<Reservation> reservations;
 	
+	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+	private List<ProfileAudit> profileAudits;
+
+	public Integer get_id() {
+		return _id;
+	}
+
+	public void set_id(Integer _id) {
+		this._id = _id;
+	}
+
+	public Integer getType() {
+		return type;
+	}
+
+	public void setType(Integer type) {
+		this.type = type;
+	}
+
+	public String getFistname() {
+		return fistname;
+	}
+
+	public void setFistname(String fistname) {
+		this.fistname = fistname;
+	}
+
+	public String getLastname() {
+		return lastname;
+	}
+
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
+	}
+
+	public Date getBirthDate() {
+		return birthDate;
+	}
+
+	public void setBirthDate(Date birthDate) {
+		this.birthDate = birthDate;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public Boolean getStatus() {
+		return status;
+	}
+
+	public void setStatus(Boolean status) {
+		this.status = status;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public BigDecimal getCurrCredit() {
+		return currCredit;
+	}
+
+	public void setCurrCredit(BigDecimal currCredit) {
+		this.currCredit = currCredit;
+	}
+
+	public Country getCountry() {
+		return country;
+	}
+
+	public void setCountry(Country country) {
+		this.country = country;
+	}
+
+	public List<Reservation> getReservations() {
+		return reservations;
+	}
+
+	public void setReservations(List<Reservation> reservations) {
+		this.reservations = reservations;
+	}
+
+	public List<ProfileAudit> getProfileAudits() {
+		return profileAudits;
+	}
+
+	public void setProfileAudits(List<ProfileAudit> profileAudits) {
+		this.profileAudits = profileAudits;
+	}
+
 }

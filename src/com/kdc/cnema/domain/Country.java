@@ -28,4 +28,38 @@ public class Country {
 	
 	@OneToMany(mappedBy = "country", fetch = FetchType.LAZY)
 	private List<Depto> deptosList;
+
+	public Integer get_id() {
+		return _id;
+	}
+
+	public void set_id(Integer _id) {
+		this._id = _id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public List<User> getUsersList() {
+		return usersList;
+	}
+
+	public void setUsersList(List<User> usersList) {
+		this.usersList = usersList;
+	}
+
+	public List<Depto> getDeptosList() {
+		return deptosList;
+	}
+
+	public void setDeptosList(List<Depto> deptosList) {
+		this.deptosList = deptosList;
+	}
+	
+	
 }

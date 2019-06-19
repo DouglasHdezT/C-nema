@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.kdc.cnema.domain.audit.DeptoAudit;
+
 /**
  * Clase que mapea la entidad "departamento" en la base de datos del proyecto.
  * @author DeusHdezT
@@ -31,6 +33,50 @@ public class Depto {
 	private Country country;
 	
 	@OneToMany(mappedBy = "depto", fetch = FetchType.LAZY)
-	private List<Town> townsList;
+	private List<Town> towns;
+
+	@OneToMany(mappedBy = "depto", fetch = FetchType.LAZY)
+	private List<DeptoAudit> deptoAudits;
+
+	public Integer get_id() {
+		return _id;
+	}
+
+	public void set_id(Integer _id) {
+		this._id = _id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Country getCountry() {
+		return country;
+	}
+
+	public void setCountry(Country country) {
+		this.country = country;
+	}
+
+	public List<Town> getTowns() {
+		return towns;
+	}
+
+	public void setTowns(List<Town> towns) {
+		this.towns = towns;
+	}
+
+	public List<DeptoAudit> getDeptoAudits() {
+		return deptoAudits;
+	}
+
+	public void setDeptoAudits(List<DeptoAudit> deptoAudits) {
+		this.deptoAudits = deptoAudits;
+	}
+	
 	
 }

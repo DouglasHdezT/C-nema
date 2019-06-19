@@ -9,30 +9,29 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-
-import com.kdc.cnema.domain.Category;
+import com.kdc.cnema.domain.Country;
 
 /**
- * Clase que mapea la entidad "categoria_auditoria" en la base de datos del proyecto.
+ * Clase que mapea la entidad "municipio_auditoria" en la base de datos del proyecto.
  * @author DeusHdezT
  * @version 1.0
  */
-@Entity(name = "categoria_auditoria")
-public class CategoryAudit {
-	
+@Entity(name = "pais_auditoria")
+public class CountryAudit {
+
 	@Id
-	@Column(name = "id_categoria_auditoria")
+	@Column(name = "id_pais_auditoria")
 	private Integer _id;
 	
 	@Column(name = "usuario_modificacion")
 	private String userModifier;
 	
 	@Column(name = "fecha_modificacion")
-	private Date modificationDate;
+	private Date modificationDate; 
 	
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name ="id_categoria")
-	private Category category;
+	@JoinColumn(name ="id_pais")
+	private Country country;
 
 	public Integer get_id() {
 		return _id;
@@ -58,13 +57,12 @@ public class CategoryAudit {
 		this.modificationDate = modificationDate;
 	}
 
-	public Category getCategory() {
-		return category;
+	public Country getCountry() {
+		return country;
 	}
 
-	public void setCategory(Category category) {
-		this.category = category;
+	public void setCountry(Country country) {
+		this.country = country;
 	}
-	
 	
 }
