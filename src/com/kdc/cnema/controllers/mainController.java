@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kdc.cnema.domain.User;
@@ -13,7 +14,7 @@ import com.kdc.cnema.domain.User;
 @CrossOrigin(origins = "*")
 public class mainController {
 
-	@RequestMapping("/")
+	@RequestMapping(value = "/", method = RequestMethod.POST)
 	@ResponseBody
 	public String main(@RequestBody User user) {
 		if(user.getFistname() != null) {
