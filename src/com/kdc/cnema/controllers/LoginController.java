@@ -65,6 +65,7 @@ public class LoginController {
 				responseCode = HttpStatus.BAD_REQUEST;
 			}else {
 				try {
+					System.out.println("Val :"+tempUser.getCountry().getId());
 					Country country = countryService.findOneById(tempUser.getCountry().getId());
 					tempUser.setCountry(country);
 					
