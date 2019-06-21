@@ -31,9 +31,6 @@ public class Town {
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_depto")
 	private Depto depto;
-	
-	@OneToMany(mappedBy = "town", fetch = FetchType.LAZY)
-	private List<TownAudit> townAudits;
 
 	public Integer getId() {
 		return id;
@@ -57,14 +54,6 @@ public class Town {
 
 	public void setDepto(Depto depto) {
 		this.depto = depto;
-	}
-
-	public List<TownAudit> getTownAudits() {
-		return townAudits;
-	}
-
-	public void setTownAudits(List<TownAudit> townAudits) {
-		this.townAudits = townAudits;
 	}
 	
 }

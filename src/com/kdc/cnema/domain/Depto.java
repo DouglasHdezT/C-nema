@@ -35,10 +35,6 @@ public class Depto {
 	@OneToMany(mappedBy = "depto", fetch = FetchType.LAZY)
 	private List<Town> towns;
 
-	@OneToMany(mappedBy = "depto", fetch = FetchType.LAZY)
-	private List<DeptoAudit> deptoAudits;
-
-	
 	public Integer getId() {
 		return id;
 	}
@@ -71,13 +67,4 @@ public class Depto {
 		this.towns = towns;
 	}
 
-	public List<DeptoAudit> getDeptoAudits() {
-		return deptoAudits;
-	}
-
-	public void setDeptoAudits(List<DeptoAudit> deptoAudits) {
-		this.deptoAudits = deptoAudits;
-	}
-	
-	
 }

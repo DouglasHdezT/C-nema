@@ -31,10 +31,6 @@ public class Country {
 	@OneToMany(mappedBy = "country", fetch = FetchType.LAZY)
 	private List<Depto> deptos;
 
-	@OneToMany(mappedBy = "country", fetch = FetchType.LAZY)
-	private List<CountryAudit> countryAudits;
-
-	
 	public Integer getId() {
 		return id;
 	}
@@ -67,12 +63,4 @@ public class Country {
 		this.deptos = deptos;
 	}
 
-	public List<CountryAudit> getCountryAudits() {
-		return countryAudits;
-	}
-
-	public void setCountryAudits(List<CountryAudit> countryAudits) {
-		this.countryAudits = countryAudits;
-	} 
-	
 }

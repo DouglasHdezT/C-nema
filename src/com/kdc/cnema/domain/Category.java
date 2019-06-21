@@ -28,10 +28,6 @@ public class Category {
 	@OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
 	private List<Movie> movies;
 
-	@OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
-	private List<CategoryAudit> categoryAudits;
-
-	
 	public Integer getId() {
 		return id;
 	}
@@ -56,12 +52,4 @@ public class Category {
 		this.movies = movies;
 	}
 
-	public List<CategoryAudit> getCategoryAudits() {
-		return categoryAudits;
-	}
-
-	public void setCategoryAudits(List<CategoryAudit> categoryAudits) {
-		this.categoryAudits = categoryAudits;
-	} 
-	
 }

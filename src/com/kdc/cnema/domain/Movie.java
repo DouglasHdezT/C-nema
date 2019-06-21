@@ -45,10 +45,6 @@ public class Movie {
 	@OneToMany(mappedBy = "movie", fetch = FetchType.LAZY)
 	private List<Schedule> schedules;
 
-	@OneToMany(mappedBy = "movie", fetch = FetchType.LAZY)
-	private List<MovieAudit> movieAudits;
-
-	
 	public Integer getId() {
 		return id;
 	}
@@ -105,12 +101,4 @@ public class Movie {
 		this.schedules = schedules;
 	}
 
-	public List<MovieAudit> getMovieAudits() {
-		return movieAudits;
-	}
-
-	public void setMovieAudits(List<MovieAudit> movieAudits) {
-		this.movieAudits = movieAudits;
-	}
-	
 }
