@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -34,6 +35,10 @@ public class LoginController {
 	@Autowired
 	CountryService countryService;
 	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+	
+	
 	@RequestMapping(value = "/", method = RequestMethod.POST)
 	public String main(@RequestBody LoginForm userSubmitted) {
 		if(userSubmitted.getUsername() != null) {
@@ -53,15 +58,24 @@ public class LoginController {
 			message = "Revisar campos de usuario";
 			responseCode = HttpStatus.BAD_REQUEST;
 		}else {
-			try {
-				User user = userService.save(tempUser);
-				message = JwtPayload.generateToken(new JwtPayload(user.getUsername(), new Date(), user.getType()+"", user.getId()+""));
-				responseCode = HttpStatus.OK;
-			}catch (Exception e) {
-				e.printStackTrace();
-				message = "Error al ingresar usuario";
-				responseCode = HttpStatus.INTERNAL_SERVER_ERROR;
+			if(userService.findOneByUsername(tempUser.getUsername()) != null) {
+				message = "Este usuario ya existe";
+				responseCode = HttpStatus.BAD_REQUEST;
+			}else {
+				try {
+					tempUser.setPassword(passwordEncoder.encode(tempUser.getPassword()));
+					
+					User user = userService.save(tempUser);
+					message = JwtPayload.generateToken(new JwtPayload(user.getUsername(), new Date(), user.getType()+"", user.getId()+""));
+					responseCode = HttpStatus.OK;
+				}catch (Exception e) {
+					e.printStackTrace();
+					message = "Error al ingresar usuario";
+					responseCode = HttpStatus.INTERNAL_SERVER_ERROR;
+				}
 			}
+			
+			
 		}
 		
 		return new ResponseEntity<>(new ResponseDTO(message), responseCode);

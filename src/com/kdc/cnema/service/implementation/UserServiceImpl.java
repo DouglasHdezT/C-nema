@@ -42,4 +42,9 @@ public class UserServiceImpl implements UserService{
 		return repository.findOneByUsernameAndPassword(username, password);
 	}
 
+	@Override
+	public User findOneByUsername(String username) throws DataAccessException {
+		return repository.findOneByUsuario(username);
+	}
+
 }
