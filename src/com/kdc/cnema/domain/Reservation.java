@@ -6,20 +6,27 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 /**
  * Clase que mapea la entidad "reservacion" en la base de datos del proyecto.
  * @author DeusHdezT
  * @version 1.0
  */
-@Entity(name = "reservacion")
+@Entity
+@Table(name = "reservacion", schema = "public")
 public class Reservation {
 	
 	@Id
 	@Column(name = "id_reservacion")
+	@GeneratedValue(generator = "reservacion_id_reservacion_seq", strategy = GenerationType.AUTO)
+	@SequenceGenerator(name = "reservacion_id_reservacion_seq" , sequenceName = "	public.reservacion_id_reservacion_seq", allocationSize = 1)
 	private Integer id;
 	
 	@Column(name = "cantidad_reservaciones")

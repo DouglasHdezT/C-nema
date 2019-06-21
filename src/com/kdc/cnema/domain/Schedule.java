@@ -7,21 +7,28 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 /**
  * Clase que mapea la entidad "horario" en la base de datos del proyecto.
  * @author DeusHdezT
  * @version 1.0
  */
-@Entity(name = "horario")
+@Entity
+@Table(name = "horario", schema = "public")
 public class Schedule {
 
 	@Id
 	@Column(name = "id_horario")
+	@GeneratedValue(generator = "horario_id_horario_seq", strategy = GenerationType.AUTO)
+	@SequenceGenerator(name = "horario_id_horario_seq" , sequenceName = "	public.horario_id_horario_seq", allocationSize = 1)
 	private Integer id;
 	
 	@Column(name = "disponibles")
