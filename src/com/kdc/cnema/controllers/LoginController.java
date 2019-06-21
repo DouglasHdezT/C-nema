@@ -44,7 +44,7 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value = "/signup", method = RequestMethod.POST)
-	public ResponseEntity<ResponseDTO> signup(@RequestBody @Valid User tempUser, @RequestParam("idCountry") Integer idCountry,  BindingResult result){
+	public ResponseEntity<ResponseDTO> signup(@RequestBody @Valid User tempUser,   BindingResult result){
 		
 		String message = "Default Message";
 		HttpStatus responseCode = HttpStatus.OK;
@@ -54,8 +54,6 @@ public class LoginController {
 			responseCode = HttpStatus.BAD_REQUEST;
 		}else {
 			try {
-				Country c = countryService.findOneById(idCountry);
-				tempUser.setCountry(c);
 				User user = userService.save(tempUser);
 				message = JwtPayload.generateToken(new JwtPayload(user.getUsername(), new Date(), user.getType()+"", user.getId()+""));
 				responseCode = HttpStatus.OK;
