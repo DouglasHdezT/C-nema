@@ -1,5 +1,7 @@
 package com.kdc.cnema.controllers;
 
+import java.util.Date;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -8,6 +10,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kdc.cnema.dtos.LoginForm;
+
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 
 @Controller
 @CrossOrigin(origins = "*")
@@ -18,7 +23,9 @@ public class LoginController {
 	@ResponseBody
 	public String main(@RequestBody LoginForm userSubmitted) {
 		if(userSubmitted.getUsername() != null) {
-			return "Username: "+ userSubmitted.getUsername() + " Password: "+userSubmitted.getPassword();
+			return Jwts.builder().setSubject(userSubmitted.getUsername())
+		            .claim("roles", userSubmitted.getPassword()).setIssuedAt(new Date())
+		            .signWith(SignatureAlgorithm.HS256, "secretkey").compact(); 
 		}else {
 			return "No sirvio";
 		}
