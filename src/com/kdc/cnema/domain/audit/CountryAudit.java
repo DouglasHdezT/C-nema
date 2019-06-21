@@ -2,14 +2,9 @@ package com.kdc.cnema.domain.audit;
 
 import java.sql.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import com.kdc.cnema.domain.Country;
 
 /**
  * Clase que mapea la entidad "municipio_auditoria" en la base de datos del proyecto.
@@ -21,7 +16,7 @@ public class CountryAudit {
 
 	@Id
 	@Column(name = "id_pais_auditoria")
-	private Integer _id;
+	private Integer id;
 	
 	@Column(name = "usuario_modificacion")
 	private String userModifier;
@@ -29,16 +24,15 @@ public class CountryAudit {
 	@Column(name = "fecha_modificacion")
 	private Date modificationDate; 
 	
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name ="id_pais")
-	private Country country;
+	@Column(name = "campo_modificacion")
+	private String modifiedField;
 
-	public Integer get_id() {
-		return _id;
+	public Integer getId() {
+		return id;
 	}
 
-	public void set_id(Integer _id) {
-		this._id = _id;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getUserModifier() {
@@ -57,12 +51,13 @@ public class CountryAudit {
 		this.modificationDate = modificationDate;
 	}
 
-	public Country getCountry() {
-		return country;
+	public String getModifiedField() {
+		return modifiedField;
 	}
 
-	public void setCountry(Country country) {
-		this.country = country;
+	public void setModifiedField(String modifiedField) {
+		this.modifiedField = modifiedField;
 	}
+	
 	
 }

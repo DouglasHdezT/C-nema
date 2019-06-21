@@ -5,8 +5,12 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 import com.kdc.cnema.domain.audit.CountryAudit;
 
@@ -15,12 +19,15 @@ import com.kdc.cnema.domain.audit.CountryAudit;
  * @author DeusHdezT
  * @version 1.0
  */
-@Entity(name = "pais")
+@Entity
+@Table(name = "pais", schema = "public")
 public class Country {
 	
 	@Id
 	@Column(name = "id_pais")
-	private Integer _id;
+	@GeneratedValue(generator = "pais_id_pais_seq", strategy = GenerationType.AUTO)
+	@SequenceGenerator(name = "pais_id_pais_seq" , sequenceName = "public.pais_id_pais_seq", allocationSize = 1)
+	private Integer id;
 	
 	@Column(name = "nombre_pais")
 	private String name;
@@ -31,15 +38,12 @@ public class Country {
 	@OneToMany(mappedBy = "country", fetch = FetchType.LAZY)
 	private List<Depto> deptos;
 
-	@OneToMany(mappedBy = "country", fetch = FetchType.LAZY)
-	private List<CountryAudit> countryAudits;
-
-	public Integer get_id() {
-		return _id;
+	public Integer getId() {
+		return id;
 	}
 
-	public void set_id(Integer _id) {
-		this._id = _id;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getName() {
@@ -66,12 +70,4 @@ public class Country {
 		this.deptos = deptos;
 	}
 
-	public List<CountryAudit> getCountryAudits() {
-		return countryAudits;
-	}
-
-	public void setCountryAudits(List<CountryAudit> countryAudits) {
-		this.countryAudits = countryAudits;
-	} 
-	
 }

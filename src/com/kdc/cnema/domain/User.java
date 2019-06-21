@@ -8,10 +8,14 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 import com.kdc.cnema.domain.audit.ProfileAudit;
 
@@ -20,12 +24,15 @@ import com.kdc.cnema.domain.audit.ProfileAudit;
  * @author DeusHdezT
  * @version 1.0
  */
-@Entity(name = "usuario")
+@Entity
+@Table(name = "usuario", schema = "public")
 public class User {
 
 	@Id
 	@Column(name = "id_usuario")
-	private Integer _id;
+	@GeneratedValue(generator = "usuario_id_usuario_seq", strategy = GenerationType.AUTO)
+	@SequenceGenerator(name = "usuario_id_usuario_seq" , sequenceName = "	public.usuario_id_usuario_seq", allocationSize = 1)
+	private Integer id;
 	
 	@Column(name = "tipo_usuario")
 	private Integer type;
@@ -64,12 +71,12 @@ public class User {
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
 	private List<ProfileAudit> profileAudits;
 
-	public Integer get_id() {
-		return _id;
+	public Integer getId() {
+		return id;
 	}
 
-	public void set_id(Integer _id) {
-		this._id = _id;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public Integer getType() {

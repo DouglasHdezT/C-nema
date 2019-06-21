@@ -22,7 +22,7 @@ public class Schedule {
 
 	@Id
 	@Column(name = "id_horario")
-	private Integer _id;
+	private Integer id;
 	
 	@Column(name = "disponibles")
 	private Integer avialable;
@@ -44,12 +44,13 @@ public class Schedule {
 	@OneToMany(mappedBy = "schedule", fetch = FetchType.LAZY)
 	private List<Reservation> reservations;
 
-	public Integer get_id() {
-		return _id;
+	
+	public Integer getId() {
+		return id;
 	}
 
-	public void set_id(Integer _id) {
-		this._id = _id;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public Integer getAvialable() {

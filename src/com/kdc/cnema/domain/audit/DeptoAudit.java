@@ -2,15 +2,9 @@ package com.kdc.cnema.domain.audit;
 
 import java.sql.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-
-import com.kdc.cnema.domain.Depto;
 
 /**
  * Clase que mapea la entidad "depto_auditoria" en la base de datos del proyecto.
@@ -22,7 +16,7 @@ public class DeptoAudit {
 
 	@Id
 	@Column(name = "id_categoria_auditoria")
-	private Integer _id;
+	private Integer id;
 	
 	@Column(name = "usuario_modificacion")
 	private String userModifier;
@@ -30,16 +24,15 @@ public class DeptoAudit {
 	@Column(name = "fecha_modificacion")
 	private Date modificationDate; 
 	
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name ="id_depto")
-	private Depto depto;
+	@Column(name = "campo_modificacion")
+	private String modifiedField;
 
-	public Integer get_id() {
-		return _id;
+	public Integer getId() {
+		return id;
 	}
 
-	public void set_id(Integer _id) {
-		this._id = _id;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getUserModifier() {
@@ -58,13 +51,13 @@ public class DeptoAudit {
 		this.modificationDate = modificationDate;
 	}
 
-	public Depto getDepto() {
-		return depto;
+	public String getModifiedField() {
+		return modifiedField;
 	}
 
-	public void setDepto(Depto depto) {
-		this.depto = depto;
+	public void setModifiedField(String modifiedField) {
+		this.modifiedField = modifiedField;
 	}
-	
+
 	
 }

@@ -23,7 +23,7 @@ public class Town {
 	
 	@Id
 	@Column(name = "id_municipio")
-	private Integer _id;
+	private Integer id;
 	
 	@Column(name = "nombre_municipio")
 	private String name;
@@ -31,16 +31,13 @@ public class Town {
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_depto")
 	private Depto depto;
-	
-	@OneToMany(mappedBy = "town", fetch = FetchType.LAZY)
-	private List<TownAudit> townAudits;
 
-	public Integer get_id() {
-		return _id;
+	public Integer getId() {
+		return id;
 	}
 
-	public void set_id(Integer _id) {
-		this._id = _id;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getName() {
@@ -57,14 +54,6 @@ public class Town {
 
 	public void setDepto(Depto depto) {
 		this.depto = depto;
-	}
-
-	public List<TownAudit> getTownAudits() {
-		return townAudits;
-	}
-
-	public void setTownAudits(List<TownAudit> townAudits) {
-		this.townAudits = townAudits;
 	}
 	
 }
