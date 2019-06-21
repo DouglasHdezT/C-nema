@@ -1,5 +1,6 @@
 package com.kdc.cnema.controllers;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.validation.Valid;
@@ -20,6 +21,7 @@ import com.kdc.cnema.domain.Country;
 import com.kdc.cnema.domain.User;
 import com.kdc.cnema.dtos.LoginForm;
 import com.kdc.cnema.dtos.ResponseDTO;
+import com.kdc.cnema.dtos.SignupDTO;
 import com.kdc.cnema.repositories.CountryRepository;
 import com.kdc.cnema.service.CountryService;
 import com.kdc.cnema.service.UserService;
@@ -63,7 +65,10 @@ public class LoginController {
 				responseCode = HttpStatus.BAD_REQUEST;
 			}else {
 				try {
-					tempUser.setPassword(passwordEncoder.encode(tempUser.getPassword()));
+					Country country = countryService.findOneById(tempUser.getCountry().getId());
+					tempUser.setCountry(country);
+					
+					tempUser.setCurrCredit(new BigDecimal(20));
 					
 					User user = userService.save(tempUser);
 					message = JwtPayload.generateToken(new JwtPayload(user.getUsername(), new Date(), user.getType()+"", user.getId()+""));
