@@ -24,6 +24,10 @@ public class JwtPayload {
 		this.type = type;
 		this.uid = uid;
 	}
+	
+	public JwtPayload() {
+		// TODO Auto-generated constructor stub
+	}
 
 	public static String generateToken(JwtPayload playload) {
 		return Jwts.builder().setSubject(playload.subject)
@@ -34,10 +38,20 @@ public class JwtPayload {
 	}
 	
 	public static JwtPayload decodeToken(String token) {
+		
+		JwtPayload payload = new JwtPayload();
+		
 		Claims claims = Jwts.parser()
 			.parseClaimsJws(token).getBody();
 		
-		return null;
+		payload.uid = (String) claims.get("uid");
+		payload.type = (String) claims.get("type");
+		payload.subject = claims.getSubject();
+		payload.issuedAtTime  = claims.getIssuedAt();
+		
+		return payload;
 	}
+	
+	
 
 }
