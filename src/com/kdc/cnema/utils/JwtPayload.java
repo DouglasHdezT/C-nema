@@ -41,7 +41,7 @@ public class JwtPayload {
 		
 		JwtPayload payload = new JwtPayload();
 		
-		Claims claims = Jwts.parser()
+		Claims claims = Jwts.parser().setSigningKey(ConstantsAPI.JWT_SECRET)
 			.parseClaimsJws(token).getBody();
 		
 		payload.uid = (String) claims.get("uid");
