@@ -12,14 +12,14 @@ import com.kdc.cnema.dtos.LoginForm;
 
 @Controller
 @CrossOrigin(origins = "*")
-public class mainController {
+public class LoginController {
 	
 	
 	@RequestMapping(value = "/", method = RequestMethod.POST)
 	@ResponseBody
-	public String main(@RequestBody LoginForm user) {
-		if(user.getUsername() != null) {
-			return "Username: "+ user.getUsername() + " Password: "+user.getPassword();
+	public String main(@RequestBody LoginForm userSubmitted) {
+		if(userSubmitted.getUsername() != null) {
+			return "Username: "+ userSubmitted.getUsername() + " Password: "+userSubmitted.getPassword();
 		}else {
 			return "No sirvio";
 		}
