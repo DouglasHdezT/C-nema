@@ -44,7 +44,7 @@ public class JpaConfiguration {
 		
 		dataSource.setDriverClassName("org.postgresql.Driver");
 		//dataSource.setUrl("jdbc:postgresql://127.0.0.1:5432/tareaNCapas");
-		dataSource.setUrl("jdbc:postgres://nhdkmarcnbdzbv:fbbb2d2d94099c537b5cb5716da5f6fb59342b98d243ecc10f5ac9b843ac8cf1@ec2-75-101-147-226.compute-1.amazonaws.com:5432/d8vp4ld2aaqaer");
+		dataSource.setUrl("jdbc:postgresql://nhdkmarcnbdzbv:fbbb2d2d94099c537b5cb5716da5f6fb59342b98d243ecc10f5ac9b843ac8cf1@ec2-75-101-147-226.compute-1.amazonaws.com:5432/d8vp4ld2aaqaer");
 		dataSource.setUsername("nhdkmarcnbdzbv");
 		dataSource.setPassword("fbbb2d2d94099c537b5cb5716da5f6fb59342b98d243ecc10f5ac9b843ac8cf1");
 		
