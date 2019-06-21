@@ -34,7 +34,7 @@ public class JwtPayload {
 	            .claim("type", playload.type)
 	            .claim("uid", playload.uid)
 	            .setIssuedAt(playload.issuedAtTime)
-	            .signWith(SignatureAlgorithm.HS256, "secretkey").compact(); 
+	            .signWith(SignatureAlgorithm.HS256, ConstantsAPI.JWT_SECRET).compact(); 
 	}
 	
 	public static JwtPayload decodeToken(String token) {
