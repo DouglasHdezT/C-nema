@@ -6,9 +6,13 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 import com.kdc.cnema.domain.User;
 
@@ -17,11 +21,14 @@ import com.kdc.cnema.domain.User;
  * @author DeusHdezT
  * @version 1.0
  */
-@Entity(name = "cuentas_auditoria")
+@Entity
+@Table(name = "cuentas_auditoria", schema = "public")
 public class ProfileAudit {
 	
 	@Id
 	@Column(name = "id_cuenta")
+	@GeneratedValue(generator = "cuentas_auditoria_id_cuenta_seq", strategy = GenerationType.AUTO)
+	@SequenceGenerator(name = "cuentas_auditoria_id_cuenta_seq" , sequenceName = "	public.cuentas_auditoria_id_cuenta_seq", allocationSize = 1)
 	private Integer _id;
 	
 	@Column(name = "usuario_modificacion")
