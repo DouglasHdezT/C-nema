@@ -1,6 +1,5 @@
 package com.kdc.cnema.controllers;
 
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,5 +23,6 @@ public class LoginController {
 			return "No sirvio";
 		}
 	}
+	
 	
 }

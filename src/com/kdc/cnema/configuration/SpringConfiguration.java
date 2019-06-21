@@ -30,6 +30,15 @@ public class SpringConfiguration implements WebMvcConfigurer{
 		return new MappingJackson2HttpMessageConverter();
 	}
 	
+//	@Bean
+//    public FilterRegistrationBean jwtFilter() {
+//        final FilterRegistrationBean registrationBean = new FilterRegistrationBean();
+//        registrationBean.setFilter(new JwtFilter());
+//        registrationBean.addUrlPatterns("/api/*");
+//
+//        return registrationBean;
+//    }
+	
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry
