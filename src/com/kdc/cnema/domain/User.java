@@ -45,11 +45,11 @@ public class User {
 	@Column(name = "tipo_usuario")
 	private Integer type;
 	
-	@NotBlank
+	@NotEmpty
 	@Column(name = "nombre_usuario")
 	private String fistname;
 	
-	@NotBlank
+	@NotEmpty
 	@Column(name = "apellido_usuario")
 	private String lastname;
 	
@@ -69,7 +69,7 @@ public class User {
 	@Column(name = "username")
 	private String username;
 	
-	@NotNull
+	@NotEmpty
 	@Column(name = "password_usuario")
 	private String password;
 	
