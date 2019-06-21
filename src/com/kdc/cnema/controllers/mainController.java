@@ -15,7 +15,7 @@ import com.kdc.cnema.dtos.LoginForm;
 public class mainController {
 	
 	
-	@RequestMapping(value = "/")
+	@RequestMapping(value = "/", method = RequestMethod.POST)
 	@ResponseBody
 	public String main(@RequestBody LoginForm user) {
 		if(user.getUsername() != null) {
