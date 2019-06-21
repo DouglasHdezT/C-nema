@@ -19,7 +19,7 @@ public class mainController {
 	@ResponseBody
 	public String main(@RequestBody LoginForm user) {
 		if(user.getUsername() != null) {
-			return user.getUsername();
+			return "Username: "+ user.getUsername() + " Password: "+user.getPassword();
 		}else {
 			return "No sirvio";
 		}
