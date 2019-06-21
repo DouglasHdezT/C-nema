@@ -10,5 +10,7 @@ import com.kdc.cnema.domain.Country;
  *	Repositorio de entidad Country
  */
 public interface CountryRepository extends JpaRepository<Country, Integer>{
-
+	
+	public Country findOneById(Integer id);
+	
 }
