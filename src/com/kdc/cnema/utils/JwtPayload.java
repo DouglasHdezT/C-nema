@@ -30,6 +30,7 @@ public class JwtPayload {
 	}
 
 	public static String generateToken(JwtPayload playload) {
+		
 		return Jwts.builder().setSubject(playload.subject)
 	            .claim("type", playload.type)
 	            .claim("uid", playload.uid)
@@ -41,15 +42,65 @@ public class JwtPayload {
 		
 		JwtPayload payload = new JwtPayload();
 		
-		Claims claims = Jwts.parser().setSigningKey(ConstantsAPI.JWT_SECRET)
-			.parseClaimsJws(token).getBody();
+		//System.out.println(token);
 		
-		payload.uid = (String) claims.get("uid");
-		payload.type = (String) claims.get("type");
-		payload.subject = claims.getSubject();
-		payload.issuedAtTime  = claims.getIssuedAt();
+		try {
+
+			Claims claims = Jwts.parser().setSigningKey(ConstantsAPI.JWT_SECRET)
+				.parseClaimsJws(token).getBody();
+			
+			payload.uid = (String) claims.get("uid");
+			payload.type = (String) claims.get("type");
+			payload.subject = claims.getSubject();
+			payload.issuedAtTime  = claims.getIssuedAt();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		
 		return payload;
+	}
+	
+	public static boolean isValidToken(String token) {
+		try {
+			Jwts.parser().setSigningKey(ConstantsAPI.JWT_SECRET).parse(token);
+			return true;
+		}catch (Exception e) {
+			//e.printStackTrace();
+			return false;
+		}
+	}
+
+	public String getSubject() {
+		return subject;
+	}
+
+	public void setSubject(String subject) {
+		this.subject = subject;
+	}
+
+	public Date getIssuedAtTime() {
+		return issuedAtTime;
+	}
+
+	public void setIssuedAtTime(Date issuedAtTime) {
+		this.issuedAtTime = issuedAtTime;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public String getUid() {
+		return uid;
+	}
+
+	public void setUid(String uid) {
+		this.uid = uid;
 	}
 	
 	

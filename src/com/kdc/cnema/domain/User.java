@@ -16,6 +16,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import com.kdc.cnema.domain.audit.ProfileAudit;
 
@@ -34,27 +39,37 @@ public class User {
 	@SequenceGenerator(name = "usuario_id_usuario_seq" , sequenceName = "public.usuario_id_usuario_seq", allocationSize = 1)
 	private Integer id;
 	
+	@NotNull
+	@Min(0)
+	@Max(1)
 	@Column(name = "tipo_usuario")
 	private Integer type;
 	
+	@NotBlank
 	@Column(name = "nombre_usuario")
 	private String fistname;
 	
+	@NotBlank
 	@Column(name = "apellido_usuario")
 	private String lastname;
 	
+	@NotNull
 	@Column(name = "fecha_nacimiento")
 	private Date birthDate;
 	
+	@NotEmpty
 	@Column(name = "direccion")
 	private String address;
 	
+	@NotNull
 	@Column(name = "estado")
 	private Boolean status;
 	
+	@NotEmpty
 	@Column(name = "username")
 	private String username;
 	
+	@NotNull
 	@Column(name = "password_usuario")
 	private String password;
 	
