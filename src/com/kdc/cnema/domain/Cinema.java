@@ -18,7 +18,7 @@ public class Cinema {
 
 	@Id
 	@Column(name="id_sala")
-	private Integer _id;
+	private Integer id;
 	
 	@Column(name="numero_sala")
 	private Integer roomNumber;
@@ -32,12 +32,13 @@ public class Cinema {
 	@OneToMany(mappedBy = "cinema", fetch = FetchType.LAZY)
 	private List<Schedule> schedules;
 
-	public Integer get_id() {
-		return _id;
+	
+	public Integer getId() {
+		return id;
 	}
 
-	public void set_id(Integer _id) {
-		this._id = _id;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public Integer getRoomNumber() {

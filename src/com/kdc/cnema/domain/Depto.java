@@ -23,7 +23,7 @@ public class Depto {
 	
 	@Id
 	@Column(name="id_depto")
-	private Integer _id;
+	private Integer id;
 	
 	@Column(name="nombre_depto")
 	private String name;
@@ -38,12 +38,13 @@ public class Depto {
 	@OneToMany(mappedBy = "depto", fetch = FetchType.LAZY)
 	private List<DeptoAudit> deptoAudits;
 
-	public Integer get_id() {
-		return _id;
+	
+	public Integer getId() {
+		return id;
 	}
 
-	public void set_id(Integer _id) {
-		this._id = _id;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getName() {

@@ -24,7 +24,7 @@ public class Movie {
 	
 	@Id
 	@Column(name =  "id_pelicula")
-	private Integer _id;
+	private Integer id;
 	
 	@Column(name =  "titulo_pelicula")
 	private String title;
@@ -48,12 +48,13 @@ public class Movie {
 	@OneToMany(mappedBy = "movie", fetch = FetchType.LAZY)
 	private List<MovieAudit> movieAudits;
 
-	public Integer get_id() {
-		return _id;
+	
+	public Integer getId() {
+		return id;
 	}
 
-	public void set_id(Integer _id) {
-		this._id = _id;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getTitle() {
