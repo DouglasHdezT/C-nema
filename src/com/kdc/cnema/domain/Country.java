@@ -5,8 +5,12 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 import com.kdc.cnema.domain.audit.CountryAudit;
 
@@ -15,11 +19,14 @@ import com.kdc.cnema.domain.audit.CountryAudit;
  * @author DeusHdezT
  * @version 1.0
  */
-@Entity(name = "pais")
+@Entity
+@Table(name = "pais", schema = "public")
 public class Country {
 	
 	@Id
 	@Column(name = "id_pais")
+	@GeneratedValue(generator = "pais_id_pais_seq", strategy = GenerationType.AUTO)
+	@SequenceGenerator(name = "pais_id_pais_seq" , sequenceName = "public.pais_id_pais_seq", allocationSize = 1)
 	private Integer id;
 	
 	@Column(name = "nombre_pais")

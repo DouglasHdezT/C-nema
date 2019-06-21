@@ -6,10 +6,14 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 import com.kdc.cnema.domain.audit.DeptoAudit;
 
@@ -18,11 +22,14 @@ import com.kdc.cnema.domain.audit.DeptoAudit;
  * @author DeusHdezT
  * @version 1.0
  */
-@Entity(name = "departamento")
+@Entity
+@Table(name = "departamento", schema = "public")
 public class Depto {
 	
 	@Id
 	@Column(name="id_depto")
+	@GeneratedValue(generator = "departamento_id_depto_seq", strategy = GenerationType.AUTO)
+	@SequenceGenerator(name = "departamento_id_depto_seq" , sequenceName = "public.departamento_id_depto_seq", allocationSize = 1)
 	private Integer id;
 	
 	@Column(name="nombre_depto")
