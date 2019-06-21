@@ -23,9 +23,7 @@ public class LoginController {
 	@ResponseBody
 	public String main(@RequestBody LoginForm userSubmitted) {
 		if(userSubmitted.getUsername() != null) {
-			return Jwts.builder().setSubject(userSubmitted.getUsername())
-		            .claim("roles", userSubmitted.getPassword()).setIssuedAt(new Date())
-		            .signWith(SignatureAlgorithm.HS256, "secretkey").compact(); 
+			return "Holi ¿";
 		}else {
 			return "No sirvio";
 		}
