@@ -5,6 +5,7 @@ import java.util.Date;
 
 import javax.validation.Valid;
 
+import org.apache.el.parser.JJTELParserState;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -111,6 +112,46 @@ public class LoginController {
 		}
 		
 		return new ResponseEntity<>(new ResponseDTO(message), responseCode);
+	}
+	
+	@RequestMapping(value= "/tokenDecode", method = RequestMethod.POST)
+	public ResponseEntity<User> decodeJWT(@RequestParam("token") String token, 
+			@RequestParam("password") String password){
+		
+		User user = new User();
+		HttpStatus code= HttpStatus.FORBIDDEN;
+		
+		try {
+			
+			JwtPayload payload = JwtPayload.decodeToken(token);
+			
+			user = userService.findOneById(Integer.parseInt(payload.getUid()));
+			
+			if(user != null) {
+				if(passwordEncoder.matches(password,user.getPassword())) {
+					code = HttpStatus.OK;
+				}else {
+					code=HttpStatus.FORBIDDEN;
+					user = new User();
+				}
+				
+			}else {
+				user = new User();
+				code = HttpStatus.NOT_FOUND;
+			}
+			
+		}catch (io.jsonwebtoken.SignatureException e) {
+			
+			code = HttpStatus.FORBIDDEN;
+		
+		}catch (Exception e) {
+			
+			e.printStackTrace();
+			code = HttpStatus.INTERNAL_SERVER_ERROR;
+		
+		}
+		
+		return new ResponseEntity<User>(user, code);
 	}
 	
 	@RequestMapping(value = "/getTokenRip")

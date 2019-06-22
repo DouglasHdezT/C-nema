@@ -44,19 +44,13 @@ public class JwtPayload {
 		
 		//System.out.println(token);
 		
-		try {
-
-			Claims claims = Jwts.parser().setSigningKey(ConstantsAPI.JWT_SECRET)
+		Claims claims = Jwts.parser().setSigningKey(ConstantsAPI.JWT_SECRET)
 				.parseClaimsJws(token).getBody();
 			
 			payload.uid = (String) claims.get("uid");
 			payload.type = (String) claims.get("type");
 			payload.subject = claims.getSubject();
 			payload.issuedAtTime  = claims.getIssuedAt();
-		}catch (Exception e) {
-			e.printStackTrace();
-		}
-		
 		
 		return payload;
 	}
