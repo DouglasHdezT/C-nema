@@ -7,10 +7,8 @@ import org.springframework.dao.DataAccessException;
 import com.kdc.cnema.domain.Category;
 
 public interface CategoryService {
-	
-	public Category findOneById() throws DataAccessException;
+	Category findOneById(Integer id) throws DataAccessException;
 	List<Category> findAll() throws DataAccessException;
 	Category save(Category category) throws DataAccessException;
 	void deleteById(Integer id) throws DataAccessException;
-
 }
