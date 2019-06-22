@@ -9,7 +9,7 @@ import com.kdc.cnema.domain.audit.MovieAudit;
 
 public interface MovieAuditService {
 	
-	public MovieAudit findOneById() throws DataAccessException;
+	public MovieAudit findOneById(Integer id) throws DataAccessException;
 	List<MovieAudit> findAll() throws DataAccessException;
 	MovieAudit save(MovieAudit movieAudit) throws DataAccessException;
 	void deleteById(Integer id) throws DataAccessException;

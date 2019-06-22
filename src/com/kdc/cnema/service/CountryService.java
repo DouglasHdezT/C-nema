@@ -9,7 +9,7 @@ import com.kdc.cnema.domain.Country;
 
 public interface CountryService {
 	
-	public Country findOneById() throws DataAccessException;
+	public Country findOneById(Integer id) throws DataAccessException;
 	List<Country> findAll() throws DataAccessException;
 	Country save(Country country) throws DataAccessException;
 	void deleteById(Integer id) throws DataAccessException;

@@ -10,7 +10,7 @@ import com.kdc.cnema.domain.Depto;
 
 public interface DeptoService {
 	
-	public Depto findOneById() throws DataAccessException;
+	public Depto findOneById(Integer id) throws DataAccessException;
 	
 	List<Depto> findAll() throws DataAccessException;
 	
