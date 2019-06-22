@@ -47,15 +47,20 @@ public class LoginController {
 		HttpStatus code = HttpStatus.FORBIDDEN;
 		
 		try {
-			User user = userService.findOneByUsernameAndPassword(userSubmitted.getUsername(), 
-					passwordEncoder.encode(userSubmitted.getPassword())); 
+			User user = userService.findOneByUsername(userSubmitted.getUsername()); 
 			
 			if(user != null) {
-				message = JwtPayload.generateToken(new JwtPayload(user.getUsername(), new Date(), user.getType()+"", user.getId()+""));
-				code = HttpStatus.OK;
+				if(passwordEncoder.matches(userSubmitted.getPassword(), user.getPassword())) {
+					message = JwtPayload.generateToken(new JwtPayload(user.getUsername(), new Date(), user.getType()+"", user.getId()+""));
+					code = HttpStatus.OK;
+				}else {
+					message = "Credenciales incorrectas";
+					code = HttpStatus.FORBIDDEN;
+				}
+				
 			}else {
-				message = "Error en las credenciales";
-				code = HttpStatus.FORBIDDEN;
+				message = "Usuario no existe";
+				code = HttpStatus.NOT_FOUND;
 			}
 			
 		} catch (Exception e) {
