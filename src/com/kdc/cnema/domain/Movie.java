@@ -38,8 +38,8 @@ public class Movie {
 	@Column(name =  "fecha_estreno")
 	private Date releaseDate;
 	
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name="id_categoria")
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="id_categoria", referencedColumnName= "id_categoria")
 	private Category category;
 	
 	@OneToMany(mappedBy = "movie", fetch = FetchType.LAZY)

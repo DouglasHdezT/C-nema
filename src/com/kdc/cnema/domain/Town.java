@@ -35,8 +35,8 @@ public class Town {
 	@Column(name = "nombre_municipio")
 	private String name;
 	
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "id_depto")
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "id_depto", referencedColumnName= "id_depto")
 	private Depto depto;
 
 	public Integer getId() {

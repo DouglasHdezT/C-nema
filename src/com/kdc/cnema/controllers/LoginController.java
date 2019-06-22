@@ -5,7 +5,6 @@ import java.util.Date;
 
 import javax.validation.Valid;
 
-import org.apache.el.parser.JJTELParserState;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,8 +21,6 @@ import com.kdc.cnema.domain.Country;
 import com.kdc.cnema.domain.User;
 import com.kdc.cnema.dtos.LoginForm;
 import com.kdc.cnema.dtos.ResponseDTO;
-import com.kdc.cnema.dtos.SignupDTO;
-import com.kdc.cnema.repositories.CountryRepository;
 import com.kdc.cnema.service.CountryService;
 import com.kdc.cnema.service.UserService;
 import com.kdc.cnema.utils.JwtPayload;

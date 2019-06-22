@@ -35,8 +35,8 @@ public class Depto {
 	@Column(name="nombre_depto")
 	private String name;
 	
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "id_pais")
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "id_pais" , referencedColumnName= "id_pais")
 	private Country country;
 	
 	@OneToMany(mappedBy = "depto", fetch = FetchType.LAZY)

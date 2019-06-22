@@ -40,12 +40,12 @@ public class Schedule {
 	@Column(name = "hora_fin")
 	private Date endTime;
 	
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "id_sala")
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "id_sala", referencedColumnName= "id_sala")
 	private Cinema cinema;
 	
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "id_pelicula")
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "id_pelicula", referencedColumnName= "id_pelicula")
 	private Movie movie;
 	
 	@OneToMany(mappedBy = "schedule", fetch = FetchType.LAZY)
