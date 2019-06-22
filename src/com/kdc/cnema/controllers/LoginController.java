@@ -41,13 +41,31 @@ public class LoginController {
 	private PasswordEncoder passwordEncoder;
 	
 	
-	@RequestMapping(value = "/", method = RequestMethod.POST)
-	public String main(@RequestBody LoginForm userSubmitted) {
-		if(userSubmitted.getUsername() != null) {
-			return "Holi ¿";
-		}else {
-			return "No sirvio";
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	public ResponseEntity<ResponseDTO> main(@RequestBody LoginForm userSubmitted) {
+		String message = "Default message";
+		HttpStatus code = HttpStatus.FORBIDDEN;
+		
+		try {
+			User user = userService.findOneByUsernameAndPassword(userSubmitted.getUsername(), 
+					passwordEncoder.encode(userSubmitted.getPassword())); 
+			
+			if(user != null) {
+				message = JwtPayload.generateToken(new JwtPayload(user.getUsername(), new Date(), user.getType()+"", user.getId()+""));
+				code = HttpStatus.OK;
+			}else {
+				message = "Error en las credenciales";
+				code = HttpStatus.FORBIDDEN;
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			message = "Error interno del servidor";
+			code = HttpStatus.INTERNAL_SERVER_ERROR;
 		}
+		
+		
+		return new ResponseEntity<>(new ResponseDTO(message), code);
 	}
 	
 	@RequestMapping(value = "/signup", method = RequestMethod.POST)
