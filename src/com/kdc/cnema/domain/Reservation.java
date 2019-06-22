@@ -43,7 +43,7 @@ public class Reservation {
 	private Schedule schedule;
 	
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "id_usuario", referencedColumnName= "id_horario")
+	@JoinColumn(name = "id_usuario", referencedColumnName= "id_usuario")
 	private User user;
 
 	
