@@ -2,37 +2,42 @@ package com.kdc.cnema.service.implementation;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.kdc.cnema.domain.audit.TownAudit;
+import com.kdc.cnema.repositories.TownAuditRepository;
 import com.kdc.cnema.service.TownAuditService;
 
 @Service
 public class TownAuditServiceImpl implements TownAuditService{
+	
+	@Autowired
+	TownAuditRepository tARepo;
 
 	@Override
-	public TownAudit findOneById() throws DataAccessException {
+	public TownAudit findOneById(Integer id) throws DataAccessException {
 		// TODO Auto-generated method stub
-		return null;
+		return tARepo.findById(id).get();
 	}
 
 	@Override
 	public List<TownAudit> findAll() throws DataAccessException {
 		// TODO Auto-generated method stub
-		return null;
+		return tARepo.findAll();
 	}
 
 	@Override
 	public TownAudit save(TownAudit townAudit) throws DataAccessException {
 		// TODO Auto-generated method stub
-		return null;
+		return tARepo.save(townAudit);
 	}
 
 	@Override
 	public void deleteById(Integer id) throws DataAccessException {
 		// TODO Auto-generated method stub
-		
+		tARepo.deleteById(id);
 	}
 
 }

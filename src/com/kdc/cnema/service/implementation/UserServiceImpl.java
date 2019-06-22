@@ -2,8 +2,6 @@ package com.kdc.cnema.service.implementation;
 
 import java.util.List;
 
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -17,38 +15,41 @@ import com.kdc.cnema.service.UserService;
 public class UserServiceImpl implements UserService{
 	
 	@Autowired
-	UserRepository repository;
+	UserRepository uRepo;
 
 	@Override
 	public User findOneById(Integer id) throws DataAccessException {
-		return repository.findOneById(id);
+		// TODO Auto-generated method stub
+		return uRepo.findById(id).get();
 	}
 
 	@Override
 	public List<User> findAll() throws DataAccessException {
-		return repository.findAll();
+		// TODO Auto-generated method stub
+		return uRepo.findAll();
 	}
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public User save(User user) throws DataAccessException {
-		return repository.save(user);
+		// TODO Auto-generated method stub
+		return uRepo.save(user);
 	}
-
 	@Override
 	public void deleteById(Integer id) throws DataAccessException {
-		repository.deleteById(id);
-		
+		// TODO Auto-generated method stub
+		uRepo.deleteById(id);
+	
 	}
 
 	@Override
 	public User findOneByUsernameAndPassword(String username, String password) throws DataAccessException {
-		return repository.findOneByUsernameAndPassword(username, password);
+		return uRepo.findOneByUsernameAndPassword(username, password);
 	}
 
 	@Override
 	public User findOneByUsername(String username) throws DataAccessException {
-		return repository.findOneByUsername(username);
+		return uRepo.findOneByUsername(username);
 	}
 
 }
