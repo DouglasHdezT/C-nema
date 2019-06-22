@@ -80,7 +80,7 @@ public class LoginController {
 		}else {
 			if(userService.findOneByUsername(tempUser.getUsername()) != null) {
 				message = "Este usuario ya existe";
-				responseCode = HttpStatus.BAD_REQUEST;
+				responseCode = HttpStatus.CONFLICT;
 			}else {
 				try {
 					Country country = countryService.findOneById(tempUser.getCountry().getId());
@@ -89,6 +89,7 @@ public class LoginController {
 					tempUser.setCountry(country);
 					tempUser.setCurrCredit(new BigDecimal(20));
 					tempUser.setType(0);
+					tempUser.setPassword(passwordEncoder.encode(tempUser.getPassword()));
 					
 					User user = userService.save(tempUser);
 					
