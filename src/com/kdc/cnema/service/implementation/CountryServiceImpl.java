@@ -19,7 +19,7 @@ public class CountryServiceImpl implements CountryService{
 	@Override
 	public Country findOneById(Integer id) throws DataAccessException {
 		
-		return repository.findOneById(id);
+		return repository.findById(id).get();
 	}
 
 	@Override

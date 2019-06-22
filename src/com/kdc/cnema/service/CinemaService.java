@@ -8,7 +8,7 @@ import com.kdc.cnema.domain.Cinema;
 
 public interface CinemaService {
 	
-	public Cinema findOneById() throws DataAccessException;
+	public Cinema findOneById(Integer id) throws DataAccessException;
 	List<Cinema> findAll() throws DataAccessException;
 	Cinema save(Cinema cinema) throws DataAccessException;
 	void deleteById(Integer id) throws DataAccessException;
