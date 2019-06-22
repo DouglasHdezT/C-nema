@@ -53,6 +53,7 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
+	@Transactional(rollbackFor = Exception.class)
 	public void updateLoggingState(Integer id, Boolean state) throws DataAccessException {
 		uRepo.updateLoginState(id, state);
 		

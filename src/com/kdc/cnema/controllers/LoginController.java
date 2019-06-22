@@ -162,6 +162,55 @@ public class LoginController {
 		return new ResponseEntity<User>(user, code);
 	}
 	
+	@RequestMapping(value = "/logout", method =  RequestMethod.POST)
+	public ResponseEntity<ResponseDTO> logout(@RequestBody GetTokenDTO requestToken){
+		String message = "Default Message";
+		HttpStatus code = HttpStatus.OK;
+		
+		String token = requestToken.getToken();
+		String password = requestToken.getPassword();
+		
+		try {
+			
+			JwtPayload payload = JwtPayload.decodeToken(token);
+			
+			User user = userService.findOneById(Integer.parseInt(payload.getUid()));
+			
+			if(user != null) {
+				if(passwordEncoder.matches(password,user.getPassword())) {
+					if(user.getLogged()) {
+						userService.updateLoggingState(user.getId(), false);
+						message = "Sesión de usuario clausurada";
+						code=HttpStatus.BAD_REQUEST;
+					}else {
+						message = "Usuario actualmente no activo";
+						code=HttpStatus.BAD_REQUEST;
+					}
+				}else {
+					code=HttpStatus.FORBIDDEN;
+					message = "Contraseña incorrecta"; 
+				}
+				
+			}else {
+				message = "Ususraio no encontrado";
+				code = HttpStatus.NOT_FOUND;
+			}
+			
+		}catch (io.jsonwebtoken.SignatureException e) {
+			message = "Token incorrecto";
+			code = HttpStatus.FORBIDDEN;
+		
+		}catch (Exception e) {
+			
+			e.printStackTrace();
+			message = "Error interno de servidor";
+			code = HttpStatus.INTERNAL_SERVER_ERROR;
+		
+		}
+		
+		return new ResponseEntity<ResponseDTO>(new ResponseDTO(message), code); 
+	}
+	
 	@RequestMapping(value = "/getTokenRip")
 	public String test() {
 		return JwtPayload.generateToken(new JwtPayload("Puto el que lo lea", new Date(), "sirviente", "Me la pela perro"));
