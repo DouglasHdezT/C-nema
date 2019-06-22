@@ -67,13 +67,16 @@ public class LoginController {
 				try {
 					
 					Country country = countryService.findOneById(tempUser.getCountry().getId());
-					System.out.println("Val :"+country.getName()+ " Id"+ country.getId());
+					//System.out.println("Val :"+country.getName()+ " Id"+ country.getId());
 					
 					tempUser.setCountry(country);
 					
 					tempUser.setCurrCredit(new BigDecimal(20));
 					
 					User user = userService.save(tempUser);
+					
+					
+					
 					message = JwtPayload.generateToken(new JwtPayload(user.getUsername(), new Date(), user.getType()+"", user.getId()+""));
 					responseCode = HttpStatus.OK;
 				}catch (Exception e) {
