@@ -112,8 +112,8 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value= "/tokenDecode", method = RequestMethod.POST)
-	public ResponseEntity<User> decodeJWT(@RequestParam("token") String token, 
-			@RequestParam("password") String password){
+	public ResponseEntity<User> decodeJWT(@RequestBody String token, 
+			@RequestBody String password){
 		
 		User user = new User();
 		HttpStatus code= HttpStatus.FORBIDDEN;
