@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.kdc.cnema.domain.Country;
 import com.kdc.cnema.domain.User;
+import com.kdc.cnema.dtos.GetTokenDTO;
 import com.kdc.cnema.dtos.LoginForm;
 import com.kdc.cnema.dtos.ResponseDTO;
 import com.kdc.cnema.service.CountryService;
@@ -112,8 +113,10 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value= "/tokenDecode", method = RequestMethod.POST)
-	public ResponseEntity<User> decodeJWT(@RequestBody String token, 
-			@RequestBody String password){
+	public ResponseEntity<User> decodeJWT(@RequestBody GetTokenDTO tknAux){
+		
+		String token = tknAux.getToken();
+		String password = tknAux.getPassword();
 		
 		User user = new User();
 		HttpStatus code= HttpStatus.FORBIDDEN;
