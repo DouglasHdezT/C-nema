@@ -3,7 +3,6 @@ package com.kdc.cnema.service;
 import java.util.List;
 
 import org.springframework.dao.DataAccessException;
-import org.springframework.http.ResponseEntity;
 
 import com.kdc.cnema.domain.Movie;
 

@@ -114,7 +114,6 @@ public class LoginController {
 				}
 			}
 			
-			
 		}
 		
 		return new ResponseEntity<>(new ResponseDTO(message), responseCode);
