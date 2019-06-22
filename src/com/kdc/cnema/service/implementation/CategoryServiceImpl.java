@@ -19,10 +19,8 @@ public class CategoryServiceImpl implements CategoryService{
 	
 	@Override
 	public Category findOneById(Integer id) {
-		return categoryRepo.findOneById(id);
+		return categoryRepo.findById(id).get();
 	}
-	
-	
 
 	@Override
 	public List<Category> findAll() throws DataAccessException {

@@ -2,36 +2,38 @@ package com.kdc.cnema.service.implementation;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.kdc.cnema.domain.audit.CountryAudit;
+import com.kdc.cnema.repositories.CountryAuditRepository;
 import com.kdc.cnema.service.CountryAuditService;
 
 @Service
 public class CountryAuditServiceImpl implements CountryAuditService{
-
+	
+	@Autowired
+	private CountryAuditRepository countryAuditRepo;
+	
 	@Override
-	public CountryAudit findOneById() throws DataAccessException {
-		// TODO Auto-generated method stub
-		return null;
+	public CountryAudit findOneById(Integer id) throws DataAccessException {
+		return countryAuditRepo.findById(id).get();
 	}
 
 	@Override
 	public List<CountryAudit> findAll() throws DataAccessException {
-		// TODO Auto-generated method stub
-		return null;
+		return countryAuditRepo.findAll();
 	}
 
 	@Override
 	public CountryAudit save(CountryAudit countryAudit) throws DataAccessException {
-		// TODO Auto-generated method stub
-		return null;
+		return countryAuditRepo.save(countryAudit);
 	}
 
 	@Override
 	public void deleteById(Integer id) throws DataAccessException {
-		// TODO Auto-generated method stub
+		countryAuditRepo.deleteById(id);
 		
 	}
 
