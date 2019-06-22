@@ -76,8 +76,8 @@ public class User {
 	@Column(name = "saldo")
 	private BigDecimal currCredit;
 	
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "id_pais")
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "id_pais", referencedColumnName= "id_pais")
 	private Country country;
 	
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)

@@ -2,9 +2,12 @@ package com.kdc.cnema.service.implementation;
 
 import java.util.List;
 
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.kdc.cnema.domain.User;
 import com.kdc.cnema.repositories.UserRepository;
@@ -27,6 +30,7 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
+	@Transactional(rollbackFor = Exception.class)
 	public User save(User user) throws DataAccessException {
 		return repository.save(user);
 	}
