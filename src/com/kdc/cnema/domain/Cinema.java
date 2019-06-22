@@ -12,6 +12,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * Clase que mapea la entidad "sala" en la base de datos del proyecto.
  * @author DeusHdezT
@@ -36,6 +38,7 @@ public class Cinema {
 	@Column(name= "capacidad")
 	private Integer capacity;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "cinema", fetch = FetchType.LAZY)
 	private List<Schedule> schedules;
 

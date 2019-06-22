@@ -49,12 +49,19 @@ public class LoginController {
 			User user = userService.findOneByUsername(userSubmitted.getUsername()); 
 			
 			if(user != null) {
-				if(passwordEncoder.matches(userSubmitted.getPassword(), user.getPassword())) {
-					message = JwtPayload.generateToken(new JwtPayload(user.getUsername(), new Date(), user.getType()+"", user.getId()+""));
-					code = HttpStatus.OK;
-				}else {
-					message = "Credenciales incorrectas";
+				
+				if(user.getLogged()) {
+					message = "Este usuario ya se encuentra activo";
 					code = HttpStatus.FORBIDDEN;
+				}else {
+					if(passwordEncoder.matches(userSubmitted.getPassword(), user.getPassword())) {
+						userService.updateLoggingState(user.getId(), true);
+						message = JwtPayload.generateToken(new JwtPayload(user.getUsername(), new Date(), user.getType()+"", user.getId()+""));
+						code = HttpStatus.OK;
+					}else {
+						message = "Credenciales incorrectas";
+						code = HttpStatus.FORBIDDEN;
+					}
 				}
 				
 			}else {
@@ -94,6 +101,7 @@ public class LoginController {
 					tempUser.setCurrCredit(new BigDecimal(20));
 					tempUser.setType(0);
 					tempUser.setPassword(passwordEncoder.encode(tempUser.getPassword()));
+					tempUser.setLogged(true);
 					
 					User user = userService.save(tempUser);
 					

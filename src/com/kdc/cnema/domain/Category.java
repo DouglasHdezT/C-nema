@@ -12,7 +12,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import com.kdc.cnema.domain.audit.CategoryAudit;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * Clase que mapea la entidad "categoria" en la base de datos del proyecto.
@@ -32,6 +32,7 @@ public class Category {
 	@Column(name = "nombre_categoria")
 	private String name;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
 	private List<Movie> movies;
 

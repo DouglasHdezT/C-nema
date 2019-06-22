@@ -52,4 +52,10 @@ public class UserServiceImpl implements UserService{
 		return uRepo.findOneByUsername(username);
 	}
 
+	@Override
+	public void updateLoggingState(Integer id, Boolean state) throws DataAccessException {
+		uRepo.updateLoginState(id, state);
+		
+	}
+
 }

@@ -2,7 +2,6 @@ package com.kdc.cnema.domain;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -15,7 +14,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import com.kdc.cnema.domain.audit.DeptoAudit;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * Clase que mapea la entidad "departamento" en la base de datos del proyecto.
@@ -35,10 +34,12 @@ public class Depto {
 	@Column(name="nombre_depto")
 	private String name;
 	
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_pais" , referencedColumnName= "id_pais")
 	private Country country;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "depto", fetch = FetchType.LAZY)
 	private List<Town> towns;
 

@@ -12,7 +12,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import com.kdc.cnema.domain.audit.CountryAudit;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * Clase que mapea la entidad "pais" en la base de datos del proyecto.
@@ -32,9 +32,11 @@ public class Country {
 	@Column(name = "nombre_pais")
 	private String name;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "country", fetch = FetchType.LAZY)
 	private List<User> users;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "country", fetch = FetchType.LAZY)
 	private List<Depto> deptos;
 
