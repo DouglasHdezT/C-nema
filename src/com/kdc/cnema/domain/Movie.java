@@ -3,7 +3,6 @@ package com.kdc.cnema.domain;
 import java.sql.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,7 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import com.kdc.cnema.domain.audit.MovieAudit;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * Clase que mapea la entidad "pelicula" en la base de datos del proyecto.
@@ -38,10 +37,12 @@ public class Movie {
 	@Column(name =  "fecha_estreno")
 	private Date releaseDate;
 	
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name="id_categoria")
+	@JsonIgnore
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="id_categoria", referencedColumnName= "id_categoria")
 	private Category category;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "movie", fetch = FetchType.LAZY)
 	private List<Schedule> schedules;
 

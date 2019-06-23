@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * Clase que mapea la entidad "reservacion" en la base de datos del proyecto.
  * @author DeusHdezT
@@ -38,12 +40,14 @@ public class Reservation {
 	@Column(name = "precio_total")
 	private BigDecimal totalPrice;
 	
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "id_horario")
+	@JsonIgnore
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "id_horario", referencedColumnName= "id_horario")
 	private Schedule schedule;
 	
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "id_usuario")
+	@JoinColumn(name = "id_usuario", referencedColumnName= "id_usuario")
 	private User user;
 
 	

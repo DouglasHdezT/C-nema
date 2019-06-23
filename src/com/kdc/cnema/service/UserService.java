@@ -19,5 +19,7 @@ public interface UserService {
 	User save(User user) throws DataAccessException;
 	
 	void deleteById(Integer id) throws DataAccessException;
+	
+	void updateLoggingState(Integer id, Boolean state) throws DataAccessException;
 }
 

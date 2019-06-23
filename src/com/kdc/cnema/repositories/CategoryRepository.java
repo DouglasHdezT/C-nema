@@ -12,4 +12,5 @@ import com.kdc.cnema.domain.Category;
  */
 public interface CategoryRepository extends JpaRepository<Category, Integer>{
 	Category findOneById(Integer id) throws DataAccessException;
+	public Category findOneByName(String name) throws DataAccessException;
 }
