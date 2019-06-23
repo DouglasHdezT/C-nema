@@ -13,7 +13,7 @@ public interface TownRepository extends JpaRepository<Town, Integer>{
 	public Town findOneByName(String name) throws DataAccessException;
 	
 	@Modifying
-	@Query(value = "UPDATE municipio SET state = :state WHERE id_municipio = :id"
+	@Query(value = "UPDATE municipio SET status = :status WHERE id_municipio = :id"
 			, nativeQuery = true)
-	public void updateState(@Param("id") Integer id, @Param("state") Boolean state) throws DataAccessException;
+	public void updateState(@Param("id") Integer id, @Param("status") Boolean status) throws DataAccessException;
 }

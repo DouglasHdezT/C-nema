@@ -16,8 +16,8 @@ import com.kdc.cnema.domain.Reservation;
 public interface ReservationRepository extends JpaRepository<Reservation, Integer>{
 	
 	@Modifying
-	@Query(value = "UPDATE categoria SET state = :state WHERE id_categoria = :id"
+	@Query(value = "UPDATE categoria SET status = :status WHERE id_categoria = :id"
 			, nativeQuery = true)
-	public void updateState(@Param("id") Integer id, @Param("state") Boolean state) throws DataAccessException;
+	public void updateState(@Param("id") Integer id, @Param("status") Boolean status) throws DataAccessException;
 	
 }

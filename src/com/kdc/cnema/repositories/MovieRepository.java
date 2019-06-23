@@ -17,7 +17,7 @@ public interface MovieRepository extends JpaRepository<Movie, Integer>{
 	public Movie findOneByTitle(String title) throws DataAccessException;
 	
 	@Modifying
-	@Query(value = "UPDATE categoria SET state = :state WHERE id_categoria = :id"
+	@Query(value = "UPDATE categoria SET status = :status WHERE id_categoria = :id"
 			, nativeQuery = true)
-	public void updateState(@Param("id") Integer id, @Param("state") Boolean state) throws DataAccessException;
+	public void updateState(@Param("id") Integer id, @Param("status") Boolean status) throws DataAccessException;
 }

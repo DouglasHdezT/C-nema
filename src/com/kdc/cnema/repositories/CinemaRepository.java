@@ -15,8 +15,8 @@ import com.kdc.cnema.domain.Cinema;
 public interface CinemaRepository extends JpaRepository<Cinema, Integer>{
 	
 	@Modifying
-	@Query(value = "UPDATE sala SET state = :state WHERE id_sala = :id"
+	@Query(value = "UPDATE sala SET status = :status WHERE id_sala = :id"
 			, nativeQuery = true)
-	public void updateState(@Param("id") Integer id, @Param("state") Boolean state) throws DataAccessException;
+	public void updateState(@Param("id") Integer id, @Param("status") Boolean status) throws DataAccessException;
 
 }

@@ -17,7 +17,7 @@ public interface DeptoRepository extends JpaRepository<Depto, Integer>{
 	public Depto findOneByName(String name) throws DataAccessException;
 	
 	@Modifying
-	@Query(value = "UPDATE departamento SET state = :state WHERE id_depto = :id"
+	@Query(value = "UPDATE departamento SET status = :status WHERE id_depto = :id"
 			, nativeQuery = true)
-	public void updateState(@Param("id") Integer id, @Param("state") Boolean state) throws DataAccessException;
+	public void updateState(@Param("id") Integer id, @Param("status") Boolean status) throws DataAccessException;
 }

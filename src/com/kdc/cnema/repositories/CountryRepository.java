@@ -20,8 +20,8 @@ public interface CountryRepository extends JpaRepository<Country, Integer>{
 	public Country findOneByName(String name) throws DataAccessException;
 	
 	@Modifying
-	@Query(value = "UPDATE pais SET state = :state WHERE is_pais = :id"
+	@Query(value = "UPDATE pais SET status = :status WHERE is_pais = :id"
 			, nativeQuery = true)
-	public void updateState(@Param("id") Integer id, @Param("state") Boolean state) throws DataAccessException;
+	public void updateState(@Param("id") Integer id, @Param("status") Boolean status) throws DataAccessException;
 	
 }

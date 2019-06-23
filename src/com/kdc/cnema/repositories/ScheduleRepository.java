@@ -11,8 +11,8 @@ import com.kdc.cnema.domain.Schedule;
 public interface ScheduleRepository extends JpaRepository<Schedule, Integer>{
 	
 	@Modifying
-	@Query(value = "UPDATE horario SET state = :state WHERE id_horario = :id"
+	@Query(value = "UPDATE horario SET status = :status WHERE id_horario = :id"
 			, nativeQuery = true)
-	public void updateState(@Param("id") Integer id, @Param("state") Boolean state) throws DataAccessException;
+	public void updateState(@Param("id") Integer id, @Param("status") Boolean status) throws DataAccessException;
 	
 }

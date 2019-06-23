@@ -20,7 +20,7 @@ public interface CategoryRepository extends JpaRepository<Category, Integer>{
 	public Category findOneByName(String name) throws DataAccessException;
 	
 	@Modifying
-	@Query(value = "UPDATE categoria SET state = :state WHERE id_categoria = :id"
+	@Query(value = "UPDATE categoria SET status = :status WHERE id_categoria = :id"
 			, nativeQuery = true)
-	public void updateState(@Param("id") Integer id, @Param("state") Boolean state) throws DataAccessException;
+	public void updateState(@Param("id") Integer id, @Param("status") Boolean status) throws DataAccessException;
 }
