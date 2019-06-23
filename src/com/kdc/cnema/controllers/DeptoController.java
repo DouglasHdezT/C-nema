@@ -19,10 +19,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.kdc.cnema.domain.Country;
 import com.kdc.cnema.domain.Depto;
+import com.kdc.cnema.domain.User;
 import com.kdc.cnema.dtos.ResponseDTO;
 import com.kdc.cnema.exceptions.MalformedAuthHeader;
 import com.kdc.cnema.service.CountryService;
 import com.kdc.cnema.service.DeptoService;
+import com.kdc.cnema.service.UserService;
 import com.kdc.cnema.utils.JwtPayload;
 
 @RestController
@@ -35,26 +37,21 @@ public class DeptoController {
 	@Autowired
 	CountryService countryService;
 	
+	@Autowired
+	UserService userService;
+	
 	@RequestMapping("/deptos/all")
-	public ResponseEntity<List<Depto>> getAllDeptos(@RequestHeader("Authorization") String authHeader){
+	public ResponseEntity<List<Depto>> getAllDeptos(){
 		List<Depto> deptos =  new ArrayList<>();	
 		HttpStatus code = HttpStatus.BAD_REQUEST;
 		
 		//System.out.println(authHeader);
 		
 		try {
-			
-			JwtPayload.validateToken(authHeader);
-			
+
 			deptos = deptoService.findAll();
 			code = HttpStatus.OK;
 			
-		}catch (io.jsonwebtoken.SignatureException e) {
-			code = HttpStatus.FORBIDDEN;
-		}catch (io.jsonwebtoken.MalformedJwtException e) {
-			code = HttpStatus.FORBIDDEN;
-		}catch (MalformedAuthHeader e) {
-			code = HttpStatus.FORBIDDEN;
 		}catch (Exception e) {
 			e.printStackTrace();
 			code = HttpStatus.INTERNAL_SERVER_ERROR;
@@ -83,7 +80,7 @@ public class DeptoController {
 				code = HttpStatus.NOT_FOUND; 
 				depto =  new Depto();
 			}
-		} catch (io.jsonwebtoken.SignatureException e) {
+		}catch (io.jsonwebtoken.SignatureException e) {
 			code = HttpStatus.FORBIDDEN;
 		}catch (io.jsonwebtoken.MalformedJwtException e) {
 			code = HttpStatus.FORBIDDEN;
@@ -107,13 +104,18 @@ public class DeptoController {
 		
 		try {
 			JwtPayload.validateToken(authHeader);
+			JwtPayload payload = JwtPayload.decodeToken(authHeader.substring(7));
 			
 			if(result.hasErrors()) {
 				message = "Campos de departamentos invalidos";
 				code = HttpStatus.BAD_REQUEST;
 			}else {
+				User user = userService.findOneById(Integer.parseInt(payload.getUid()));
 				
-				if(country == null) {
+				if(user.getType() == 0) {
+					message = "Usuario no autorizado";
+					code = HttpStatus.FORBIDDEN;
+				}else if(country == null) {
 					message = "Pais inexistente";
 					code = HttpStatus.CONFLICT;
 				}
