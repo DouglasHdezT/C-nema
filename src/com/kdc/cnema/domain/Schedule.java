@@ -14,6 +14,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -32,12 +35,16 @@ public class Schedule {
 	@SequenceGenerator(name = "horario_id_horario_seq" , sequenceName = "	public.horario_id_horario_seq", allocationSize = 1)
 	private Integer id;
 	
+	@Min(0)
+	@Max(600)
 	@Column(name = "disponibles")
 	private Integer avialable;
 	
+	@NotNull
 	@Column(name = "hora_inicio")
 	private Date startTime;
 	
+	@NotNull
 	@Column(name = "hora_fin")
 	private Date endTime;
 	
