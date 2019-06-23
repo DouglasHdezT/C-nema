@@ -46,7 +46,7 @@ public class CategoryController {
 				code);
 	}
 	
-	@RequestMapping("/category/{id}")
+	@RequestMapping("/categories/{id}")
 	public ResponseEntity<Category> getCategory(@PathVariable(value = "id") Integer id){
 		Category category = new Category();
 		HttpStatus code = HttpStatus.BAD_REQUEST;
@@ -68,7 +68,7 @@ public class CategoryController {
 		return new ResponseEntity<Category>(category, code);
 	}
 	
-	@RequestMapping(value="/category/save", method = RequestMethod.POST)
+	@RequestMapping(value="/categories/save", method = RequestMethod.POST)
 	public ResponseEntity<ResponseDTO> insertCategory(@RequestBody @Valid Category category, BindingResult result){
 		
 		String message = "Default message";

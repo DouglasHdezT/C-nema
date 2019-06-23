@@ -9,10 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.kdc.cnema.domain.Cinema;
 import com.kdc.cnema.domain.Movie;
@@ -22,6 +24,8 @@ import com.kdc.cnema.service.CinemaService;
 import com.kdc.cnema.service.MovieService;
 import com.kdc.cnema.service.ScheduleService;
 
+@RestController
+@CrossOrigin(origins = "*")
 public class ScheduleController {
 
 	@Autowired
@@ -34,7 +38,7 @@ public class ScheduleController {
 	MovieService movieService;
 	
 	
-	@RequestMapping(value = "/schedules/all")
+	@RequestMapping(value = "/schedule/all")
 	public ResponseEntity<List<Schedule>> getAllSchedules(){
 		List<Schedule> schedules = new ArrayList<>();
 		HttpStatus code = HttpStatus.BAD_REQUEST;

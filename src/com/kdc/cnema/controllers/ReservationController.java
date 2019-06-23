@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
+import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -53,6 +54,28 @@ public class ReservationController {
 		return new ResponseEntity<List<Reservation>>(
 				reservations,
 				code);
+	}
+	
+	@RequestMapping("/reservations/{id}")
+	public ResponseEntity<Reservation> getReservation(@PathParam("id") Integer id){
+		Reservation reservation = new Reservation();
+		HttpStatus code = HttpStatus.BAD_REQUEST;
+		
+		try {
+			Reservation reservationAux = reservationService.findOneById(id);
+			
+			if(reservationAux == null) {
+				code = HttpStatus.NOT_FOUND;
+				reservation = new Reservation();
+			}else {
+				code = HttpStatus.OK;
+			}
+			
+		} catch (Exception e) {
+			code = HttpStatus.INTERNAL_SERVER_ERROR;
+		}	
+		
+		return new ResponseEntity<Reservation>(reservation, code);
 	}
 
 	@RequestMapping(value="/reservations/save", method = RequestMethod.POST)
