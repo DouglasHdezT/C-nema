@@ -1,6 +1,7 @@
 package com.kdc.cnema.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -14,7 +15,8 @@ public interface UserRepository extends JpaRepository<User, Integer>{
 	
 	public User findOneById(Integer id);
 	
-	@Query(value = "UPDATE usuario SET isLogged = :state WHERE id_usuario = :id"
+	@Modifying
+	@Query(value = "UPDATE usuario SET is_logged = :state WHERE id_usuario = :id"
 			, nativeQuery = true)
 	public void updateLoginState(@Param("id") Integer id, @Param("state") Boolean state);
 }

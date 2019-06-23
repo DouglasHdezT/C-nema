@@ -64,7 +64,7 @@ public class User {
 	@Column(name = "estado")
 	private Boolean status;
 	
-	@Column(name = "isLogged")
+	@Column(name = "is_logged")
 	private Boolean logged;
 	
 	@NotEmpty
