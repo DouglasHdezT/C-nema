@@ -15,10 +15,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.kdc.cnema.domain.Country;
 import com.kdc.cnema.domain.Reservation;
+import com.kdc.cnema.domain.Schedule;
+import com.kdc.cnema.domain.User;
 import com.kdc.cnema.dtos.ResponseDTO;
 import com.kdc.cnema.service.ReservationService;
+import com.kdc.cnema.service.ScheduleService;
+import com.kdc.cnema.service.UserService;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -26,6 +29,12 @@ public class ReservationController {
 	
 	@Autowired
 	ReservationService reservationService;
+	
+	@Autowired
+	UserService userService;
+	
+	@Autowired
+	ScheduleService scheduleService;
 	
 	@RequestMapping("/reservations/all")
 	public ResponseEntity<List<Reservation>> getAllReservations(){
@@ -57,11 +66,21 @@ public class ReservationController {
 				message = "Reservaciones invalidas";
 				code = HttpStatus.BAD_REQUEST;
 			}else {
-				Country countryAux = reservationService.findOneByName(reservation.getName());
-				reservationService.save(reservation);
-				message = "Reservacion insertada con éxito";
-				code = HttpStatus.OK;
 				
+				User user = userService.findOneById(reservation.getUser().getId());
+				Schedule schedule = scheduleService.findOneById(reservation.getSchedule().getId());
+				
+				if(user == null) {
+					message = "Usuario no encontrado";
+					code = HttpStatus.NOT_FOUND;
+				}else if (schedule == null) {
+					message = "Horario no encontrado";
+					code = HttpStatus.NOT_FOUND;
+				}else {
+					reservationService.save(reservation);
+					message = "Reservacion insertada con éxito";
+					code = HttpStatus.OK;
+				}
 			}
 		} catch (Exception e) {
 			message = "Error interno de servidor";
