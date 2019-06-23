@@ -1,5 +1,8 @@
 package com.kdc.cnema.controllers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +32,23 @@ public class ScheduleController {
 	@Autowired
 	MovieService movieService;
 	
+	
+	@RequestMapping(value = "/schedules/all")
+	public ResponseEntity<List<Schedule>> getAllSchedules(){
+		List<Schedule> schedules = new ArrayList<>();
+		HttpStatus code = HttpStatus.BAD_REQUEST;
+		
+		try {
+			schedules = scheduleService.findAll();
+			code=HttpStatus.OK;
+		} catch (Exception e) {
+			e.printStackTrace();
+			code=HttpStatus.INTERNAL_SERVER_ERROR;
+		}
+		
+		return new ResponseEntity<List<Schedule>>(schedules, code);
+	}
+	
 	@RequestMapping(value = "/schedule/save", method = RequestMethod.POST)
 	public ResponseEntity<ResponseDTO> insertSchedule(@RequestBody @Valid Schedule schedule, BindingResult result){
 		String message = "Default message";
@@ -42,6 +62,22 @@ public class ScheduleController {
 			}else {
 				Cinema cinema = cinemaService.findOneById(schedule.getId());
 				Movie movie = movieService.findOneById(schedule.getId());
+				
+				if(cinema == null) {
+					message = "Sala inexistente";
+					code = HttpStatus.NOT_FOUND;
+				}else if(movie == null) {
+					message = "Película inexistente";
+					code = HttpStatus.NOT_FOUND;
+				}else {
+					schedule.setCinema(cinema);
+					schedule.setMovie(movie);
+					
+					scheduleService.save(schedule);
+					
+					message = "Horario insertado con éxito";
+					code = HttpStatus.OK;
+				}
 			}
 			
 		}catch (Exception e) {
