@@ -25,7 +25,7 @@ public class CountryServiceImpl implements CountryService{
 	@Override
 	public List<Country> findAll() throws DataAccessException {
 		// TODO Auto-generated method stub
-		return null;
+		return repository.findAll();
 	}
 
 	@Override
