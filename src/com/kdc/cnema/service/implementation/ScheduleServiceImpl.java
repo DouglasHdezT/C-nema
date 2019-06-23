@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.kdc.cnema.domain.Schedule;
 import com.kdc.cnema.repositories.ScheduleRepository;
@@ -29,15 +30,23 @@ public class ScheduleServiceImpl implements ScheduleService{
 	}
 
 	@Override
+	@Transactional(rollbackFor = Exception.class)
 	public Schedule save(Schedule user) throws DataAccessException {
 		// TODO Auto-generated method stub
 		return sRepo.save(user);
 	}
 
 	@Override
+	@Transactional(rollbackFor = Exception.class)
 	public void deleteById(Integer id) throws DataAccessException {
 		// TODO Auto-generated method stub
 		sRepo.deleteById(id);
+	}
+	
+	@Override
+	@Transactional(rollbackFor = Exception.class)
+	public void updateState(Integer id, Boolean state) throws DataAccessException {
+		sRepo.updateState(id, state);
 	}
 
 }

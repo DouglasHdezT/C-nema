@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.kdc.cnema.domain.Movie;
 import com.kdc.cnema.repositories.MovieRepository;
@@ -28,14 +29,15 @@ public class MovieServiceImpl implements MovieService{
 	}
 
 	@Override
+	@Transactional(rollbackFor = Exception.class)
 	public Movie save(Movie movie) throws DataAccessException {
 		// TODO Auto-generated method stub
 		return mRepo.save(movie);
 	}
 
 	@Override
+	@Transactional(rollbackFor = Exception.class)
 	public void deleteById(Integer id) throws DataAccessException {
-		// TODO Auto-generated method stub
 		mRepo.deleteById(id);
 		
 	}
@@ -46,4 +48,9 @@ public class MovieServiceImpl implements MovieService{
 		return mRepo.findOneByTitle(title);
 	}
 
+	@Override
+	@Transactional(rollbackFor = Exception.class)
+	public void updateState(Integer id, Boolean state) throws DataAccessException {
+		mRepo.updateState(id, state);
+	}
 }

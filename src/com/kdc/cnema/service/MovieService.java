@@ -9,8 +9,14 @@ import com.kdc.cnema.domain.Movie;
 
 public interface MovieService {
 	Movie findOneById(Integer id) throws DataAccessException;
+	
 	Movie findOneByTitle(String title) throws DataAccessException;
+	
 	public List<Movie> findAll() throws DataAccessException;
+	
 	Movie save(Movie movie) throws DataAccessException;
+	
 	void deleteById(Integer id) throws DataAccessException;
+	
+	void updateState(Integer id, Boolean state) throws DataAccessException;
 }

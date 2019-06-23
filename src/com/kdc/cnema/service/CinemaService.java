@@ -13,4 +13,5 @@ public interface CinemaService {
 	Cinema save(Cinema cinema) throws DataAccessException;
 	void deleteById(Integer id) throws DataAccessException;
 
+	void updateState(Integer id, Boolean state) throws DataAccessException;
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.kdc.cnema.domain.audit.CategoryAudit;
 import com.kdc.cnema.repositories.CategoryAuditRepository;
@@ -27,11 +28,13 @@ public class CategoryAuditServiceImpl implements CategoryAuditService{
 	}
 
 	@Override
+	@Transactional(rollbackFor = Exception.class)
 	public CategoryAudit save(CategoryAudit categoryAudit) throws DataAccessException {
 		return categoryAuditRepo.save(categoryAudit);
 	}
 
 	@Override
+	@Transactional(rollbackFor = Exception.class)
 	public void deleteById(Integer id) throws DataAccessException {
 		categoryAuditRepo.deleteById(id);
 		
