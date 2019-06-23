@@ -1,6 +1,9 @@
 package com.kdc.cnema.utils;
 
+import java.nio.charset.MalformedInputException;
 import java.util.Date;
+
+import com.kdc.cnema.exceptions.MalformedAuthHeader;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -55,13 +58,16 @@ public class JwtPayload {
 		return payload;
 	}
 	
-	public static boolean isValidToken(String token) {
-		try {
-			Jwts.parser().setSigningKey(ConstantsAPI.JWT_SECRET).parse(token);
-			return true;
-		}catch (Exception e) {
-			//e.printStackTrace();
-			return false;
+	public static void validateToken(String authHeader) throws Exception {
+		if(authHeader.length() > 7) {
+			if(authHeader.contains("Bearer ")) {
+				String token = authHeader.substring(7);
+				Jwts.parser().setSigningKey(ConstantsAPI.JWT_SECRET).parse(token);
+			}else {
+				throw new MalformedAuthHeader();
+			}
+		}else {
+			throw new MalformedAuthHeader();
 		}
 	}
 

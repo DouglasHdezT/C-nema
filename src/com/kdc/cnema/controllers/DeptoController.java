@@ -20,8 +20,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.kdc.cnema.domain.Country;
 import com.kdc.cnema.domain.Depto;
 import com.kdc.cnema.dtos.ResponseDTO;
+import com.kdc.cnema.exceptions.MalformedAuthHeader;
 import com.kdc.cnema.service.CountryService;
 import com.kdc.cnema.service.DeptoService;
+import com.kdc.cnema.utils.JwtPayload;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -38,11 +40,17 @@ public class DeptoController {
 		List<Depto> deptos =  new ArrayList<>();	
 		HttpStatus code = HttpStatus.BAD_REQUEST;
 		
-		System.out.println(authHeader);
+		//System.out.println(authHeader);
 		
 		try {
+			JwtPayload.validateToken(authHeader);
+			
 			deptos = deptoService.findAll();
 			code = HttpStatus.OK;
+		}catch (io.jsonwebtoken.SignatureException e) {
+			code = HttpStatus.BAD_REQUEST;
+		}catch (MalformedAuthHeader e) {
+			code = HttpStatus.BAD_REQUEST;
 		}catch (Exception e) {
 			e.printStackTrace();
 			code = HttpStatus.INTERNAL_SERVER_ERROR;

@@ -220,9 +220,4 @@ public class LoginController {
 		return JwtPayload.decodeToken(token);
 	}
 	
-	@RequestMapping(value = "/test2")
-	public boolean jwtTest2(@RequestParam String token){
-		return JwtPayload.isValidToken(token);
-	}
-	
 }
