@@ -107,6 +107,22 @@ public class Movie {
 		this.releaseDate = releaseDate;
 	}
 
+	public Integer getLength() {
+		return length;
+	}
+
+	public void setLength(Integer length) {
+		this.length = length;
+	}
+
+	public Boolean getStatus() {
+		return status;
+	}
+
+	public void setStatus(Boolean status) {
+		this.status = status;
+	}
+
 	public Category getCategory() {
 		return category;
 	}

@@ -86,6 +86,14 @@ public class Cinema {
 		this.capacity = capacity;
 	}
 
+	public Boolean getStatus() {
+		return status;
+	}
+
+	public void setStatus(Boolean status) {
+		this.status = status;
+	}
+
 	public List<Schedule> getSchedules() {
 		return schedules;
 	}

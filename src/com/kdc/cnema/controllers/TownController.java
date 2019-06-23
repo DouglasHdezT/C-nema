@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.kdc.cnema.domain.Category;
 import com.kdc.cnema.domain.Depto;
 import com.kdc.cnema.domain.Town;
 import com.kdc.cnema.dtos.ResponseDTO;

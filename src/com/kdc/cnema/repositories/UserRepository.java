@@ -1,5 +1,6 @@
 package com.kdc.cnema.repositories;
 
+import org.springframework.dao.DataAccessException;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -19,4 +20,9 @@ public interface UserRepository extends JpaRepository<User, Integer>{
 	@Query(value = "UPDATE usuario SET is_logged = :state WHERE id_usuario = :id"
 			, nativeQuery = true)
 	public void updateLoginState(@Param("id") Integer id, @Param("state") Boolean state);
+	
+	@Modifying
+	@Query(value = "UPDATE usuario SET state = :state WHERE id_usuario = :id"
+			, nativeQuery = true)
+	public void updateState(@Param("id") Integer id, @Param("state") Boolean state) throws DataAccessException;
 }

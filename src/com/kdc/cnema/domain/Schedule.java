@@ -96,6 +96,14 @@ public class Schedule {
 		this.endTime = endTime;
 	}
 
+	public Boolean getStatus() {
+		return status;
+	}
+
+	public void setStatus(Boolean status) {
+		this.status = status;
+	}
+
 	public Cinema getCinema() {
 		return cinema;
 	}

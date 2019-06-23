@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.dao.DataAccessException;
 
-import com.kdc.cnema.domain.Category;
 import com.kdc.cnema.domain.Movie;
 
 

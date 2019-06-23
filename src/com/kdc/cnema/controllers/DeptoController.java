@@ -12,13 +12,13 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kdc.cnema.domain.Country;
 import com.kdc.cnema.domain.Depto;
-import com.kdc.cnema.domain.Movie;
 import com.kdc.cnema.dtos.ResponseDTO;
 import com.kdc.cnema.service.CountryService;
 import com.kdc.cnema.service.DeptoService;
@@ -34,9 +34,11 @@ public class DeptoController {
 	CountryService countryService;
 	
 	@RequestMapping("/deptos/all")
-	public ResponseEntity<List<Depto>> getAllDeptos(){
+	public ResponseEntity<List<Depto>> getAllDeptos(@RequestHeader("Authorization") String authHeader){
 		List<Depto> deptos =  new ArrayList<>();	
 		HttpStatus code = HttpStatus.BAD_REQUEST;
+		
+		System.out.println(authHeader);
 		
 		try {
 			deptos = deptoService.findAll();

@@ -34,12 +34,12 @@ public class Depto {
 	@Column(name="nombre_depto")
 	private String name;
 	
+	@Column(name =  "status")
+	private Boolean status;
+	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_pais" , referencedColumnName= "id_pais")
 	private Country country;
-	
-	@Column(name =  "status")
-	private Boolean status;
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "depto", fetch = FetchType.LAZY)
@@ -59,6 +59,14 @@ public class Depto {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public Boolean getStatus() {
+		return status;
+	}
+
+	public void setStatus(Boolean status) {
+		this.status = status;
 	}
 
 	public Country getCountry() {

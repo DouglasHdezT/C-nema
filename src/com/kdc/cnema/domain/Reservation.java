@@ -89,6 +89,14 @@ public class Reservation {
 		this.totalPrice = totalPrice;
 	}
 
+	public Boolean getStatus() {
+		return status;
+	}
+
+	public void setStatus(Boolean status) {
+		this.status = status;
+	}
+
 	public Schedule getSchedule() {
 		return schedule;
 	}
