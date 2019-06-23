@@ -110,7 +110,7 @@ public class MovieController {
 			JwtPayload payload = JwtPayload.decodeToken(authHeader.substring(7));
 			
 			if(result.hasErrors()) {
-				message = "Campos de la categoria invalidos";
+				message = "Campos de pelicula invalidos";
 				code = HttpStatus.BAD_REQUEST;
 			}else {
 				Movie movieAux = movieService.findOneByTitle(movie.getTitle());

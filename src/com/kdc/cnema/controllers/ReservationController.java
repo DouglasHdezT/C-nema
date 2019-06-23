@@ -97,7 +97,7 @@ public class ReservationController {
 	}
 
 	@RequestMapping(value="/reservations/save", method = RequestMethod.POST)
-	public ResponseEntity<ResponseDTO> insertCountry(@RequestBody @Valid Reservation reservation, @RequestHeader("Authorization") String authHeader
+	public ResponseEntity<ResponseDTO> insertReservation(@RequestBody @Valid Reservation reservation, @RequestHeader("Authorization") String authHeader
 			, BindingResult result){
 		
 		String message = "Default message";

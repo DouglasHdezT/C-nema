@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.kdc.cnema.domain.Country;
 import com.kdc.cnema.domain.Depto;
+import com.kdc.cnema.domain.Movie;
+import com.kdc.cnema.domain.Town;
 import com.kdc.cnema.domain.User;
 import com.kdc.cnema.dtos.ResponseDTO;
 import com.kdc.cnema.exceptions.MalformedAuthHeader;
