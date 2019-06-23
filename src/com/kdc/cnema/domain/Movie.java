@@ -6,10 +6,13 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -25,6 +28,8 @@ public class Movie {
 	
 	@Id
 	@Column(name =  "id_pelicula")
+	@GeneratedValue(generator = "pelicula_id_pelicula_seq", strategy = GenerationType.AUTO)
+	@SequenceGenerator(name = "pelicula_id_pelicula_seq" , sequenceName = "public.pelicula_id_pelicula_seq", allocationSize = 1)
 	private Integer id;
 	
 	@NotBlank
