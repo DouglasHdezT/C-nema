@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -29,6 +30,7 @@ public class Category {
 	@SequenceGenerator(name = "categoria_id_categoria_seq" , sequenceName = "public.categoria_id_categoria_seq", allocationSize = 1)
 	private Integer id;
 	
+	@NotBlank
 	@Column(name = "nombre_categoria")
 	private String name;
 	

@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -43,6 +44,28 @@ public class CategoryController {
 		return new ResponseEntity<List<Category>>(
 				categories,
 				code);
+	}
+	
+	@RequestMapping("/category/{id}")
+	public ResponseEntity<Category> getCategory(@PathVariable(value = "id") Integer id){
+		Category category = new Category();
+		HttpStatus code = HttpStatus.BAD_REQUEST;
+		
+		try {
+			category = cateogryService.findOneById(id);
+			
+			if(category != null) {
+				code = HttpStatus.OK;
+			}else {
+				code = HttpStatus.NOT_FOUND; 
+				category =  new Category();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			code = HttpStatus.INTERNAL_SERVER_ERROR;
+		}
+		
+		return new ResponseEntity<Category>(category, code);
 	}
 	
 	@RequestMapping(value="/categories/save", method = RequestMethod.POST)
