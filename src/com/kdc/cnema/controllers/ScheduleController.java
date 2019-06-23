@@ -94,7 +94,7 @@ public class ScheduleController {
 					message = "Sala inexistente";
 					code = HttpStatus.NOT_FOUND;
 				}else if(movie == null) {
-					message = "Película inexistente";
+					message = "Pelicula inexistente";
 					code = HttpStatus.NOT_FOUND;
 				}else {
 					schedule.setCinema(cinema);
@@ -102,7 +102,7 @@ public class ScheduleController {
 					
 					scheduleService.save(schedule);
 					
-					message = "Horario insertado con éxito";
+					message = "Horario insertado con exito";
 					code = HttpStatus.OK;
 				}
 			}

@@ -86,7 +86,7 @@ public class CategoryController {
 					code = HttpStatus.CONFLICT;
 				}else {
 					cateogryService.save(category);
-					message = "Categoria insertada con éxito";
+					message = "Categoria insertada con exito";
 					code = HttpStatus.OK;
 				}
 				
