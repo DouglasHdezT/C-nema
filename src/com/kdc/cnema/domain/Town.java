@@ -33,7 +33,6 @@ public class Town {
 	@Column(name = "nombre_municipio")
 	private String name;
 	
-	@JsonIgnore
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_depto", referencedColumnName= "id_depto")
 	private Depto depto;

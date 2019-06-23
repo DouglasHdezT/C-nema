@@ -43,7 +43,6 @@ public class Movie {
 	@Column(name =  "fecha_estreno")
 	private Date releaseDate;
 	
-	@JsonIgnore
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="id_categoria", referencedColumnName= "id_categoria")
 	private Category category;

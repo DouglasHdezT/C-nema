@@ -78,7 +78,6 @@ public class User {
 	@Column(name = "saldo")
 	private BigDecimal currCredit;
 	
-	@JsonIgnore
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_pais", referencedColumnName= "id_pais")
 	private Country country;

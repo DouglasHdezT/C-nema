@@ -47,12 +47,10 @@ public class Reservation {
 	@Column(name = "precio_total")
 	private BigDecimal totalPrice;
 	
-	@JsonIgnore
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_horario", referencedColumnName= "id_horario")
 	private Schedule schedule;
 	
-	@JsonIgnore
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_usuario", referencedColumnName= "id_usuario")
 	private User user;

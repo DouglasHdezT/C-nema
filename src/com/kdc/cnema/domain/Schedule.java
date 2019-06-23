@@ -48,12 +48,10 @@ public class Schedule {
 	@Column(name = "hora_fin")
 	private Date endTime;
 	
-	@JsonIgnore
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_sala", referencedColumnName= "id_sala")
 	private Cinema cinema;
 	
-	@JsonIgnore
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_pelicula", referencedColumnName= "id_pelicula")
 	private Movie movie;
