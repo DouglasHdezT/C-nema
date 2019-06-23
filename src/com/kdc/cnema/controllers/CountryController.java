@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kdc.cnema.domain.Country;
-import com.kdc.cnema.domain.Movie;
 import com.kdc.cnema.domain.User;
 import com.kdc.cnema.dtos.ResponseDTO;
 import com.kdc.cnema.exceptions.MalformedAuthHeader;
@@ -133,4 +132,46 @@ public class CountryController {
 		return new ResponseEntity<ResponseDTO>(new ResponseDTO(message), code);		
 	}
 	
+	@RequestMapping("countries/update/{id}")
+	public ResponseEntity<ResponseDTO> updateState(@PathVariable("id") Integer id, @RequestHeader("Authorization") String authHeader){
+		
+		String message = "Default message";
+		HttpStatus code = HttpStatus.BAD_REQUEST;
+		
+		try {
+			
+			JwtPayload.validateToken(authHeader);
+			JwtPayload payload = JwtPayload.decodeToken(authHeader.substring(7));
+			
+			Country country = countryService.findOneById(id);
+			User user = userService.findOneById(Integer.parseInt(payload.getUid()));
+			
+			if(user != null && user.getType() == 0) {
+				code = HttpStatus.FORBIDDEN;
+				message = "Faltan permisos";
+			}else if(country  == null) {
+				code = HttpStatus.NOT_FOUND;
+				message = "Categoria no encontrada";
+			}else {
+				countryService.updateState(id, !country.getStatus());
+				code = HttpStatus.OK;
+				message = "Estado modificado con exito";
+			}
+			
+		}catch (io.jsonwebtoken.SignatureException e) {
+			message = "Token invalido";
+			code = HttpStatus.FORBIDDEN;
+		}catch (io.jsonwebtoken.MalformedJwtException e) {
+			message = "Token invalido";
+			code = HttpStatus.FORBIDDEN;
+		}catch (MalformedAuthHeader e) {
+			message = "Token invalido";
+			code = HttpStatus.FORBIDDEN;
+		}catch (Exception e) {
+			message = "Error interno de servidor";
+			code = HttpStatus.INTERNAL_SERVER_ERROR;
+		}
+		
+		return new ResponseEntity<ResponseDTO>(new ResponseDTO(message), code);
+	}
 }

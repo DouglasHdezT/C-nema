@@ -45,10 +45,6 @@ public class Reservation {
 	@Column(name = "precio_total")
 	private BigDecimal totalPrice;
 	
-	@NotNull
-	@Column(name =  "status")
-	private Boolean status;
-	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_horario", referencedColumnName= "id_horario")
 	private Schedule schedule;
@@ -88,14 +84,6 @@ public class Reservation {
 
 	public void setTotalPrice(BigDecimal totalPrice) {
 		this.totalPrice = totalPrice;
-	}
-
-	public Boolean getStatus() {
-		return status;
-	}
-
-	public void setStatus(Boolean status) {
-		this.status = status;
 	}
 
 	public Schedule getSchedule() {

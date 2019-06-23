@@ -43,11 +43,5 @@ public class ReservationServicioImpl implements ReservationService{
 		seRepo.deleteById(id);
 	}
 
-	@Override
-	@Transactional(rollbackFor = Exception.class)
-	public void updateState(Integer id, Boolean state) throws DataAccessException {
-		seRepo.updateState(id, state);
-	}
-
 }
 
