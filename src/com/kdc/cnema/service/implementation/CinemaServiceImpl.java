@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.kdc.cnema.domain.Cinema;
 import com.kdc.cnema.repositories.CinemaRepository;
@@ -27,11 +28,13 @@ public class CinemaServiceImpl implements CinemaService{
 	}
 
 	@Override
+	@Transactional(rollbackFor = Exception.class)
 	public Cinema save(Cinema cinema) throws DataAccessException {
 		return cinemaRepo.save(cinema);
 	}
 
 	@Override
+	@Transactional(rollbackFor = Exception.class)
 	public void deleteById(Integer id) throws DataAccessException {
 		cinemaRepo.deleteById(id);
 	}
