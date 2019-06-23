@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -47,6 +48,28 @@ public class ScheduleController {
 		}
 		
 		return new ResponseEntity<List<Schedule>>(schedules, code);
+	}
+	
+	@RequestMapping(value = "/schedule/{id}")
+	public ResponseEntity<Schedule> getSchedule(@PathVariable("id") Integer id){
+		Schedule schedule =  new Schedule();
+		HttpStatus code = HttpStatus.BAD_GATEWAY;
+		
+		try {
+			schedule = scheduleService.findOneById(id);
+			
+			if(schedule == null) {
+				schedule = new Schedule();
+				code = HttpStatus.NOT_FOUND;
+			}else {
+				code = HttpStatus.OK;
+			}
+		} catch (Exception e) {
+			code = HttpStatus.INTERNAL_SERVER_ERROR;
+		}
+		
+		
+		return new ResponseEntity<Schedule>(schedule, code);
 	}
 	
 	@RequestMapping(value = "/schedule/save", method = RequestMethod.POST)
