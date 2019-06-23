@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.kdc.cnema.domain.Category;
 import com.kdc.cnema.repositories.CategoryRepository;
@@ -28,14 +29,21 @@ public class CategoryServiceImpl implements CategoryService{
 	}
 
 	@Override
+	@Transactional(rollbackFor = Exception.class)
 	public Category save(Category category) throws DataAccessException {
 		return categoryRepo.save(category);
 	}
 
 	@Override
+	@Transactional(rollbackFor = Exception.class)
 	public void deleteById(Integer id) throws DataAccessException {
 		categoryRepo.deleteById(id);
 		
+	}
+
+	@Override
+	public Category findOneByName(String name) throws DataAccessException {
+		return categoryRepo.findOneByName(name);
 	}
 
 }
