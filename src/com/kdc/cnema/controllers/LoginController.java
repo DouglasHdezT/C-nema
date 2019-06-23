@@ -180,7 +180,7 @@ public class LoginController {
 					if(user.getLogged()) {
 						userService.updateLoggingState(user.getId(), false);
 						message = "Sesión de usuario clausurada";
-						code=HttpStatus.BAD_REQUEST;
+						code=HttpStatus.OK;
 					}else {
 						message = "Usuario actualmente no activo";
 						code=HttpStatus.BAD_REQUEST;

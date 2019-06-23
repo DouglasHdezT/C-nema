@@ -68,7 +68,7 @@ public class CategoryController {
 		return new ResponseEntity<Category>(category, code);
 	}
 	
-	@RequestMapping(value="/categories/save", method = RequestMethod.POST)
+	@RequestMapping(value="/category/save", method = RequestMethod.POST)
 	public ResponseEntity<ResponseDTO> insertCategory(@RequestBody @Valid Category category, BindingResult result){
 		
 		String message = "Default message";
