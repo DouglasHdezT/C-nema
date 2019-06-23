@@ -87,24 +87,17 @@ public class TownController {
 				message = "Campos de municipios invalidos";
 				code = HttpStatus.BAD_REQUEST;
 			}else {
-				Town townAux = townService.findOneByName(town.getName());
-				
-				if(townAux != null) {
-					message = "Municipio ya existente";
+
+				if(depto==null) {
+					message = "Departamento inexistente";
 					code = HttpStatus.CONFLICT;
-				}else {
-					if(depto==null) {
-						message = "Departamento inexistente";
-						code = HttpStatus.CONFLICT;
-					}
-					else {
-						town.setDepto(depto);
-						townService.save(town);
-						message = "Municipio insertado con exito";
-						code = HttpStatus.OK;
-					}
 				}
-				
+				else {
+					town.setDepto(depto);
+					townService.save(town);
+					message = "Municipio insertado con exito";
+					code = HttpStatus.OK;
+				}
 			}
 		} catch (Exception e) {
 			message = "Error interno de servidor";
