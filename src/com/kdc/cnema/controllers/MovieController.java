@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kdc.cnema.domain.Category;
 import com.kdc.cnema.domain.Movie;
 import com.kdc.cnema.dtos.ResponseDTO;
+import com.kdc.cnema.service.CategoryService;
 import com.kdc.cnema.service.MovieService;
 
 @RestController
@@ -28,6 +29,9 @@ public class MovieController {
 	
 	@Autowired
 	MovieService movieService;
+	
+	@Autowired
+	CategoryService categoryService;
 	
 	@RequestMapping("/movies/all")
 	public ResponseEntity<List<Movie>> getAllMovies(){
@@ -53,6 +57,7 @@ public class MovieController {
 		
 		String message = "Default message";
 		HttpStatus code = HttpStatus.BAD_REQUEST;
+		Category category = categoryService.findOneById(movie.getCategory().getId());
 		
 		try {
 			if(result.hasErrors()) {
@@ -65,9 +70,17 @@ public class MovieController {
 					message = "Pelicula ya existe";
 					code = HttpStatus.CONFLICT;
 				}else {
-					movieService.save(movie);
-					message = "Pelicula insertada con éxito";
-					code = HttpStatus.OK;
+					
+					if(category == null) {
+						message = "Categoria inexistente";
+						code = HttpStatus.CONFLICT;
+					}
+					else {
+						movie.setCategory(category);
+						movieService.save(movie);
+						message = "Pelicula insertada con éxito";
+						code = HttpStatus.OK;
+					}
 				}
 				
 			}

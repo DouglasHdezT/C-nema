@@ -69,7 +69,7 @@ public class DeptoController {
 					code = HttpStatus.CONFLICT;
 				}else {
 					
-					if(country != null) {
+					if(country == null) {
 						message = "Pais inexistente";
 						code = HttpStatus.CONFLICT;
 					}
