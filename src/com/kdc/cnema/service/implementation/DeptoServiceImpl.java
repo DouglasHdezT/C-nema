@@ -37,4 +37,10 @@ public class DeptoServiceImpl implements DeptoService{
 		
 	}
 
+	@Override
+	public Depto findOneByName(String name) throws DataAccessException {
+		// TODO Auto-generated method stub
+		return deptoRepo.findOneByName(name);
+	}
+
 }

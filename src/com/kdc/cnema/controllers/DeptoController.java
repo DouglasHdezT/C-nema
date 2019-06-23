@@ -15,29 +15,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.kdc.cnema.domain.Country;
 import com.kdc.cnema.domain.Depto;
-import com.kdc.cnema.domain.Town;
 import com.kdc.cnema.dtos.ResponseDTO;
 import com.kdc.cnema.service.DeptoService;
-import com.kdc.cnema.service.TownService;
 
 @RestController
 @CrossOrigin(origins = "*")
-public class TownController {
-	
-	@Autowired
-	TownService townService;
+public class DeptoController {
 	
 	@Autowired
 	DeptoService deptoService;
 	
-	@RequestMapping("/towns/all")
-	public ResponseEntity<List<Town>> getAllTowns(){
-		List<Town> towns =  new ArrayList<>();	
+	@RequestMapping("/deptos/all")
+	public ResponseEntity<List<Depto>> getAllDeptos(){
+		List<Depto> deptos =  new ArrayList<>();	
 		HttpStatus code = HttpStatus.BAD_REQUEST;
 		
 		try {
-			towns = townService.findAll();
+			deptos = deptoService.findAll();
 			code = HttpStatus.OK;
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -45,38 +41,31 @@ public class TownController {
 		}
 		
 		
-		return new ResponseEntity<List<Town>>(
-				towns,
+		return new ResponseEntity<List<Depto>>(
+				deptos,
 				code);
 	}
 	
-	@RequestMapping(value="/towns/save", method = RequestMethod.POST)
-	public ResponseEntity<ResponseDTO> insertTown(@RequestBody @Valid Town town, BindingResult result){
+	@RequestMapping(value="/deptos/save", method = RequestMethod.POST)
+	public ResponseEntity<ResponseDTO> insertDepto(@RequestBody @Valid Depto depto, BindingResult result){
 		
 		String message = "Default message";
 		HttpStatus code = HttpStatus.BAD_REQUEST;
-		Depto depto = deptoService.findOneById(town.getDepto().getId());
 		
 		try {
 			if(result.hasErrors()) {
-				message = "Campos de municipios invalidos";
+				message = "Campos de departamentos invalidos";
 				code = HttpStatus.BAD_REQUEST;
 			}else {
-				Town townAux = townService.findOneByName(town.getName());
+				Depto deptoAux = deptoService.findOneByName(depto.getName());
 				
-				if(townAux != null) {
-					message = "Categoria ya existe";
+				if(deptoAux != null) {
+					message = "Pais ya existe";
 					code = HttpStatus.CONFLICT;
 				}else {
-					if(depto.getId()!=null) {
-						code = HttpStatus.CONFLICT;
-					}
-					else {
-						town.setDepto(depto);
-						townService.save(town);
-						message = "Municipio insertada con éxito";
-						code = HttpStatus.OK;
-					}
+					deptoService.save(depto);
+					message = "Departamento insertada con éxito";
+					code = HttpStatus.OK;
 				}
 				
 			}
@@ -87,6 +76,6 @@ public class TownController {
 		
 		return new ResponseEntity<ResponseDTO>(new ResponseDTO(message), code);		
 	}
-
 	
+
 }

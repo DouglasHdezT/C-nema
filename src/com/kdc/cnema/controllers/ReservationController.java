@@ -15,29 +15,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.kdc.cnema.domain.Depto;
-import com.kdc.cnema.domain.Town;
+import com.kdc.cnema.domain.Country;
+import com.kdc.cnema.domain.Reservation;
 import com.kdc.cnema.dtos.ResponseDTO;
-import com.kdc.cnema.service.DeptoService;
-import com.kdc.cnema.service.TownService;
+import com.kdc.cnema.service.ReservationService;
 
 @RestController
 @CrossOrigin(origins = "*")
-public class TownController {
+public class ReservationController {
 	
 	@Autowired
-	TownService townService;
+	ReservationService reservationService;
 	
-	@Autowired
-	DeptoService deptoService;
-	
-	@RequestMapping("/towns/all")
-	public ResponseEntity<List<Town>> getAllTowns(){
-		List<Town> towns =  new ArrayList<>();	
+	@RequestMapping("/reservations/all")
+	public ResponseEntity<List<Reservation>> getAllReservations(){
+		List<Reservation> reservations =  new ArrayList<>();	
 		HttpStatus code = HttpStatus.BAD_REQUEST;
 		
 		try {
-			towns = townService.findAll();
+			reservations = reservationService.findAll();
 			code = HttpStatus.OK;
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -45,39 +41,26 @@ public class TownController {
 		}
 		
 		
-		return new ResponseEntity<List<Town>>(
-				towns,
+		return new ResponseEntity<List<Reservation>>(
+				reservations,
 				code);
 	}
-	
-	@RequestMapping(value="/towns/save", method = RequestMethod.POST)
-	public ResponseEntity<ResponseDTO> insertTown(@RequestBody @Valid Town town, BindingResult result){
+
+	@RequestMapping(value="/reservations/save", method = RequestMethod.POST)
+	public ResponseEntity<ResponseDTO> insertCountry(@RequestBody @Valid Reservation reservation, BindingResult result){
 		
 		String message = "Default message";
 		HttpStatus code = HttpStatus.BAD_REQUEST;
-		Depto depto = deptoService.findOneById(town.getDepto().getId());
 		
 		try {
 			if(result.hasErrors()) {
-				message = "Campos de municipios invalidos";
+				message = "Reservaciones invalidas";
 				code = HttpStatus.BAD_REQUEST;
 			}else {
-				Town townAux = townService.findOneByName(town.getName());
-				
-				if(townAux != null) {
-					message = "Categoria ya existe";
-					code = HttpStatus.CONFLICT;
-				}else {
-					if(depto.getId()!=null) {
-						code = HttpStatus.CONFLICT;
-					}
-					else {
-						town.setDepto(depto);
-						townService.save(town);
-						message = "Municipio insertada con éxito";
-						code = HttpStatus.OK;
-					}
-				}
+				Country countryAux = reservationService.findOneByName(reservation.getName());
+				reservationService.save(reservation);
+				message = "Reservacion insertada con éxito";
+				code = HttpStatus.OK;
 				
 			}
 		} catch (Exception e) {
@@ -87,6 +70,4 @@ public class TownController {
 		
 		return new ResponseEntity<ResponseDTO>(new ResponseDTO(message), code);		
 	}
-
-	
 }
