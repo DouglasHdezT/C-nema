@@ -13,8 +13,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -33,12 +35,18 @@ public class Movie {
 	private Integer id;
 	
 	@NotBlank
+	@Size(min = 1, max= 150)
 	@Column(name =  "titulo_pelicula")
 	private String title;
 	
 	@NotBlank
+	@Size(min = 1, max= 1000)
 	@Column(name =  "descripcion")
 	private String description;
+	
+	@Min(1)
+	@Column(name =  "duracion")
+	private Integer length;
 	
 	@NotBlank
 	@Column(name =  "url_imagen")
@@ -47,6 +55,9 @@ public class Movie {
 	@NotNull
 	@Column(name =  "fecha_estreno")
 	private Date releaseDate;
+	
+	@Column(name =  "status")
+	private Boolean status;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="id_categoria", referencedColumnName= "id_categoria")

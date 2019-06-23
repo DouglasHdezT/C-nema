@@ -33,6 +33,9 @@ public class Town {
 	@Column(name = "nombre_municipio")
 	private String name;
 	
+	@Column(name =  "status")
+	private Boolean status;
+	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_depto", referencedColumnName= "id_depto")
 	private Depto depto;

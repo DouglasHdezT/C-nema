@@ -46,6 +46,9 @@ public class Cinema {
 	@Column(name= "capacidad")
 	private Integer capacity;
 	
+	@Column(name =  "status")
+	private Boolean status;
+	
 	@JsonIgnore
 	@OneToMany(mappedBy = "cinema", fetch = FetchType.LAZY)
 	private List<Schedule> schedules;

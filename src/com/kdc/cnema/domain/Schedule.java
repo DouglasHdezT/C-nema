@@ -48,6 +48,9 @@ public class Schedule {
 	@Column(name = "hora_fin")
 	private Date endTime;
 	
+	@Column(name =  "status")
+	private Boolean status;
+	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_sala", referencedColumnName= "id_sala")
 	private Cinema cinema;

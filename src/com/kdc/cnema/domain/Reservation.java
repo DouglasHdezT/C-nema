@@ -17,8 +17,6 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 /**
  * Clase que mapea la entidad "reservacion" en la base de datos del proyecto.
  * @author DeusHdezT
@@ -46,6 +44,9 @@ public class Reservation {
 	@NotNull
 	@Column(name = "precio_total")
 	private BigDecimal totalPrice;
+	
+	@Column(name =  "status")
+	private Boolean status;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_horario", referencedColumnName= "id_horario")

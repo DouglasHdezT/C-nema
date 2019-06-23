@@ -38,6 +38,9 @@ public class Depto {
 	@JoinColumn(name = "id_pais" , referencedColumnName= "id_pais")
 	private Country country;
 	
+	@Column(name =  "status")
+	private Boolean status;
+	
 	@JsonIgnore
 	@OneToMany(mappedBy = "depto", fetch = FetchType.LAZY)
 	private List<Town> towns;
