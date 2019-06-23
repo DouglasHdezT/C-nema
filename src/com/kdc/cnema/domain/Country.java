@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -29,6 +30,7 @@ public class Country {
 	@SequenceGenerator(name = "pais_id_pais_seq" , sequenceName = "public.pais_id_pais_seq", allocationSize = 1)
 	private Integer id;
 	
+	@NotBlank
 	@Column(name = "nombre_pais")
 	private String name;
 	

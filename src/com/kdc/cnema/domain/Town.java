@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -28,6 +29,7 @@ public class Town {
 	@SequenceGenerator(name = "municipio_id_municipio_seq" , sequenceName = "	public.municipio_id_municipio_seq", allocationSize = 1)
 	private Integer id;
 	
+	@NotBlank
 	@Column(name = "nombre_municipio")
 	private String name;
 	
