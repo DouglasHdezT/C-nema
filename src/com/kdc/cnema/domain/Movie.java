@@ -36,7 +36,7 @@ public class Movie {
 	private String description;
 	
 	@NotBlank
-	@Column(name =  "url_image")
+	@Column(name =  "url_imagen")
 	private String urlImage;
 	
 	@NotNull
