@@ -43,14 +43,18 @@ public class DeptoController {
 		//System.out.println(authHeader);
 		
 		try {
+			
 			JwtPayload.validateToken(authHeader);
 			
 			deptos = deptoService.findAll();
 			code = HttpStatus.OK;
+			
 		}catch (io.jsonwebtoken.SignatureException e) {
-			code = HttpStatus.BAD_REQUEST;
+			code = HttpStatus.FORBIDDEN;
+		}catch (io.jsonwebtoken.MalformedJwtException e) {
+			code = HttpStatus.FORBIDDEN;
 		}catch (MalformedAuthHeader e) {
-			code = HttpStatus.BAD_REQUEST;
+			code = HttpStatus.FORBIDDEN;
 		}catch (Exception e) {
 			e.printStackTrace();
 			code = HttpStatus.INTERNAL_SERVER_ERROR;
