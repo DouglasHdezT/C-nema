@@ -31,13 +31,19 @@ public class CountryServiceImpl implements CountryService{
 	@Override
 	public Country save(Country country) throws DataAccessException {
 		// TODO Auto-generated method stub
-		return null;
+		return repository.save(country);
 	}
 
 	@Override
 	public void deleteById(Integer id) throws DataAccessException {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public Country findOneByName(String name) throws DataAccessException {
+		// TODO Auto-generated method stub
+		return repository.findOneByName(name);
 	}
 
 }

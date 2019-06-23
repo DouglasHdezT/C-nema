@@ -41,4 +41,10 @@ public class TownServiceImpl implements TownService{
 		tRepo.deleteById(id);
 	}
 
+	@Override
+	public Town findOneByName(String name) throws DataAccessException {
+		// TODO Auto-generated method stub
+		return tRepo.findOneByName(name);
+	}
+
 }

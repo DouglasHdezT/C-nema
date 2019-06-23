@@ -13,29 +13,27 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.kdc.cnema.domain.Category;
-import com.kdc.cnema.domain.Movie;
+import com.kdc.cnema.domain.Country;
 import com.kdc.cnema.dtos.ResponseDTO;
-import com.kdc.cnema.service.MovieService;
+import com.kdc.cnema.service.CountryService;
 
 @RestController
 @CrossOrigin(origins = "*")
-public class MovieController {
+public class CountryController {
 	
 	@Autowired
-	MovieService movieService;
-	
-	@RequestMapping("/movies/all")
-	public ResponseEntity<List<Movie>> getAllMovies(){
-		List<Movie> movies =  new ArrayList<>();	
+	CountryService countryService;
+
+	@RequestMapping("/countries/all")
+	public ResponseEntity<List<Country>> getAllCountries(){
+		List<Country> countries =  new ArrayList<>();	
 		HttpStatus code = HttpStatus.BAD_REQUEST;
 		
 		try {
-			movies = movieService.findAll();
+			countries = countryService.findAll();
 			code = HttpStatus.OK;
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -43,30 +41,30 @@ public class MovieController {
 		}
 		
 		
-		return new ResponseEntity<List<Movie>>(
-				movies,
+		return new ResponseEntity<List<Country>>(
+				countries,
 				code);
 	}
 	
-	@RequestMapping(value="/movies/save", method = RequestMethod.POST)
-	public ResponseEntity<ResponseDTO> insertMovie(@RequestBody @Valid Movie movie, BindingResult result){
+	@RequestMapping(value="/countries/save", method = RequestMethod.POST)
+	public ResponseEntity<ResponseDTO> insertCountry(@RequestBody @Valid Country country, BindingResult result){
 		
 		String message = "Default message";
 		HttpStatus code = HttpStatus.BAD_REQUEST;
 		
 		try {
 			if(result.hasErrors()) {
-				message = "Campos de la categoria invalidos";
+				message = "Campos paises invalidos";
 				code = HttpStatus.BAD_REQUEST;
 			}else {
-				Movie movieAux = movieService.findOneByTitle(movie.getTitle());
+				Country countryAux = countryService.findOneByName(country.getName());
 				
-				if(movieAux != null) {
-					message = "Pelicula ya existe";
+				if(countryAux != null) {
+					message = "Pais ya existe";
 					code = HttpStatus.CONFLICT;
 				}else {
-					movieService.save(movie);
-					message = "Pelicula insertada con éxito";
+					countryService.save(country);
+					message = "Categoria insertada con éxito";
 					code = HttpStatus.OK;
 				}
 				

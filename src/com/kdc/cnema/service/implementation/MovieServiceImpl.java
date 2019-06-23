@@ -40,4 +40,10 @@ public class MovieServiceImpl implements MovieService{
 		
 	}
 
+	@Override
+	public Movie findOneByTitle(String title) throws DataAccessException {
+		// TODO Auto-generated method stub
+		return mRepo.findOneByTitle(title);
+	}
+
 }

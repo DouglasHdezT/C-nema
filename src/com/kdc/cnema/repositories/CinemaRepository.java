@@ -9,5 +9,7 @@ import com.kdc.cnema.domain.Cinema;
  *	Repository para entidad Sala
  */
 public interface CinemaRepository extends JpaRepository<Cinema, Integer>{
+	
+	
 
 }
