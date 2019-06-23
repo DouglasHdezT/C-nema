@@ -10,12 +10,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kdc.cnema.domain.Country;
+import com.kdc.cnema.domain.Depto;
 import com.kdc.cnema.dtos.ResponseDTO;
 import com.kdc.cnema.service.CountryService;
 
@@ -45,6 +47,28 @@ public class CountryController {
 				code);
 	}
 	
+	@RequestMapping("/countries/{id}")
+	public ResponseEntity<Country> getCountry(@PathVariable(value = "id") Integer id){
+		Country country = new Country();
+		HttpStatus code = HttpStatus.BAD_REQUEST;
+		
+		try {
+			country = countryService.findOneById(id);
+			
+			if(country != null) {
+				code = HttpStatus.OK;
+			}else {
+				code = HttpStatus.NOT_FOUND; 
+				country =  new Country();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			code = HttpStatus.INTERNAL_SERVER_ERROR;
+		}
+		
+		return new ResponseEntity<Country>(country, code);
+	}
+	
 	@RequestMapping(value="/countries/save", method = RequestMethod.POST)
 	public ResponseEntity<ResponseDTO> insertCountry(@RequestBody @Valid Country country, BindingResult result){
 		
@@ -63,7 +87,7 @@ public class CountryController {
 					code = HttpStatus.CONFLICT;
 				}else {
 					countryService.save(country);
-					message = "Categoria insertada con éxito";
+					message = "Categoria insertada con exito";
 					code = HttpStatus.OK;
 				}
 				

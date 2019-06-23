@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.kdc.cnema.domain.Country;
 import com.kdc.cnema.domain.Depto;
+import com.kdc.cnema.domain.Movie;
 import com.kdc.cnema.dtos.ResponseDTO;
 import com.kdc.cnema.service.CountryService;
 import com.kdc.cnema.service.DeptoService;
@@ -50,6 +52,29 @@ public class DeptoController {
 				code);
 	}
 	
+	
+	@RequestMapping("/deptos/{id}")
+	public ResponseEntity<Depto> getTown(@PathVariable(value = "id") Integer id){
+		Depto depto = new Depto();
+		HttpStatus code = HttpStatus.BAD_REQUEST;
+		
+		try {
+			depto = deptoService.findOneById(id);
+			
+			if(depto != null) {
+				code = HttpStatus.OK;
+			}else {
+				code = HttpStatus.NOT_FOUND; 
+				depto =  new Depto();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			code = HttpStatus.INTERNAL_SERVER_ERROR;
+		}
+		
+		return new ResponseEntity<Depto>(depto, code);
+	}
+	
 	@RequestMapping(value="/deptos/save", method = RequestMethod.POST)
 	public ResponseEntity<ResponseDTO> insertDepto(@RequestBody @Valid Depto depto, BindingResult result){
 		
@@ -76,7 +101,7 @@ public class DeptoController {
 					else {
 						depto.setCountry(country);
 						deptoService.save(depto);
-						message = "Departamento insertada con éxito";
+						message = "Departamento insertada con exito";
 						code = HttpStatus.OK;
 					}
 				}

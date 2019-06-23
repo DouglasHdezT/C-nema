@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.kdc.cnema.domain.Category;
 import com.kdc.cnema.domain.Movie;
+import com.kdc.cnema.domain.Town;
 import com.kdc.cnema.dtos.ResponseDTO;
 import com.kdc.cnema.service.CategoryService;
 import com.kdc.cnema.service.MovieService;
@@ -50,6 +52,29 @@ public class MovieController {
 				code);
 	}
 	
+	
+	@RequestMapping("/movies/{id}")
+	public ResponseEntity<Movie> getMovie(@PathVariable(value = "id") Integer id){
+		Movie movie = new Movie();
+		HttpStatus code = HttpStatus.BAD_REQUEST;
+		
+		try {
+			movie = movieService.findOneById(id);
+			
+			if(movie != null) {
+				code = HttpStatus.OK;
+			}else {
+				code = HttpStatus.NOT_FOUND; 
+				movie =  new Movie();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			code = HttpStatus.INTERNAL_SERVER_ERROR;
+		}
+		
+		return new ResponseEntity<Movie>(movie, code);
+	}
+	
 	@RequestMapping(value="/movies/save", method = RequestMethod.POST)
 	public ResponseEntity<ResponseDTO> insertMovie(@RequestBody @Valid Movie movie, BindingResult result){
 		
@@ -76,7 +101,7 @@ public class MovieController {
 					else {
 						movie.setCategory(category);
 						movieService.save(movie);
-						message = "Pelicula insertada con éxito";
+						message = "Pelicula insertada con exito";
 						code = HttpStatus.OK;
 					}
 				}
