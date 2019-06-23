@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.kdc.cnema.domain.Country;
 import com.kdc.cnema.domain.Depto;
 import com.kdc.cnema.dtos.ResponseDTO;
+import com.kdc.cnema.service.CountryService;
 import com.kdc.cnema.service.DeptoService;
 
 @RestController
@@ -26,6 +27,9 @@ public class DeptoController {
 	
 	@Autowired
 	DeptoService deptoService;
+	
+	@Autowired
+	CountryService countryService;
 	
 	@RequestMapping("/deptos/all")
 	public ResponseEntity<List<Depto>> getAllDeptos(){
@@ -51,6 +55,7 @@ public class DeptoController {
 		
 		String message = "Default message";
 		HttpStatus code = HttpStatus.BAD_REQUEST;
+		Country country = countryService.findOneById(depto.getCountry().getId());
 		
 		try {
 			if(result.hasErrors()) {
@@ -63,9 +68,17 @@ public class DeptoController {
 					message = "Pais ya existe";
 					code = HttpStatus.CONFLICT;
 				}else {
-					deptoService.save(depto);
-					message = "Departamento insertada con éxito";
-					code = HttpStatus.OK;
+					
+					if(country != null) {
+						message = "Pais inexistente";
+						code = HttpStatus.CONFLICT;
+					}
+					else {
+						depto.setCountry(country);
+						deptoService.save(depto);
+						message = "Departamento insertada con éxito";
+						code = HttpStatus.OK;
+					}
 				}
 				
 			}

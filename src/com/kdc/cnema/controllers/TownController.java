@@ -65,16 +65,17 @@ public class TownController {
 				Town townAux = townService.findOneByName(town.getName());
 				
 				if(townAux != null) {
-					message = "Categoria ya existe";
+					message = "Municipio ya existente";
 					code = HttpStatus.CONFLICT;
 				}else {
-					if(depto.getId()!=null) {
+					if(depto==null) {
+						message = "Departamento inexistente";
 						code = HttpStatus.CONFLICT;
 					}
 					else {
 						town.setDepto(depto);
 						townService.save(town);
-						message = "Municipio insertada con éxito";
+						message = "Municipio insertado con éxito";
 						code = HttpStatus.OK;
 					}
 				}
