@@ -34,6 +34,9 @@ public class Country {
 	@Column(name = "nombre_pais")
 	private String name;
 	
+	@Column(name =  "status")
+	private Boolean status;
+	
 	@JsonIgnore
 	@OneToMany(mappedBy = "country", fetch = FetchType.LAZY)
 	private List<User> users;
@@ -56,6 +59,14 @@ public class Country {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public Boolean getStatus() {
+		return status;
+	}
+
+	public void setStatus(Boolean status) {
+		this.status = status;
 	}
 
 	public List<User> getUsers() {

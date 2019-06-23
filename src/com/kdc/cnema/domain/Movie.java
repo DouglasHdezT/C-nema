@@ -6,12 +6,17 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -25,25 +30,35 @@ public class Movie {
 	
 	@Id
 	@Column(name =  "id_pelicula")
+	@GeneratedValue(generator = "pelicula_id_pelicula_seq", strategy = GenerationType.AUTO)
+	@SequenceGenerator(name = "pelicula_id_pelicula_seq" , sequenceName = "public.pelicula_id_pelicula_seq", allocationSize = 1)
 	private Integer id;
 	
 	@NotBlank
+	@Size(min = 1, max= 150)
 	@Column(name =  "titulo_pelicula")
 	private String title;
 	
 	@NotBlank
+	@Size(min = 1, max= 1000)
 	@Column(name =  "descripcion")
 	private String description;
 	
+	@Min(1)
+	@Column(name =  "duracion")
+	private Integer length;
+	
 	@NotBlank
-	@Column(name =  "url_image")
+	@Column(name =  "url_imagen")
 	private String urlImage;
 	
 	@NotNull
 	@Column(name =  "fecha_estreno")
 	private Date releaseDate;
 	
-	@JsonIgnore
+	@Column(name =  "status")
+	private Boolean status;
+	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="id_categoria", referencedColumnName= "id_categoria")
 	private Category category;
@@ -90,6 +105,22 @@ public class Movie {
 
 	public void setReleaseDate(Date releaseDate) {
 		this.releaseDate = releaseDate;
+	}
+
+	public Integer getLength() {
+		return length;
+	}
+
+	public void setLength(Integer length) {
+		this.length = length;
+	}
+
+	public Boolean getStatus() {
+		return status;
+	}
+
+	public void setStatus(Boolean status) {
+		this.status = status;
 	}
 
 	public Category getCategory() {

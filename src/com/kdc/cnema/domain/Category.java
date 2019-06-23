@@ -34,6 +34,9 @@ public class Category {
 	@Column(name = "nombre_categoria")
 	private String name;
 	
+	@Column(name =  "status")
+	private Boolean status;
+	
 	@JsonIgnore
 	@OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
 	private List<Movie> movies;
@@ -52,6 +55,14 @@ public class Category {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public Boolean getStatus() {
+		return status;
+	}
+
+	public void setStatus(Boolean status) {
+		this.status = status;
 	}
 
 	public List<Movie> getMovies() {

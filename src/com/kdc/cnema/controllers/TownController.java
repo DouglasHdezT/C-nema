@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.kdc.cnema.domain.Category;
 import com.kdc.cnema.domain.Depto;
 import com.kdc.cnema.domain.Town;
 import com.kdc.cnema.dtos.ResponseDTO;
@@ -88,24 +87,17 @@ public class TownController {
 				message = "Campos de municipios invalidos";
 				code = HttpStatus.BAD_REQUEST;
 			}else {
-				Town townAux = townService.findOneByName(town.getName());
-				
-				if(townAux != null) {
-					message = "Municipio ya existente";
+
+				if(depto==null) {
+					message = "Departamento inexistente";
 					code = HttpStatus.CONFLICT;
-				}else {
-					if(depto==null) {
-						message = "Departamento inexistente";
-						code = HttpStatus.CONFLICT;
-					}
-					else {
-						town.setDepto(depto);
-						townService.save(town);
-						message = "Municipio insertado con exito";
-						code = HttpStatus.OK;
-					}
 				}
-				
+				else {
+					town.setDepto(depto);
+					townService.save(town);
+					message = "Municipio insertado con exito";
+					code = HttpStatus.OK;
+				}
 			}
 		} catch (Exception e) {
 			message = "Error interno de servidor";

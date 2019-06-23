@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.kdc.cnema.domain.Town;
 import com.kdc.cnema.repositories.TownRepository;
@@ -30,12 +31,14 @@ public class TownServiceImpl implements TownService{
 	}
 
 	@Override
+	@Transactional(rollbackFor = Exception.class)
 	public Town save(Town user) throws DataAccessException {
 		// TODO Auto-generated method stub
 		return tRepo.save(user);
 	}
 
 	@Override
+	@Transactional(rollbackFor = Exception.class)
 	public void deleteById(Integer id) throws DataAccessException {
 		// TODO Auto-generated method stub
 		tRepo.deleteById(id);
@@ -47,4 +50,9 @@ public class TownServiceImpl implements TownService{
 		return tRepo.findOneByName(name);
 	}
 
+	@Override
+	@Transactional(rollbackFor = Exception.class)
+	public void updateState(Integer id, Boolean state) throws DataAccessException {
+		tRepo.updateState(id, state);
+	}
 }

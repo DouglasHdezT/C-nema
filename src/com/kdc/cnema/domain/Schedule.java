@@ -48,12 +48,13 @@ public class Schedule {
 	@Column(name = "hora_fin")
 	private Date endTime;
 	
-	@JsonIgnore
+	@Column(name =  "status")
+	private Boolean status;
+	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_sala", referencedColumnName= "id_sala")
 	private Cinema cinema;
 	
-	@JsonIgnore
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_pelicula", referencedColumnName= "id_pelicula")
 	private Movie movie;
@@ -93,6 +94,14 @@ public class Schedule {
 
 	public void setEndTime(Date endTime) {
 		this.endTime = endTime;
+	}
+
+	public Boolean getStatus() {
+		return status;
+	}
+
+	public void setStatus(Boolean status) {
+		this.status = status;
 	}
 
 	public Cinema getCinema() {

@@ -17,8 +17,6 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 /**
  * Clase que mapea la entidad "reservacion" en la base de datos del proyecto.
  * @author DeusHdezT
@@ -47,12 +45,13 @@ public class Reservation {
 	@Column(name = "precio_total")
 	private BigDecimal totalPrice;
 	
-	@JsonIgnore
+	@Column(name =  "status")
+	private Boolean status;
+	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_horario", referencedColumnName= "id_horario")
 	private Schedule schedule;
 	
-	@JsonIgnore
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_usuario", referencedColumnName= "id_usuario")
 	private User user;
@@ -88,6 +87,14 @@ public class Reservation {
 
 	public void setTotalPrice(BigDecimal totalPrice) {
 		this.totalPrice = totalPrice;
+	}
+
+	public Boolean getStatus() {
+		return status;
+	}
+
+	public void setStatus(Boolean status) {
+		this.status = status;
 	}
 
 	public Schedule getSchedule() {

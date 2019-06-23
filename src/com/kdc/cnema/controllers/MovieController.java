@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.kdc.cnema.domain.Category;
 import com.kdc.cnema.domain.Movie;
-import com.kdc.cnema.domain.Town;
 import com.kdc.cnema.dtos.ResponseDTO;
 import com.kdc.cnema.service.CategoryService;
 import com.kdc.cnema.service.MovieService;
@@ -108,6 +107,7 @@ public class MovieController {
 				
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 			message = "Error interno de servidor";
 			code = HttpStatus.INTERNAL_SERVER_ERROR;
 		}

@@ -179,7 +179,7 @@ public class LoginController {
 				if(passwordEncoder.matches(password,user.getPassword())) {
 					if(user.getLogged()) {
 						userService.updateLoggingState(user.getId(), false);
-						message = "Sesión de usuario clausurada";
+						message = "Sesion de usuario clausurada";
 						code=HttpStatus.OK;
 					}else {
 						message = "Usuario actualmente no activo";
@@ -218,11 +218,6 @@ public class LoginController {
 	@RequestMapping(value = "/test")
 	public JwtPayload jwtTest(@RequestParam String token){
 		return JwtPayload.decodeToken(token);
-	}
-	
-	@RequestMapping(value = "/test2")
-	public boolean jwtTest2(@RequestParam String token){
-		return JwtPayload.isValidToken(token);
 	}
 	
 }

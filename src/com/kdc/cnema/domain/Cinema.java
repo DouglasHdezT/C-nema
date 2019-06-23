@@ -46,6 +46,9 @@ public class Cinema {
 	@Column(name= "capacidad")
 	private Integer capacity;
 	
+	@Column(name =  "status")
+	private Boolean status;
+	
 	@JsonIgnore
 	@OneToMany(mappedBy = "cinema", fetch = FetchType.LAZY)
 	private List<Schedule> schedules;
@@ -81,6 +84,14 @@ public class Cinema {
 
 	public void setCapacity(Integer capacity) {
 		this.capacity = capacity;
+	}
+
+	public Boolean getStatus() {
+		return status;
+	}
+
+	public void setStatus(Boolean status) {
+		this.status = status;
 	}
 
 	public List<Schedule> getSchedules() {

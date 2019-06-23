@@ -13,7 +13,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -32,11 +31,12 @@ public class Depto {
 	@SequenceGenerator(name = "departamento_id_depto_seq" , sequenceName = "public.departamento_id_depto_seq", allocationSize = 1)
 	private Integer id;
 	
-	@NotBlank
 	@Column(name="nombre_depto")
 	private String name;
 	
-	@JsonIgnore
+	@Column(name =  "status")
+	private Boolean status;
+	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_pais" , referencedColumnName= "id_pais")
 	private Country country;
@@ -59,6 +59,14 @@ public class Depto {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public Boolean getStatus() {
+		return status;
+	}
+
+	public void setStatus(Boolean status) {
+		this.status = status;
 	}
 
 	public Country getCountry() {

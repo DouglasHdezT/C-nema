@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
-import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -102,7 +101,7 @@ public class ReservationController {
 					code = HttpStatus.NOT_FOUND;
 				}else {
 					reservationService.save(reservation);
-					message = "Reservacion insertada con éxito";
+					message = "Reservacion insertada con exito";
 					code = HttpStatus.OK;
 				}
 			}

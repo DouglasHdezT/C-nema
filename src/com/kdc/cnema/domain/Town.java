@@ -12,8 +12,6 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 /**
  * Clase que mapea la entidad "municipio" en la base de datos del proyecto.
  * @author DeusHdezT
@@ -33,7 +31,9 @@ public class Town {
 	@Column(name = "nombre_municipio")
 	private String name;
 	
-	@JsonIgnore
+	@Column(name =  "status")
+	private Boolean status;
+	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_depto", referencedColumnName= "id_depto")
 	private Depto depto;
@@ -52,6 +52,14 @@ public class Town {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public Boolean getStatus() {
+		return status;
+	}
+
+	public void setStatus(Boolean status) {
+		this.status = status;
 	}
 
 	public Depto getDepto() {

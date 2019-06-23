@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.kdc.cnema.domain.audit.ProfileAudit;
 import com.kdc.cnema.repositories.ProfileAuditRepository;
@@ -29,12 +30,14 @@ public class ProfileAuditServiceImpl implements ProfileAuditService{
 	}
 
 	@Override
+	@Transactional(rollbackFor = Exception.class)
 	public ProfileAudit save(ProfileAudit profileAudit) throws DataAccessException {
 		// TODO Auto-generated method stub
 		return pARepo.save(profileAudit);
 	}
 
 	@Override
+	@Transactional(rollbackFor = Exception.class)
 	public void deleteById(Integer id) throws DataAccessException {
 		// TODO Auto-generated method stub
 		pARepo.deleteById(id);

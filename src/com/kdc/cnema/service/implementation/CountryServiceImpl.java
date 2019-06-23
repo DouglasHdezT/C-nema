@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.kdc.cnema.domain.Country;
 import com.kdc.cnema.repositories.CountryRepository;
@@ -25,19 +26,20 @@ public class CountryServiceImpl implements CountryService{
 	@Override
 	public List<Country> findAll() throws DataAccessException {
 		// TODO Auto-generated method stub
-		return null;
+		return repository.findAll();
 	}
 
 	@Override
+	@Transactional(rollbackFor = Exception.class)
 	public Country save(Country country) throws DataAccessException {
 		// TODO Auto-generated method stub
 		return repository.save(country);
 	}
 
 	@Override
+	@Transactional(rollbackFor = Exception.class)
 	public void deleteById(Integer id) throws DataAccessException {
-		// TODO Auto-generated method stub
-		
+		repository.deleteById(id);
 	}
 
 	@Override
@@ -46,4 +48,9 @@ public class CountryServiceImpl implements CountryService{
 		return repository.findOneByName(name);
 	}
 
+	@Override
+	@Transactional(rollbackFor = Exception.class)
+	public void updateState(Integer id, Boolean state) throws DataAccessException {
+		repository.updateState(id, state);
+	}
 }

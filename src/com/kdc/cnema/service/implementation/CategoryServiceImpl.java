@@ -27,6 +27,11 @@ public class CategoryServiceImpl implements CategoryService{
 	public List<Category> findAll() throws DataAccessException {
 		return categoryRepo.findAll();
 	}
+	
+	@Override
+	public Category findOneByName(String name) throws DataAccessException {
+		return categoryRepo.findOneByName(name);
+	}
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)
@@ -38,12 +43,12 @@ public class CategoryServiceImpl implements CategoryService{
 	@Transactional(rollbackFor = Exception.class)
 	public void deleteById(Integer id) throws DataAccessException {
 		categoryRepo.deleteById(id);
-		
 	}
 
 	@Override
-	public Category findOneByName(String name) throws DataAccessException {
-		return categoryRepo.findOneByName(name);
+	@Transactional(rollbackFor = Exception.class)
+	public void updateState(Integer id, Boolean state) throws DataAccessException {
+		categoryRepo.updateState(id, state);
 	}
 
 }

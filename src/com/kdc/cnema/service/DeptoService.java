@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.dao.DataAccessException;
 
-import com.kdc.cnema.domain.Category;
 import com.kdc.cnema.domain.Depto;
 
 
@@ -21,4 +20,5 @@ public interface DeptoService {
 	
 	void deleteById(Integer id) throws DataAccessException;
 
+	void updateState(Integer id, Boolean state) throws DataAccessException;
 }
