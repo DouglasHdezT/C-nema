@@ -22,7 +22,7 @@ public interface UserRepository extends JpaRepository<User, Integer>{
 	public void updateLoginState(@Param("id") Integer id, @Param("state") Boolean state);
 	
 	@Modifying
-	@Query(value = "UPDATE usuario SET state = :state WHERE id_usuario = :id"
+	@Query(value = "UPDATE usuario SET status = :status WHERE id_usuario = :id"
 			, nativeQuery = true)
-	public void updateState(@Param("id") Integer id, @Param("state") Boolean state) throws DataAccessException;
+	public void updateState(@Param("id") Integer id, @Param("status") Boolean status) throws DataAccessException;
 }
