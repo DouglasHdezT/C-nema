@@ -16,7 +16,7 @@ public interface UserRepository extends JpaRepository<User, Integer>{
 	public User findOneById(Integer id);
 	
 	@Modifying
-	@Query(value = "UPDATE usuario SET isLogged = :state WHERE id_usuario = :id"
+	@Query(value = "UPDATE usuario SET islogged = :state WHERE id_usuario = :id"
 			, nativeQuery = true)
 	public void updateLoginState(@Param("id") Integer id, @Param("state") Boolean state);
 }
