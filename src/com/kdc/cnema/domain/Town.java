@@ -11,6 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 /**
  * Clase que mapea la entidad "municipio" en la base de datos del proyecto.
@@ -31,6 +32,7 @@ public class Town {
 	@Column(name = "nombre_municipio")
 	private String name;
 	
+	@NotNull
 	@Column(name =  "status")
 	private Boolean status;
 	

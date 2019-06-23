@@ -56,6 +56,7 @@ public class Movie {
 	@Column(name =  "fecha_estreno")
 	private Date releaseDate;
 	
+	@NotNull
 	@Column(name =  "status")
 	private Boolean status;
 	

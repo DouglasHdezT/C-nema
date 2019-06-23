@@ -12,13 +12,18 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kdc.cnema.domain.Category;
+import com.kdc.cnema.domain.User;
 import com.kdc.cnema.dtos.ResponseDTO;
+import com.kdc.cnema.exceptions.MalformedAuthHeader;
 import com.kdc.cnema.service.CategoryService;
+import com.kdc.cnema.service.UserService;
+import com.kdc.cnema.utils.JwtPayload;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -27,14 +32,25 @@ public class CategoryController {
 	@Autowired
 	CategoryService cateogryService;
 	
+	@Autowired
+	UserService userService;
+	
 	@RequestMapping("/categories/all")
-	public ResponseEntity<List<Category>> getAllCategories(){
+	public ResponseEntity<List<Category>> getAllCategories(@RequestHeader("Authorization") String authHeader){
 		List<Category> categories =  new ArrayList<>();	
 		HttpStatus code = HttpStatus.BAD_REQUEST;
 		
 		try {
+			JwtPayload.validateToken(authHeader);
+			
 			categories = cateogryService.findAll();
 			code = HttpStatus.OK;
+		}catch (io.jsonwebtoken.SignatureException e) {
+			code = HttpStatus.FORBIDDEN;
+		}catch (io.jsonwebtoken.MalformedJwtException e) {
+			code = HttpStatus.FORBIDDEN;
+		}catch (MalformedAuthHeader e) {
+			code = HttpStatus.FORBIDDEN;
 		}catch (Exception e) {
 			e.printStackTrace();
 			code = HttpStatus.INTERNAL_SERVER_ERROR;
@@ -47,11 +63,12 @@ public class CategoryController {
 	}
 	
 	@RequestMapping("/categories/{id}")
-	public ResponseEntity<Category> getCategory(@PathVariable(value = "id") Integer id){
+	public ResponseEntity<Category> getCategory(@PathVariable(value = "id") Integer id, @RequestHeader("Authorization") String authHeader){
 		Category category = new Category();
 		HttpStatus code = HttpStatus.BAD_REQUEST;
 		
 		try {
+			JwtPayload.validateToken(authHeader);
 			category = cateogryService.findOneById(id);
 			
 			if(category != null) {
@@ -60,7 +77,13 @@ public class CategoryController {
 				code = HttpStatus.NOT_FOUND; 
 				category =  new Category();
 			}
-		} catch (Exception e) {
+		}catch (io.jsonwebtoken.SignatureException e) {
+			code = HttpStatus.FORBIDDEN;
+		}catch (io.jsonwebtoken.MalformedJwtException e) {
+			code = HttpStatus.FORBIDDEN;
+		}catch (MalformedAuthHeader e) {
+			code = HttpStatus.FORBIDDEN;
+		}catch (Exception e) {
 			e.printStackTrace();
 			code = HttpStatus.INTERNAL_SERVER_ERROR;
 		}
@@ -69,19 +92,28 @@ public class CategoryController {
 	}
 	
 	@RequestMapping(value="/categories/save", method = RequestMethod.POST)
-	public ResponseEntity<ResponseDTO> insertCategory(@RequestBody @Valid Category category, BindingResult result){
+	public ResponseEntity<ResponseDTO> insertCategory(@RequestBody @Valid Category category, @RequestHeader("Authorization") String authHeader,
+			BindingResult result){
 		
 		String message = "Default message";
 		HttpStatus code = HttpStatus.BAD_REQUEST;
 		
 		try {
+			JwtPayload.validateToken(authHeader);
+			JwtPayload payload = JwtPayload.decodeToken(authHeader.substring(7));
+			
 			if(result.hasErrors()) {
 				message = "Campos de la categoria invalidos";
 				code = HttpStatus.BAD_REQUEST;
 			}else {
 				Category categoryAux = cateogryService.findOneByName(category.getName());
 				
-				if(categoryAux != null) {
+				User user = userService.findOneById(Integer.parseInt(payload.getUid()));
+				
+				if(user.getType() == 0) {
+					message = "Usuario no autorizado";
+					code = HttpStatus.FORBIDDEN;
+				}else if(categoryAux != null) {
 					message = "Categoria ya existe";
 					code = HttpStatus.CONFLICT;
 				}else {
@@ -91,7 +123,16 @@ public class CategoryController {
 				}
 				
 			}
-		} catch (Exception e) {
+		}catch (io.jsonwebtoken.SignatureException e) {
+			message = "Token invalido";
+			code = HttpStatus.FORBIDDEN;
+		}catch (io.jsonwebtoken.MalformedJwtException e) {
+			message = "Token invalido";
+			code = HttpStatus.FORBIDDEN;
+		}catch (MalformedAuthHeader e) {
+			message = "Token invalido";
+			code = HttpStatus.FORBIDDEN;
+		}catch (Exception e) {
 			message = "Error interno de servidor";
 			code = HttpStatus.INTERNAL_SERVER_ERROR;
 		}

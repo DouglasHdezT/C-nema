@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -31,9 +33,11 @@ public class Depto {
 	@SequenceGenerator(name = "departamento_id_depto_seq" , sequenceName = "public.departamento_id_depto_seq", allocationSize = 1)
 	private Integer id;
 	
+	@NotBlank
 	@Column(name="nombre_depto")
 	private String name;
 	
+	@NotNull
 	@Column(name =  "status")
 	private Boolean status;
 	

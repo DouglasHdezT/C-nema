@@ -14,6 +14,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -46,6 +47,7 @@ public class Cinema {
 	@Column(name= "capacidad")
 	private Integer capacity;
 	
+	@NotNull
 	@Column(name =  "status")
 	private Boolean status;
 	

@@ -48,6 +48,7 @@ public class Schedule {
 	@Column(name = "hora_fin")
 	private Date endTime;
 	
+	@NotNull
 	@Column(name =  "status")
 	private Boolean status;
 	

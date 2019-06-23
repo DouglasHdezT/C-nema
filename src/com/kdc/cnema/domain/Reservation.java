@@ -45,6 +45,7 @@ public class Reservation {
 	@Column(name = "precio_total")
 	private BigDecimal totalPrice;
 	
+	@NotNull
 	@Column(name =  "status")
 	private Boolean status;
 	
