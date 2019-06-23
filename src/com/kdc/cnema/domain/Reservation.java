@@ -13,6 +13,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -31,12 +34,16 @@ public class Reservation {
 	@SequenceGenerator(name = "reservacion_id_reservacion_seq" , sequenceName = "	public.reservacion_id_reservacion_seq", allocationSize = 1)
 	private Integer id;
 	
+	@Min(1)
+	@Max(15)
 	@Column(name = "cantidad_reservaciones")
 	private Integer quanReservations;
 	
+	@NotNull
 	@Column(name = "precio_unitario")
 	private BigDecimal unitPrice;
 	
+	@NotNull
 	@Column(name = "precio_total")
 	private BigDecimal totalPrice;
 	

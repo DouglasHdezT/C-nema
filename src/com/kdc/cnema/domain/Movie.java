@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -25,15 +27,19 @@ public class Movie {
 	@Column(name =  "id_pelicula")
 	private Integer id;
 	
+	@NotBlank
 	@Column(name =  "titulo_pelicula")
 	private String title;
 	
+	@NotBlank
 	@Column(name =  "descripcion")
 	private String description;
 	
+	@NotBlank
 	@Column(name =  "url_image")
 	private String urlImage;
 	
+	@NotNull
 	@Column(name =  "fecha_estreno")
 	private Date releaseDate;
 	

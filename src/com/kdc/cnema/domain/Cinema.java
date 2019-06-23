@@ -11,6 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -29,12 +32,17 @@ public class Cinema {
 	@SequenceGenerator(name = "sala_id_sala_seq" , sequenceName = "public.sala_id_sala_seq", allocationSize = 1)
 	private Integer id;
 	
+	@Min(1)
+	@Max(60)
 	@Column(name="numero_sala")
 	private Integer roomNumber;
 	
+	@NotBlank
 	@Column(name = "tipo_sala")
 	private String type;
 	
+	@Min(1)
+	@Max(600)
 	@Column(name= "capacidad")
 	private Integer capacity;
 	
