@@ -46,6 +46,7 @@ public class CategoryServiceImpl implements CategoryService{
 	}
 
 	@Override
+	@Transactional(rollbackFor = Exception.class)
 	public void updateState(Integer id, Boolean state) throws DataAccessException {
 		categoryRepo.updateState(id, state);
 	}
