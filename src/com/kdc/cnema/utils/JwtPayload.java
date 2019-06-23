@@ -1,6 +1,5 @@
 package com.kdc.cnema.utils;
 
-import java.nio.charset.MalformedInputException;
 import java.util.Date;
 
 import com.kdc.cnema.exceptions.MalformedAuthHeader;
