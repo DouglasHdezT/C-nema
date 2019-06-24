@@ -41,7 +41,6 @@ public class Reservation {
 	@Column(name = "precio_unitario")
 	private BigDecimal unitPrice;
 	
-	@NotNull
 	@Column(name = "precio_total")
 	private BigDecimal totalPrice;
 	
