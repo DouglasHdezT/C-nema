@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.kdc.cnema.domain.Category;
 import com.kdc.cnema.domain.User;
 import com.kdc.cnema.exceptions.MalformedAuthHeader;
 import com.kdc.cnema.service.UserService;
