@@ -45,12 +45,10 @@ public class Schedule {
 	private Integer avialable;
 	
 	@NotNull
-	@JsonDeserialize(using = DateHandler.class)
 	@Column(name = "hora_inicio")
 	private Date startTime;
 	
 	@NotNull
-	@JsonDeserialize(using = DateHandler.class)
 	@Column(name = "hora_fin")
 	private Date endTime;
 	
