@@ -1,7 +1,6 @@
 package com.kdc.cnema.domain;
 
 import java.math.BigDecimal;
-import java.math.BigInteger;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -39,18 +38,30 @@ public class Reservation {
 	private Integer quanReservations;
 	
 	@NotNull
-	@Column(name = "precio_unitario")
-	private BigDecimal unitPrice;
-	
-	@Column(name = "precio_total")
+	@Column(name = "subtotal")
 	private BigDecimal totalPrice;
 	
+	@NotNull
+	@Column(name = "saldo_utilizar")
+	private BigDecimal usedBalance;
+	
+	@NotNull
+	@Column(name = "saldo_remanete_cuenta")
+	private BigDecimal remainBalance;
+	
+	@NotNull
+	@Column(name = "gran_total")
+	private BigDecimal grandTotal;
+	
+	@Min(1)
+	@Max(15)
 	@Column(name = "cantidad_especial")
-	private BigInteger cantidadEspecial;
+	private Integer quanPremium;;
 	
+	@Min(1)
+	@Max(15)
 	@Column(name = "cantidad_normal")
-	private BigInteger cantidadNormal;
-	
+	private Integer quanNormal;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_horario", referencedColumnName= "id_horario")
@@ -60,7 +71,6 @@ public class Reservation {
 	@JoinColumn(name = "id_usuario", referencedColumnName= "id_usuario")
 	private User user;
 
-	
 	public Integer getId() {
 		return id;
 	}
@@ -77,20 +87,52 @@ public class Reservation {
 		this.quanReservations = quanReservations;
 	}
 
-	public BigDecimal getUnitPrice() {
-		return unitPrice;
-	}
-
-	public void setUnitPrice(BigDecimal unitPrice) {
-		this.unitPrice = unitPrice;
-	}
-
 	public BigDecimal getTotalPrice() {
 		return totalPrice;
 	}
 
 	public void setTotalPrice(BigDecimal totalPrice) {
 		this.totalPrice = totalPrice;
+	}
+
+	public BigDecimal getUsedBalance() {
+		return usedBalance;
+	}
+
+	public void setUsedBalance(BigDecimal usedBalance) {
+		this.usedBalance = usedBalance;
+	}
+
+	public BigDecimal getRemainBalance() {
+		return remainBalance;
+	}
+
+	public void setRemainBalance(BigDecimal remainBalance) {
+		this.remainBalance = remainBalance;
+	}
+
+	public BigDecimal getGrandTotal() {
+		return grandTotal;
+	}
+
+	public void setGrandTotal(BigDecimal grandTotal) {
+		this.grandTotal = grandTotal;
+	}
+
+	public Integer getQuanPremium() {
+		return quanPremium;
+	}
+
+	public void setQuanPremium(Integer quanPremium) {
+		this.quanPremium = quanPremium;
+	}
+
+	public Integer getQuanNormal() {
+		return quanNormal;
+	}
+
+	public void setQuanNormal(Integer quanNormal) {
+		this.quanNormal = quanNormal;
 	}
 
 	public Schedule getSchedule() {
@@ -108,5 +150,5 @@ public class Reservation {
 	public void setUser(User user) {
 		this.user = user;
 	}
-	
+
 }

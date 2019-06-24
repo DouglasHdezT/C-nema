@@ -53,11 +53,13 @@ public class Schedule {
 	@Column(name =  "status")
 	private Boolean status;
 
+	@NotNull
 	@Column(name =  "precio_especial")
-	private BigDecimal precioEspecial;
+	private BigDecimal premiumPrice;
 	
+	@NotNull
 	@Column(name =  "precio_normal")
-	private BigDecimal precioNormal;
+	private BigDecimal normalPrice;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_sala", referencedColumnName= "id_sala")
@@ -71,7 +73,6 @@ public class Schedule {
 	@OneToMany(mappedBy = "schedule", fetch = FetchType.LAZY)
 	private List<Reservation> reservations;
 
-	
 	public Integer getId() {
 		return id;
 	}
@@ -112,6 +113,22 @@ public class Schedule {
 		this.status = status;
 	}
 
+	public BigDecimal getPremiumPrice() {
+		return premiumPrice;
+	}
+
+	public void setPremiumPrice(BigDecimal premiumPrice) {
+		this.premiumPrice = premiumPrice;
+	}
+
+	public BigDecimal getNormalPrice() {
+		return normalPrice;
+	}
+
+	public void setNormalPrice(BigDecimal normalPrice) {
+		this.normalPrice = normalPrice;
+	}
+
 	public Cinema getCinema() {
 		return cinema;
 	}
@@ -136,4 +153,5 @@ public class Schedule {
 		this.reservations = reservations;
 	}
 
+	
 }

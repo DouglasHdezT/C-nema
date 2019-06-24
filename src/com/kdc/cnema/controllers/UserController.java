@@ -23,6 +23,7 @@ import com.kdc.cnema.domain.User;
 import com.kdc.cnema.dtos.ArgumentDTO;
 import com.kdc.cnema.dtos.ResponseDTO;
 import com.kdc.cnema.exceptions.MalformedAuthHeader;
+import com.kdc.cnema.service.ReservationService;
 import com.kdc.cnema.service.ScheduleService;
 import com.kdc.cnema.service.UserService;
 import com.kdc.cnema.utils.JwtPayload;
@@ -36,6 +37,9 @@ public class UserController {
 	
 	@Autowired
 	ScheduleService scheduleService;
+	
+	@Autowired
+	ReservationService reservationService;
 	
 	/*
 	 * Admin methods
@@ -130,10 +134,11 @@ public class UserController {
 	 */
 	
 	@RequestMapping(value = "/users/reservations/save", method = RequestMethod.POST)
-	public ResponseEntity<Reservation> insertReservation(@RequestBody @Valid Reservation reservation, 
+	public ResponseEntity<ResponseDTO> insertReservation(@RequestBody @Valid Reservation reservation, 
 			@RequestHeader("Authorization") String authHeader, BindingResult result){
-		Reservation reservationFinal = new Reservation();
+
 		HttpStatus code = HttpStatus.BAD_REQUEST;
+		String message = "Default message";
 		
 		try {
 			
@@ -147,36 +152,52 @@ public class UserController {
 				code = HttpStatus.BAD_REQUEST;
 			}else {
 				
-				reservation.setTotalPrice(new BigDecimal(
-							reservation.getQuanReservations() *
-							reservation.getUnitPrice().longValue()
-						));
-				
 				if(user == null || schedule == null) {
 					
 					code = HttpStatus.NOT_FOUND;
 				
-				}else if(reservation.getTotalPrice().longValue() > user.getCurrCredit().longValue()){
-					
-					code = HttpStatus.CONFLICT;
-					
-				}else if (reservation.getQuanReservations() > schedule.getAvialable()) {
-				
-					code = HttpStatus.CONFLICT;
-					
 				}else {
 					
-					schedule.setAvialable(
-								schedule.getAvialable() - 
-								reservation.getQuanReservations()
-							);
+					reservation.setTotalPrice(new BigDecimal(
+							(reservation.getQuanNormal() * schedule.getNormalPrice().longValue()) +
+							(reservation.getQuanPremium() * schedule.getPremiumPrice().longValue()) 
+						));
 					
-					schedule = scheduleService.save(schedule);
+					reservation.setQuanReservations(
+							reservation.getQuanNormal() + reservation.getQuanPremium()
+						);
 					
-					reservation.setSchedule(schedule);
-					reservation.setUser(user);
+					if(reservation.getUsedBalance().longValue() > user.getCurrCredit().longValue()){
+						
+						code = HttpStatus.CONFLICT;
+						
+					}else if (reservation.getQuanReservations() > schedule.getAvialable()) {
 					
-				}
+						code = HttpStatus.CONFLICT;
+						
+					}else {
+						
+						schedule.setAvialable(
+									schedule.getAvialable() - 
+									reservation.getQuanReservations()
+								);
+						
+						user.setCurrCredit(new BigDecimal(
+									user.getCurrCredit().longValue() - 
+									reservation.getUsedBalance().longValue()
+								));;
+						
+						reservation.setRemainBalance(user.getCurrCredit());
+								
+						schedule = scheduleService.save(schedule);
+						user =  userService.save(user);
+						
+						reservation.setSchedule(schedule);
+						reservation.setUser(user);
+						
+						reservation = reservationService.save(reservation);
+					}
+				} 
 				
 			}
 			
@@ -190,7 +211,7 @@ public class UserController {
 			code = HttpStatus.INTERNAL_SERVER_ERROR;
 		}
 		
-		return new ResponseEntity<Reservation>(reservationFinal, code);
+		return new ResponseEntity<ResponseDTO>(new ResponseDTO(message), code);
 	}
 	
 	@RequestMapping(value = "/users/reservations", method = RequestMethod.POST)
