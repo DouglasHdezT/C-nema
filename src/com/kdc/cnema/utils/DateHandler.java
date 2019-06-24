@@ -28,10 +28,10 @@ public class DateHandler extends StdDeserializer<Date>{
 	@Override
 	public Date deserialize(JsonParser p, DeserializationContext ctxt) throws IOException, JsonProcessingException {
 		
-		String date = p.getText();
+		
 		
 		try {
-			return new Date(Long.parseLong(date));
+			return new Date(p.getLongValue());
 		}catch (Exception e) {
 			return null;
 		}
