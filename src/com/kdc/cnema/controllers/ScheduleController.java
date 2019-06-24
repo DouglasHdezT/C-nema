@@ -114,8 +114,8 @@ public class ScheduleController {
 				message = "Campos de horario invalidos";
 				code = HttpStatus.BAD_REQUEST;
 			}else {
-				Cinema cinema = cinemaService.findOneById(schedule.getId());
-				Movie movie = movieService.findOneById(schedule.getId());
+				Cinema cinema = cinemaService.findOneById(schedule.getCinema().getId());
+				Movie movie = movieService.findOneById(schedule.getMovie().getId());
 				
 				User user = userService.findOneById(Integer.parseInt(payload.getUid()));
 				
