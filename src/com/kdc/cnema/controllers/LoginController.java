@@ -100,6 +100,7 @@ public class LoginController {
 					tempUser.setCountry(country);
 					tempUser.setCurrCredit(new BigDecimal(20));
 					tempUser.setType(0);
+					tempUser.setStatus(false);
 					tempUser.setPassword(passwordEncoder.encode(tempUser.getPassword()));
 					tempUser.setLogged(true);
 					
