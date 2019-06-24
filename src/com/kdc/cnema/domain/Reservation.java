@@ -1,6 +1,7 @@
 package com.kdc.cnema.domain;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -43,6 +44,13 @@ public class Reservation {
 	
 	@Column(name = "precio_total")
 	private BigDecimal totalPrice;
+	
+	@Column(name = "cantidad_especial")
+	private BigInteger cantidadEspecial;
+	
+	@Column(name = "cantidad_normal")
+	private BigInteger cantidadNormal;
+	
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_horario", referencedColumnName= "id_horario")

@@ -1,5 +1,6 @@
 package com.kdc.cnema.domain;
 
+import java.math.BigDecimal;
 import java.sql.Date;
 import java.util.List;
 
@@ -51,6 +52,12 @@ public class Schedule {
 	@NotNull
 	@Column(name =  "status")
 	private Boolean status;
+
+	@Column(name =  "precio_especial")
+	private BigDecimal precioEspecial;
+	
+	@Column(name =  "precio_normal")
+	private BigDecimal precioNormal;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_sala", referencedColumnName= "id_sala")
