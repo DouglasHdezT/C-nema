@@ -21,6 +21,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.kdc.cnema.utils.DateHandler;
 
 /**
  * Clase que mapea la entidad "horario" en la base de datos del proyecto.
@@ -43,10 +45,12 @@ public class Schedule {
 	private Integer avialable;
 	
 	@NotNull
+	@JsonDeserialize(using = DateHandler.class)
 	@Column(name = "hora_inicio")
 	private Date startTime;
 	
 	@NotNull
+	@JsonDeserialize(using = DateHandler.class)
 	@Column(name = "hora_fin")
 	private Date endTime;
 	
