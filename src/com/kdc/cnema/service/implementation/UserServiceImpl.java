@@ -59,4 +59,10 @@ public class UserServiceImpl implements UserService{
 		
 	}
 
+	@Override
+	public void updateStatus(Integer id, Boolean status) throws DataAccessException {
+		uRepo.updateState(id, status);
+		
+	}
+
 }

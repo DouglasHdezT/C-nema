@@ -21,5 +21,7 @@ public interface UserService {
 	void deleteById(Integer id) throws DataAccessException;
 	
 	void updateLoggingState(Integer id, Boolean state) throws DataAccessException;
+	
+	void updateStatus(Integer id, Boolean status) throws DataAccessException;
 }
 

@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.kdc.cnema.domain.Reservation;
 import com.kdc.cnema.domain.Schedule;
 import com.kdc.cnema.domain.User;
+import com.kdc.cnema.dtos.ArgumentDTO;
+import com.kdc.cnema.dtos.ResponseDTO;
 import com.kdc.cnema.exceptions.MalformedAuthHeader;
 import com.kdc.cnema.service.ScheduleService;
 import com.kdc.cnema.service.UserService;
@@ -71,6 +73,55 @@ public class UserController {
 		return new ResponseEntity<List<User>>(
 				users,
 				code);
+	}
+	
+	@RequestMapping(value ="/users/update/")
+	public ResponseEntity<ResponseDTO> updateState(@RequestBody ArgumentDTO argumentBody, @RequestHeader("Authorization") String authHeader){
+		String message = "Default message";
+		HttpStatus code = HttpStatus.BAD_REQUEST;
+		
+		try {
+			
+			JwtPayload.validateToken(authHeader);
+			JwtPayload payload = JwtPayload.decodeToken(authHeader.substring(7));
+			
+			User user = userService.findOneById(Integer.parseInt(payload.getUid()));
+			User userToUpdate = userService.findOneById(argumentBody.getId());
+			
+			if(user != null && user.getType() == 0) {
+				
+				code = HttpStatus.FORBIDDEN;
+				message = "Faltan permisos";
+			
+			}else if(userToUpdate == null) {
+				
+				code = HttpStatus.NOT_FOUND;
+				message = "Usuario no encontrado";
+			
+			}else{
+				
+				userService.updateStatus(userToUpdate.getId(), !userToUpdate.getStatus());;
+				
+				code = HttpStatus.OK;
+				message = "Usuario modificado";
+			}
+
+			
+		}catch (io.jsonwebtoken.SignatureException e) {
+			message = "Token invalido";
+			code = HttpStatus.FORBIDDEN;
+		}catch (io.jsonwebtoken.MalformedJwtException e) {
+			message = "Token invalido";
+			code = HttpStatus.FORBIDDEN;
+		}catch (MalformedAuthHeader e) {
+			message = "Token invalido";
+			code = HttpStatus.FORBIDDEN;
+		}catch (Exception e) {
+			message = "Error interno de servidor";
+			code = HttpStatus.INTERNAL_SERVER_ERROR;
+		}
+		
+		return new ResponseEntity<ResponseDTO>(new ResponseDTO(message), code);
 	}
 	
 	
