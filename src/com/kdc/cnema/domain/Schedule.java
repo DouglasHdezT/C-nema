@@ -33,7 +33,7 @@ public class Schedule {
 	@Id
 	@Column(name = "id_horario")
 	@GeneratedValue(generator = "horario_id_horario_seq", strategy = GenerationType.AUTO)
-	@SequenceGenerator(name = "horario_id_horario_seq" , sequenceName = "	public.horario_id_horario_seq", allocationSize = 1)
+	@SequenceGenerator(name = "horario_id_horario_seq" , sequenceName = "public.horario_id_horario_seq", allocationSize = 1)
 	private Integer id;
 	
 	@Min(0)

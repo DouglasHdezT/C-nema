@@ -150,6 +150,7 @@ public class ScheduleController {
 			code = HttpStatus.FORBIDDEN;
 		}catch (Exception e) {
 			e.printStackTrace();
+			code = HttpStatus.INTERNAL_SERVER_ERROR;
 			message = "Error interno de servidor";
 		}
 		

@@ -22,7 +22,7 @@ public class DeptoAudit {
 	@Id
 	@Column(name = "id_categoria_auditoria")
 	@GeneratedValue(generator = "depto_auditoria_id_depto_auditoria_seq", strategy = GenerationType.AUTO)
-	@SequenceGenerator(name = "depto_auditoria_id_depto_auditoria_seq" , sequenceName = "	public.depto_auditoria_id_depto_auditoria_seq", allocationSize = 1)
+	@SequenceGenerator(name = "depto_auditoria_id_depto_auditoria_seq" , sequenceName = "public.depto_auditoria_id_depto_auditoria_seq", allocationSize = 1)
 	private Integer id;
 	
 	@Column(name = "usuario_modificacion")

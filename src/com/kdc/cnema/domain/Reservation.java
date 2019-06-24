@@ -27,7 +27,7 @@ public class Reservation {
 	@Id
 	@Column(name = "id_reservacion")
 	@GeneratedValue(generator = "reservacion_id_reservacion_seq", strategy = GenerationType.AUTO)
-	@SequenceGenerator(name = "reservacion_id_reservacion_seq" , sequenceName = "	public.reservacion_id_reservacion_seq", allocationSize = 1)
+	@SequenceGenerator(name = "reservacion_id_reservacion_seq" , sequenceName = "public.reservacion_id_reservacion_seq", allocationSize = 1)
 	private Integer id;
 	
 	@Min(1)

@@ -22,7 +22,7 @@ public class CategoryAudit {
 	@Id
 	@Column(name = "id_categoria_auditoria")
 	@GeneratedValue(generator = "categoria_auditoria_id_categoria_auditoria_seq", strategy = GenerationType.AUTO)
-	@SequenceGenerator(name = "categoria_auditoria_id_categoria_auditoria_seq" , sequenceName = "	public.categoria_auditoria_id_categoria_auditoria_seq", allocationSize = 1)
+	@SequenceGenerator(name = "categoria_auditoria_id_categoria_auditoria_seq" , sequenceName = "public.categoria_auditoria_id_categoria_auditoria_seq", allocationSize = 1)
 	private Integer id;
 	
 	@Column(name = "usuario_modificacion")

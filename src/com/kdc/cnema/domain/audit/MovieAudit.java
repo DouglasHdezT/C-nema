@@ -22,7 +22,7 @@ public class MovieAudit {
 	@Id
 	@Column(name = "id_categoria_auditoria")
 	@GeneratedValue(generator = "pelicula_auditoria_id_pelicula_auditoria_seq", strategy = GenerationType.AUTO)
-	@SequenceGenerator(name = "pelicula_auditoria_id_pelicula_auditoria_seq" , sequenceName = "	public.pelicula_auditoria_id_pelicula_auditoria_seq", allocationSize = 1)
+	@SequenceGenerator(name = "pelicula_auditoria_id_pelicula_auditoria_seq" , sequenceName = "public.pelicula_auditoria_id_pelicula_auditoria_seq", allocationSize = 1)
 	private Integer id;
 	
 	@Column(name = "usuario_modificacion")

@@ -28,7 +28,7 @@ public class ProfileAudit {
 	@Id
 	@Column(name = "id_cuenta")
 	@GeneratedValue(generator = "cuentas_auditoria_id_cuenta_seq", strategy = GenerationType.AUTO)
-	@SequenceGenerator(name = "cuentas_auditoria_id_cuenta_seq" , sequenceName = "	public.cuentas_auditoria_id_cuenta_seq", allocationSize = 1)
+	@SequenceGenerator(name = "cuentas_auditoria_id_cuenta_seq" , sequenceName = "public.cuentas_auditoria_id_cuenta_seq", allocationSize = 1)
 	private Integer _id;
 	
 	@Column(name = "usuario_modificacion")

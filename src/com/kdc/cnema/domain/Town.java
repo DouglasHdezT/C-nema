@@ -25,7 +25,7 @@ public class Town {
 	@Id
 	@Column(name = "id_municipio")
 	@GeneratedValue(generator = "municipio_id_municipio_seq", strategy = GenerationType.AUTO)
-	@SequenceGenerator(name = "municipio_id_municipio_seq" , sequenceName = "	public.municipio_id_municipio_seq", allocationSize = 1)
+	@SequenceGenerator(name = "municipio_id_municipio_seq" , sequenceName = "public.municipio_id_municipio_seq", allocationSize = 1)
 	private Integer id;
 	
 	@NotBlank
