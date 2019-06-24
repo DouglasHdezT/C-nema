@@ -21,8 +21,6 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.kdc.cnema.utils.DateHandler;
 
 /**
  * Clase que mapea la entidad "horario" en la base de datos del proyecto.
@@ -130,6 +128,14 @@ public class Schedule {
 
 	public BigDecimal getNormalPrice() {
 		return normalPrice;
+	}
+	
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	public void setNormalPrice(BigDecimal normalPrice) {
