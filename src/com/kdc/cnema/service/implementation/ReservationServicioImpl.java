@@ -1,5 +1,6 @@
 package com.kdc.cnema.service.implementation;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,14 +9,24 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.kdc.cnema.domain.Reservation;
+import com.kdc.cnema.domain.Schedule;
+import com.kdc.cnema.domain.User;
 import com.kdc.cnema.repositories.ReservationRepository;
 import com.kdc.cnema.service.ReservationService;
+import com.kdc.cnema.service.ScheduleService;
+import com.kdc.cnema.service.UserService;
 
 @Service
 public class ReservationServicioImpl implements ReservationService{
 	
 	@Autowired
 	ReservationRepository seRepo;
+	
+	@Autowired
+	UserService userService;
+	
+	@Autowired
+	ScheduleService scheduleService;
 
 	@Override
 	public Reservation findOneById(Integer id) throws DataAccessException {
@@ -31,9 +42,27 @@ public class ReservationServicioImpl implements ReservationService{
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public Reservation save(Reservation user) throws DataAccessException {
-		// TODO Auto-generated method stub
-		return seRepo.save(user);
+	public Reservation save(Reservation reservation, Schedule schedule, User user) throws DataAccessException {
+		
+		schedule.setAvialable(
+				schedule.getAvialable() - 
+				reservation.getQuanReservations()
+			);
+	
+		user.setCurrCredit(new BigDecimal(
+					user.getCurrCredit().longValue() - 
+					reservation.getUsedBalance().longValue()
+				));;
+		
+		reservation.setRemainBalance(user.getCurrCredit());
+				
+		schedule = scheduleService.save(schedule);
+		user =  userService.save(user);
+		
+		reservation.setSchedule(schedule);
+		reservation.setUser(user);
+		
+		return seRepo.save(reservation);
 	}
 
 	@Override

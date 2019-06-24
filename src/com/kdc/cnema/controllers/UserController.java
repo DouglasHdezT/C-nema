@@ -150,10 +150,11 @@ public class UserController {
 
 			if(result.hasErrors()) {
 				code = HttpStatus.BAD_REQUEST;
+				message = "Campos de reservación con errores";
 			}else {
 				
 				if(user == null || schedule == null) {
-					
+					message = "Usuario u Horario no encotrados";
 					code = HttpStatus.NOT_FOUND;
 				
 				}else {
@@ -169,45 +170,36 @@ public class UserController {
 					
 					if(reservation.getUsedBalance().longValue() > user.getCurrCredit().longValue()){
 						
+						message = "Credito insuficiente";
 						code = HttpStatus.CONFLICT;
 						
 					}else if (reservation.getQuanReservations() > schedule.getAvialable()) {
 					
+						message = "No hay asientos disponibles";
 						code = HttpStatus.CONFLICT;
 						
 					}else {
 						
-						schedule.setAvialable(
-									schedule.getAvialable() - 
-									reservation.getQuanReservations()
-								);
+						reservation = reservationService.save(reservation, schedule, user);
 						
-						user.setCurrCredit(new BigDecimal(
-									user.getCurrCredit().longValue() - 
-									reservation.getUsedBalance().longValue()
-								));;
-						
-						reservation.setRemainBalance(user.getCurrCredit());
-								
-						schedule = scheduleService.save(schedule);
-						user =  userService.save(user);
-						
-						reservation.setSchedule(schedule);
-						reservation.setUser(user);
-						
-						reservation = reservationService.save(reservation);
+						message = "Reservacion insertada con exito";
+						code = HttpStatus.OK;
 					}
 				} 
 				
 			}
 			
 		}catch (io.jsonwebtoken.SignatureException e) {
+			message = "Token invalido";
 			code = HttpStatus.FORBIDDEN;
 		}catch (io.jsonwebtoken.MalformedJwtException e) {
+			message = "Token invalido";
 			code = HttpStatus.FORBIDDEN;
 		}catch (MalformedAuthHeader e) {
+			message = "Token invalido";
 			code = HttpStatus.FORBIDDEN;
 		}catch (Exception e) {
+			message = "Error interno de servidor";
 			code = HttpStatus.INTERNAL_SERVER_ERROR;
 		}
 		

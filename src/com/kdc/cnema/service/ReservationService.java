@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.dao.DataAccessException;
 
 import com.kdc.cnema.domain.Reservation;
+import com.kdc.cnema.domain.Schedule;
+import com.kdc.cnema.domain.User;
 
 
 public interface ReservationService {
@@ -12,7 +14,7 @@ public interface ReservationService {
 	
 	List<Reservation> findAll() throws DataAccessException;
 	
-	Reservation save(Reservation user) throws DataAccessException;
+	Reservation save(Reservation reservation, Schedule schedule, User user) throws DataAccessException;
 	
 	void deleteById(Integer id) throws DataAccessException;
 }
