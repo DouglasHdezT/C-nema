@@ -1,5 +1,6 @@
 package com.kdc.cnema.domain;
 
+import java.math.BigDecimal;
 import java.sql.Date;
 import java.util.List;
 
@@ -20,6 +21,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.deser.std.NumberDeserializers.BigDecimalDeserializer;
 
 /**
  * Clase que mapea la entidad "horario" en la base de datos del proyecto.
@@ -53,13 +56,15 @@ public class Schedule {
 	@Column(name =  "status")
 	private Boolean status;
 
+	@JsonDeserialize(using = BigDecimalDeserializer.class)
 	@NotNull
 	@Column(name =  "precio_especial")
-	private Float premiumPrice;
+	private BigDecimal premiumPrice;
 	
+	@JsonDeserialize(using = BigDecimalDeserializer.class)
 	@NotNull
 	@Column(name =  "precio_normal")
-	private Float normalPrice;
+	private BigDecimal normalPrice;
 	
 	@NotBlank
 	@Column(name = "tipo_lenguaje")
@@ -116,20 +121,20 @@ public class Schedule {
 	public void setStatus(Boolean status) {
 		this.status = status;
 	}
-	
-	public Float getPremiumPrice() {
+
+	public BigDecimal getPremiumPrice() {
 		return premiumPrice;
 	}
 
-	public void setPremiumPrice(Float premiumPrice) {
+	public void setPremiumPrice(BigDecimal premiumPrice) {
 		this.premiumPrice = premiumPrice;
 	}
 
-	public Float getNormalPrice() {
+	public BigDecimal getNormalPrice() {
 		return normalPrice;
 	}
 
-	public void setNormalPrice(Float normalPrice) {
+	public void setNormalPrice(BigDecimal normalPrice) {
 		this.normalPrice = normalPrice;
 	}
 

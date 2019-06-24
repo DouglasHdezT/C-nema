@@ -1,5 +1,6 @@
 package com.kdc.cnema.domain;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -20,6 +21,8 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.deser.std.NumberDeserializers.BigDecimalDeserializer;
 import com.kdc.cnema.domain.audit.ProfileAudit;
 
 /**
@@ -74,8 +77,9 @@ public class User {
 	@Column(name = "password_usuario")
 	private String password;
 	
+	@JsonDeserialize(using = BigDecimalDeserializer.class)
 	@Column(name = "saldo")
-	private Float currCredit;
+	private BigDecimal currCredit;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_pais", referencedColumnName= "id_pais")
@@ -170,11 +174,11 @@ public class User {
 		this.password = password;
 	}
 
-	public Float getCurrCredit() {
+	public BigDecimal getCurrCredit() {
 		return currCredit;
 	}
 
-	public void setCurrCredit(Float currCredit) {
+	public void setCurrCredit(BigDecimal currCredit) {
 		this.currCredit = currCredit;
 	}
 

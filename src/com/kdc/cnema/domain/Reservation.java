@@ -1,5 +1,7 @@
 package com.kdc.cnema.domain;
 
+import java.math.BigDecimal;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,6 +16,9 @@ import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.deser.std.NumberDeserializers.BigDecimalDeserializer;
 
 /**
  * Clase que mapea la entidad "reservacion" en la base de datos del proyecto.
@@ -35,21 +40,25 @@ public class Reservation {
 	@Column(name = "cantidad_reservaciones")
 	private Integer quanReservations;
 	
+	@JsonDeserialize(using = BigDecimalDeserializer.class)
 	@NotNull
 	@Column(name = "subtotal")
-	private Float totalPrice;
+	private BigDecimal totalPrice;
 	
+	@JsonDeserialize(using = BigDecimalDeserializer.class)
 	@NotNull
 	@Column(name = "saldo_utilizar")
-	private Float usedBalance;
+	private BigDecimal usedBalance;
 	
+	@JsonDeserialize(using = BigDecimalDeserializer.class)
 	@NotNull
 	@Column(name = "saldo_remanete_cuenta")
-	private Float remainBalance;
+	private BigDecimal remainBalance;
 	
+	@JsonDeserialize(using = BigDecimalDeserializer.class)
 	@NotNull
 	@Column(name = "gran_total")
-	private Float grandTotal;
+	private BigDecimal grandTotal;
 	
 	@Min(1)
 	@Max(15)
@@ -85,35 +94,35 @@ public class Reservation {
 		this.quanReservations = quanReservations;
 	}
 
-	public Float getTotalPrice() {
+	public BigDecimal getTotalPrice() {
 		return totalPrice;
 	}
 
-	public void setTotalPrice(Float totalPrice) {
+	public void setTotalPrice(BigDecimal totalPrice) {
 		this.totalPrice = totalPrice;
 	}
 
-	public Float getUsedBalance() {
+	public BigDecimal getUsedBalance() {
 		return usedBalance;
 	}
 
-	public void setUsedBalance(Float usedBalance) {
+	public void setUsedBalance(BigDecimal usedBalance) {
 		this.usedBalance = usedBalance;
 	}
 
-	public Float getRemainBalance() {
+	public BigDecimal getRemainBalance() {
 		return remainBalance;
 	}
 
-	public void setRemainBalance(Float remainBalance) {
+	public void setRemainBalance(BigDecimal remainBalance) {
 		this.remainBalance = remainBalance;
 	}
 
-	public Float getGrandTotal() {
+	public BigDecimal getGrandTotal() {
 		return grandTotal;
 	}
 
-	public void setGrandTotal(Float grandTotal) {
+	public void setGrandTotal(BigDecimal grandTotal) {
 		this.grandTotal = grandTotal;
 	}
 

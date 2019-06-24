@@ -1,5 +1,6 @@
 package com.kdc.cnema.controllers;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -158,10 +159,10 @@ public class UserController {
 				
 				}else {
 					
-					reservation.setTotalPrice(
-							(reservation.getQuanNormal() * schedule.getNormalPrice())+
-							(reservation.getQuanPremium() * schedule.getPremiumPrice())
-						);
+					reservation.setTotalPrice(new BigDecimal(
+							(reservation.getQuanNormal() * schedule.getNormalPrice().doubleValue())+
+							(reservation.getQuanPremium() * schedule.getPremiumPrice().doubleValue())
+						));
 					
 					reservation.setQuanReservations(
 							reservation.getQuanNormal() + reservation.getQuanPremium()
