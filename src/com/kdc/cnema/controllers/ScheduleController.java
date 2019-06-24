@@ -119,7 +119,7 @@ public class ScheduleController {
 				
 				User user = userService.findOneById(Integer.parseInt(payload.getUid()));
 				
-				if(user.getType() == 0) {
+				if(user == null || user.getType() == 0) {
 					message = "Usuario no autorizado";
 					code = HttpStatus.FORBIDDEN;
 				}else if(cinema == null) {
