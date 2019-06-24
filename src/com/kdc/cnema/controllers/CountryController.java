@@ -132,7 +132,7 @@ public class CountryController {
 		return new ResponseEntity<ResponseDTO>(new ResponseDTO(message), code);		
 	}
 	
-	@RequestMapping("countries/update/{id}")
+	@RequestMapping("/countries/update/{id}")
 	public ResponseEntity<ResponseDTO> updateState(@PathVariable("id") Integer id, @RequestHeader("Authorization") String authHeader){
 		
 		String message = "Default message";

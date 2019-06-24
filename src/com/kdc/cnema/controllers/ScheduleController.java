@@ -46,7 +46,7 @@ public class ScheduleController {
 	UserService userService;
 	
 	
-	@RequestMapping(value = "/schedule/all")
+	@RequestMapping(value = "/schedules/all")
 	public ResponseEntity<List<Schedule>> getAllSchedules(@RequestHeader("Authorization") String authHeader){
 		List<Schedule> schedules = new ArrayList<>();
 		HttpStatus code = HttpStatus.BAD_REQUEST;
@@ -70,7 +70,7 @@ public class ScheduleController {
 		return new ResponseEntity<List<Schedule>>(schedules, code);
 	}
 	
-	@RequestMapping(value = "/schedule/{id}")
+	@RequestMapping(value = "/schedules/{id}")
 	public ResponseEntity<Schedule> getSchedule(@PathVariable("id") Integer id, @RequestHeader("Authorization") String authHeader){
 		Schedule schedule =  new Schedule();
 		HttpStatus code = HttpStatus.BAD_GATEWAY;
@@ -100,7 +100,7 @@ public class ScheduleController {
 		return new ResponseEntity<Schedule>(schedule, code);
 	}
 	
-	@RequestMapping(value = "/schedule/save", method = RequestMethod.POST)
+	@RequestMapping(value = "/schedules/save", method = RequestMethod.POST)
 	public ResponseEntity<ResponseDTO> insertSchedule(@RequestBody @Valid Schedule schedule, @RequestHeader("Authorization") String authHeader, 
 			BindingResult result){
 		String message = "Default message";
@@ -156,7 +156,7 @@ public class ScheduleController {
 		return new ResponseEntity<ResponseDTO>(new ResponseDTO(message), code);
 	}
 	
-	@RequestMapping("categories/update/{id}")
+	@RequestMapping("/schedules/update/{id}")
 	public ResponseEntity<ResponseDTO> updateState(@PathVariable("id") Integer id, @RequestHeader("Authorization") String authHeader){
 		
 		String message = "Default message";

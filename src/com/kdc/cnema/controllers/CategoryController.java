@@ -140,7 +140,7 @@ public class CategoryController {
 		return new ResponseEntity<ResponseDTO>(new ResponseDTO(message), code);		
 	}
 	
-	@RequestMapping("categories/update/{id}")
+	@RequestMapping("/categories/update/{id}")
 	public ResponseEntity<ResponseDTO> updateState(@PathVariable("id") Integer id, @RequestHeader("Authorization") String authHeader){
 		
 		String message = "Default message";

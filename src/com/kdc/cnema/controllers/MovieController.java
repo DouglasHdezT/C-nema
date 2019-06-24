@@ -147,7 +147,7 @@ public class MovieController {
 		return new ResponseEntity<ResponseDTO>(new ResponseDTO(message), code);		
 	}
 	
-	@RequestMapping("categories/update/{id}")
+	@RequestMapping("/movies/update/{id}")
 	public ResponseEntity<ResponseDTO> updateState(@PathVariable("id") Integer id, @RequestHeader("Authorization") String authHeader){
 		
 		String message = "Default message";

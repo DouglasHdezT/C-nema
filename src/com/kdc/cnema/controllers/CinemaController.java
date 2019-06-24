@@ -129,7 +129,7 @@ public class CinemaController {
 		return new ResponseEntity<ResponseDTO>(new ResponseDTO(message), code);		
 	}
 	
-	@RequestMapping("cinemas/update/{id}")
+	@RequestMapping("/cinemas/update/{id}")
 	public ResponseEntity<ResponseDTO> updateState(@PathVariable("id") Integer id, @RequestHeader("Authorization") String authHeader){
 		
 		String message = "Default message";
