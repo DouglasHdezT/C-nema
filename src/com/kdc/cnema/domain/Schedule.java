@@ -1,6 +1,5 @@
 package com.kdc.cnema.domain;
 
-import java.math.BigDecimal;
 import java.sql.Date;
 import java.util.List;
 
@@ -56,11 +55,11 @@ public class Schedule {
 
 	@NotNull
 	@Column(name =  "precio_especial")
-	private BigDecimal premiumPrice;
+	private Float premiumPrice;
 	
 	@NotNull
 	@Column(name =  "precio_normal")
-	private BigDecimal normalPrice;
+	private Float normalPrice;
 	
 	@NotBlank
 	@Column(name = "tipo_lenguaje")
@@ -117,29 +116,29 @@ public class Schedule {
 	public void setStatus(Boolean status) {
 		this.status = status;
 	}
-
-	public BigDecimal getPremiumPrice() {
+	
+	public Float getPremiumPrice() {
 		return premiumPrice;
 	}
 
-	public void setPremiumPrice(BigDecimal premiumPrice) {
+	public void setPremiumPrice(Float premiumPrice) {
 		this.premiumPrice = premiumPrice;
 	}
 
-	public BigDecimal getNormalPrice() {
+	public Float getNormalPrice() {
 		return normalPrice;
 	}
-	
+
+	public void setNormalPrice(Float normalPrice) {
+		this.normalPrice = normalPrice;
+	}
+
 	public String getType() {
 		return type;
 	}
 
 	public void setType(String type) {
 		this.type = type;
-	}
-
-	public void setNormalPrice(BigDecimal normalPrice) {
-		this.normalPrice = normalPrice;
 	}
 
 	public Cinema getCinema() {

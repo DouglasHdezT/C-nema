@@ -1,6 +1,5 @@
 package com.kdc.cnema.controllers;
 
-import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.validation.Valid;
@@ -98,7 +97,7 @@ public class LoginController {
 					//System.out.println("Val :"+country.getName()+ " Id"+ country.getId());
 					
 					tempUser.setCountry(country);
-					tempUser.setCurrCredit(new BigDecimal(20));
+					tempUser.setCurrCredit(20.0f);
 					tempUser.setType(0);
 					tempUser.setStatus(false);
 					tempUser.setPassword(passwordEncoder.encode(tempUser.getPassword()));

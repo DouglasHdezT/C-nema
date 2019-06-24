@@ -1,6 +1,5 @@
 package com.kdc.cnema.domain;
 
-import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -76,7 +75,7 @@ public class User {
 	private String password;
 	
 	@Column(name = "saldo")
-	private BigDecimal currCredit;
+	private Float currCredit;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_pais", referencedColumnName= "id_pais")
@@ -171,11 +170,11 @@ public class User {
 		this.password = password;
 	}
 
-	public BigDecimal getCurrCredit() {
+	public Float getCurrCredit() {
 		return currCredit;
 	}
 
-	public void setCurrCredit(BigDecimal currCredit) {
+	public void setCurrCredit(Float currCredit) {
 		this.currCredit = currCredit;
 	}
 

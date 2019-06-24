@@ -1,7 +1,5 @@
 package com.kdc.cnema.domain;
 
-import java.math.BigDecimal;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -39,19 +37,19 @@ public class Reservation {
 	
 	@NotNull
 	@Column(name = "subtotal")
-	private BigDecimal totalPrice;
+	private Float totalPrice;
 	
 	@NotNull
 	@Column(name = "saldo_utilizar")
-	private BigDecimal usedBalance;
+	private Float usedBalance;
 	
 	@NotNull
 	@Column(name = "saldo_remanete_cuenta")
-	private BigDecimal remainBalance;
+	private Float remainBalance;
 	
 	@NotNull
 	@Column(name = "gran_total")
-	private BigDecimal grandTotal;
+	private Float grandTotal;
 	
 	@Min(1)
 	@Max(15)
@@ -87,35 +85,35 @@ public class Reservation {
 		this.quanReservations = quanReservations;
 	}
 
-	public BigDecimal getTotalPrice() {
+	public Float getTotalPrice() {
 		return totalPrice;
 	}
 
-	public void setTotalPrice(BigDecimal totalPrice) {
+	public void setTotalPrice(Float totalPrice) {
 		this.totalPrice = totalPrice;
 	}
 
-	public BigDecimal getUsedBalance() {
+	public Float getUsedBalance() {
 		return usedBalance;
 	}
 
-	public void setUsedBalance(BigDecimal usedBalance) {
+	public void setUsedBalance(Float usedBalance) {
 		this.usedBalance = usedBalance;
 	}
 
-	public BigDecimal getRemainBalance() {
+	public Float getRemainBalance() {
 		return remainBalance;
 	}
 
-	public void setRemainBalance(BigDecimal remainBalance) {
+	public void setRemainBalance(Float remainBalance) {
 		this.remainBalance = remainBalance;
 	}
 
-	public BigDecimal getGrandTotal() {
+	public Float getGrandTotal() {
 		return grandTotal;
 	}
 
-	public void setGrandTotal(BigDecimal grandTotal) {
+	public void setGrandTotal(Float grandTotal) {
 		this.grandTotal = grandTotal;
 	}
 

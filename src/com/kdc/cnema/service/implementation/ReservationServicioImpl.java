@@ -1,6 +1,5 @@
 package com.kdc.cnema.service.implementation;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,10 +48,10 @@ public class ReservationServicioImpl implements ReservationService{
 				reservation.getQuanReservations()
 			);
 	
-		user.setCurrCredit(new BigDecimal(
-					user.getCurrCredit().longValue() - 
-					reservation.getUsedBalance().longValue()
-				));;
+		user.setCurrCredit(
+					user.getCurrCredit() - 
+					reservation.getUsedBalance()
+				);;
 		
 		reservation.setRemainBalance(user.getCurrCredit());
 				
