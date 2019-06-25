@@ -56,7 +56,6 @@ public class Movie {
 	private String urlImage;
 	
 	@NotNull
-	@JsonDeserialize(using = DateDeserializer.class)
 	@Column(name =  "fecha_estreno")
 	private Date releaseDate;
 	
