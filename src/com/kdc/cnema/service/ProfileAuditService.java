@@ -11,6 +11,8 @@ public interface ProfileAuditService {
 	
 	public ProfileAudit findOneById(Integer id) throws DataAccessException;
 	
+	public ProfileAudit findOneByUserId(Integer id) throws DataAccessException;
+	
 	List<ProfileAudit> findAll() throws DataAccessException;
 	
 	ProfileAudit save(ProfileAudit profileAudit) throws DataAccessException;

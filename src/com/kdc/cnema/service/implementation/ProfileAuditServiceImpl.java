@@ -21,6 +21,11 @@ public class ProfileAuditServiceImpl implements ProfileAuditService{
 	public ProfileAudit findOneById(Integer id) throws DataAccessException {
 		return pARepo.findById(id).get();
 	}
+	
+	@Override
+	public ProfileAudit findOneByUserId(Integer id) throws DataAccessException {
+		return pARepo.findOneByUserId(id);
+	}
 
 	@Override
 	public List<ProfileAudit> findAll() throws DataAccessException {

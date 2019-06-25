@@ -1,6 +1,7 @@
 package com.kdc.cnema.controllers;
 
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.util.Date;
 
 import javax.validation.Valid;
@@ -14,7 +15,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kdc.cnema.domain.Country;
@@ -58,7 +58,13 @@ public class LoginController {
 				if(user.getLogged()) {
 					message = "Este usuario ya se encuentra activo";
 					code = HttpStatus.FORBIDDEN;
-				}else {
+				}else if(!user.getStatus()) {
+					message = profileAuditService
+							.findOneByUserId(user.getId())
+							.getArgument();
+					code = HttpStatus.FORBIDDEN;
+				}
+				else{
 					if(passwordEncoder.matches(userSubmitted.getPassword(), user.getPassword())) {
 						userService.updateLoggingState(user.getId(), true);
 						message = JwtPayload.generateToken(new JwtPayload(user.getUsername(), new Date(), user.getType()+"", user.getId()+""));
@@ -112,6 +118,7 @@ public class LoginController {
 					ProfileAudit audit = new ProfileAudit();
 					audit.setArgument("Solo un admin puede activar la cuenta.");
 					audit.setStateChanged(false);
+					audit.setModificationDate(new Timestamp(new Date().getTime()));
 					audit.setUserModifier("AdminBot");
 					
 					User user = userService.loginSave(tempUser, audit);
@@ -219,16 +226,6 @@ public class LoginController {
 		}
 		
 		return new ResponseEntity<ResponseDTO>(new ResponseDTO(message), code); 
-	}
-	
-	@RequestMapping(value = "/getTokenRip")
-	public String test() {
-		return JwtPayload.generateToken(new JwtPayload("Puto el que lo lea", new Date(), "sirviente", "Me la pela perro"));
-	}
-	
-	@RequestMapping(value = "/test")
-	public JwtPayload jwtTest(@RequestParam String token){
-		return JwtPayload.decodeToken(token);
 	}
 	
 }

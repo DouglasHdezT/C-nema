@@ -238,5 +238,4 @@ public class UserController {
 		
 		return new ResponseEntity<List<Reservation>>(reservations, code);
 	}
-	
 }
