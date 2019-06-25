@@ -14,6 +14,8 @@ public interface ScheduleService {
 	
 	List<Schedule> findAllActive() throws DataAccessException;
 	
+	List<Schedule> findAllPerMovie(Integer id) throws DataAccessException;
+	
 	Schedule save(Schedule user) throws DataAccessException;
 	
 	void deleteById(Integer id) throws DataAccessException;

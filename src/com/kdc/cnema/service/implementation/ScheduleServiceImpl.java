@@ -31,6 +31,11 @@ public class ScheduleServiceImpl implements ScheduleService{
 	public List<Schedule> findAllActive() throws DataAccessException {
 		return sRepo.findByStatus(true);
 	}
+	
+	@Override
+	public List<Schedule> findAllPerMovie(Integer id) throws DataAccessException {
+		return sRepo.findAllPerMovie(id); 
+	}
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)
