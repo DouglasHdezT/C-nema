@@ -1,7 +1,9 @@
 package com.kdc.cnema.controllers;
 
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.kdc.cnema.domain.Reservation;
 import com.kdc.cnema.domain.Schedule;
 import com.kdc.cnema.domain.User;
+import com.kdc.cnema.domain.audit.ProfileAudit;
 import com.kdc.cnema.dtos.ArgumentDTO;
 import com.kdc.cnema.dtos.ResponseDTO;
 import com.kdc.cnema.exceptions.MalformedAuthHeader;
@@ -104,7 +107,15 @@ public class UserController {
 			
 			}else{
 				
-				userService.updateStatus(userToUpdate.getId(), !userToUpdate.getStatus());;
+				ProfileAudit audit = new ProfileAudit();
+				
+				audit.setArgument(argumentBody.getArgument());
+				audit.setUser(userToUpdate);
+				audit.setUserModifier(user.getUsername());
+				audit.setModificationDate(new Timestamp(new Date().getTime()));
+				audit.setStateChanged(!userToUpdate.getStatus());
+				
+				userService.updateStatus(userToUpdate.getId(), !userToUpdate.getStatus(), audit);
 				
 				code = HttpStatus.OK;
 				message = "Usuario modificado";

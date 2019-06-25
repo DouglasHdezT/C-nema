@@ -9,7 +9,7 @@ import com.kdc.cnema.domain.audit.ProfileAudit;
 public interface ProfileAuditRepository extends JpaRepository<ProfileAudit, Integer>{
 
 	
-	@Query(value = "SELECT * FROM cuentas_auditoria WHERE id_usuario = :user_id"
+	@Query(value = "SELECT * FROM cuentas_auditoria WHERE id_usuario = :user_id ORDER BY id_cuenta DESC"
 			, nativeQuery = true)
 	public ProfileAudit findOneByUserId(@Param("user_id") Integer id);
 	
