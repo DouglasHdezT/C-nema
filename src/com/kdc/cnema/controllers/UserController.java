@@ -132,6 +132,7 @@ public class UserController {
 			message = "Token invalido";
 			code = HttpStatus.FORBIDDEN;
 		}catch (Exception e) {
+			e.printStackTrace();
 			message = "Error interno de servidor";
 			code = HttpStatus.INTERNAL_SERVER_ERROR;
 		}
