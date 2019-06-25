@@ -1,7 +1,7 @@
 package com.kdc.cnema.domain;
 
 import java.math.BigDecimal;
-import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -22,6 +22,7 @@ import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.deser.std.DateDeserializers.TimestampDeserializer;
 import com.fasterxml.jackson.databind.deser.std.NumberDeserializers.BigDecimalDeserializer;
 
 /**
@@ -44,13 +45,15 @@ public class Schedule {
 	@Column(name = "disponibles")
 	private Integer avialable;
 	
+	@JsonDeserialize(using = TimestampDeserializer.class)
 	@NotNull
 	@Column(name = "hora_inicio")
-	private Date startTime;
+	private Timestamp startTime;
 	
+	@JsonDeserialize(using = TimestampDeserializer.class)
 	@NotNull
 	@Column(name = "hora_fin")
-	private Date endTime;
+	private Timestamp endTime;
 	
 	@NotNull
 	@Column(name =  "status")
@@ -98,19 +101,19 @@ public class Schedule {
 		this.avialable = avialable;
 	}
 
-	public Date getStartTime() {
+	public Timestamp getStartTime() {
 		return startTime;
 	}
 
-	public void setStartTime(Date startTime) {
+	public void setStartTime(Timestamp startTime) {
 		this.startTime = startTime;
 	}
 
-	public Date getEndTime() {
+	public Timestamp getEndTime() {
 		return endTime;
 	}
 
-	public void setEndTime(Date endTime) {
+	public void setEndTime(Timestamp endTime) {
 		this.endTime = endTime;
 	}
 
