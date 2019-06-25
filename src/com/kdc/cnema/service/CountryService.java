@@ -15,6 +15,8 @@ public interface CountryService {
 	
 	List<Country> findAll() throws DataAccessException;
 	
+	List<Country> findAllActive() throws DataAccessException;
+	
 	Country save(Country country) throws DataAccessException;
 	
 	void deleteById(Integer id) throws DataAccessException;

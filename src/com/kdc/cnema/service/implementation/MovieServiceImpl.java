@@ -19,7 +19,6 @@ public class MovieServiceImpl implements MovieService{
 
 	@Override
 	public Movie findOneById(Integer id) throws DataAccessException {
-		// TODO Auto-generated method stub
 		return mRepo.findById(id).get();
 	}
 
@@ -27,11 +26,20 @@ public class MovieServiceImpl implements MovieService{
 	public List<Movie> findAll(){
 		return mRepo.findAll();
 	}
+	
+	@Override
+	public List<Movie> findAllActive(){
+		return mRepo.findByStatus(true);
+	}
+	
+	@Override
+	public Movie findOneByTitle(String title) throws DataAccessException {
+		return mRepo.findOneByTitle(title);
+	}
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public Movie save(Movie movie) throws DataAccessException {
-		// TODO Auto-generated method stub
 		return mRepo.save(movie);
 	}
 
@@ -40,12 +48,6 @@ public class MovieServiceImpl implements MovieService{
 	public void deleteById(Integer id) throws DataAccessException {
 		mRepo.deleteById(id);
 		
-	}
-
-	@Override
-	public Movie findOneByTitle(String title) throws DataAccessException {
-		// TODO Auto-generated method stub
-		return mRepo.findOneByTitle(title);
 	}
 
 	@Override

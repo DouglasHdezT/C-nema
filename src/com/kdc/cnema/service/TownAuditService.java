@@ -10,7 +10,10 @@ import com.kdc.cnema.domain.audit.TownAudit;
 public interface TownAuditService {
 
 	public TownAudit findOneById(Integer id) throws DataAccessException;
+	
 	List<TownAudit> findAll() throws DataAccessException;
+	
 	TownAudit save(TownAudit townAudit) throws DataAccessException;
+	
 	void deleteById(Integer id) throws DataAccessException;
 }

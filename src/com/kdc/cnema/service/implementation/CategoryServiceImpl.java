@@ -29,6 +29,11 @@ public class CategoryServiceImpl implements CategoryService{
 	}
 	
 	@Override
+	public List<Category> findAllActive() throws DataAccessException {
+		return categoryRepo.findByStatus(true);
+	}
+	
+	@Override
 	public Category findOneByName(String name) throws DataAccessException {
 		return categoryRepo.findOneByName(name);
 	}

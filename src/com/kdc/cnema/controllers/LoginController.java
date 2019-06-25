@@ -59,7 +59,7 @@ public class LoginController {
 					message = "Este usuario ya se encuentra activo";
 					code = HttpStatus.FORBIDDEN;
 				}else if(!user.getStatus()) {
-					message = profileAuditService
+					message ="Usuario desactivado: " + profileAuditService
 							.findOneByUserId(user.getId())
 							.getArgument();
 					code = HttpStatus.FORBIDDEN;

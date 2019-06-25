@@ -15,6 +15,8 @@ public interface DeptoService {
 	Depto findOneByName(String name) throws DataAccessException;
 	
 	List<Depto> findAll() throws DataAccessException;
+
+	List<Depto> findAllActive() throws DataAccessException;
 	
 	Depto save(Depto depto) throws DataAccessException;
 	

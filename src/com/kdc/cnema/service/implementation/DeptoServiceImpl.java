@@ -26,6 +26,16 @@ public class DeptoServiceImpl implements DeptoService{
 	public List<Depto> findAll() throws DataAccessException {
 		return deptoRepo.findAll();
 	}
+	
+	@Override
+	public List<Depto> findAllActive() throws DataAccessException {
+		return deptoRepo.findByStatus(true);
+	}
+	
+	@Override
+	public Depto findOneByName(String name) throws DataAccessException {
+		return deptoRepo.findOneByName(name);
+	}
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)
@@ -40,12 +50,6 @@ public class DeptoServiceImpl implements DeptoService{
 		
 	}
 
-	@Override
-	public Depto findOneByName(String name) throws DataAccessException {
-		// TODO Auto-generated method stub
-		return deptoRepo.findOneByName(name);
-	}
-	
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public void updateState(Integer id, Boolean state) throws DataAccessException {

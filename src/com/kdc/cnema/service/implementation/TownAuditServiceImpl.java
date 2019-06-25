@@ -19,27 +19,23 @@ public class TownAuditServiceImpl implements TownAuditService{
 
 	@Override
 	public TownAudit findOneById(Integer id) throws DataAccessException {
-		// TODO Auto-generated method stub
 		return tARepo.findById(id).get();
 	}
 
 	@Override
 	public List<TownAudit> findAll() throws DataAccessException {
-		// TODO Auto-generated method stub
 		return tARepo.findAll();
 	}
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public TownAudit save(TownAudit townAudit) throws DataAccessException {
-		// TODO Auto-generated method stub
 		return tARepo.save(townAudit);
 	}
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public void deleteById(Integer id) throws DataAccessException {
-		// TODO Auto-generated method stub
 		tARepo.deleteById(id);
 	}
 

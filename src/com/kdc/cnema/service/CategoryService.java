@@ -14,6 +14,8 @@ public interface CategoryService {
 	
 	List<Category> findAll() throws DataAccessException;
 	
+	List<Category> findAllActive() throws DataAccessException;
+	
 	Category save(Category category) throws DataAccessException;
 	
 	void deleteById(Integer id) throws DataAccessException;

@@ -26,6 +26,11 @@ public class CinemaServiceImpl implements CinemaService{
 	public List<Cinema> findAll() throws DataAccessException {
 		return cinemaRepo.findAll();
 	}
+	
+	@Override
+	public List<Cinema> findAllActive() throws DataAccessException {
+		return cinemaRepo.findByStatus(true);
+	}
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)

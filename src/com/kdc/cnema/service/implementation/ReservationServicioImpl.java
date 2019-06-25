@@ -30,13 +30,11 @@ public class ReservationServicioImpl implements ReservationService{
 
 	@Override
 	public Reservation findOneById(Integer id) throws DataAccessException {
-		// TODO Auto-generated method stub
 		return seRepo.findById(id).get();
 	}
 
 	@Override
 	public List<Reservation> findAll() throws DataAccessException {
-		// TODO Auto-generated method stub
 		return seRepo.findAll();
 	}
 
@@ -68,7 +66,6 @@ public class ReservationServicioImpl implements ReservationService{
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public void deleteById(Integer id) throws DataAccessException {
-		// TODO Auto-generated method stub
 		seRepo.deleteById(id);
 	}
 

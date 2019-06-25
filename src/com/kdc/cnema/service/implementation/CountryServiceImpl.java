@@ -19,20 +19,27 @@ public class CountryServiceImpl implements CountryService{
 	
 	@Override
 	public Country findOneById(Integer id) throws DataAccessException {
-		
 		return repository.findById(id).get();
 	}
 
 	@Override
 	public List<Country> findAll() throws DataAccessException {
-		// TODO Auto-generated method stub
 		return repository.findAll();
+	}
+	
+	@Override
+	public List<Country> findAllActive() throws DataAccessException {
+		return repository.findByStatus(true);
+	}
+	
+	@Override
+	public Country findOneByName(String name) throws DataAccessException {
+		return repository.findOneByName(name);
 	}
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public Country save(Country country) throws DataAccessException {
-		// TODO Auto-generated method stub
 		return repository.save(country);
 	}
 
@@ -40,12 +47,6 @@ public class CountryServiceImpl implements CountryService{
 	@Transactional(rollbackFor = Exception.class)
 	public void deleteById(Integer id) throws DataAccessException {
 		repository.deleteById(id);
-	}
-
-	@Override
-	public Country findOneByName(String name) throws DataAccessException {
-		// TODO Auto-generated method stub
-		return repository.findOneByName(name);
 	}
 
 	@Override

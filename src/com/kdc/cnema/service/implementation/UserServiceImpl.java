@@ -37,10 +37,11 @@ public class UserServiceImpl implements UserService{
 	public User save(User user) throws DataAccessException {
 		return uRepo.save(user);
 	}
+	
 	@Override
+	@Transactional(rollbackFor = Exception.class)
 	public void deleteById(Integer id) throws DataAccessException {
 		uRepo.deleteById(id);
-	
 	}
 
 	@Override

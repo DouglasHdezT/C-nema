@@ -1,5 +1,7 @@
 package com.kdc.cnema.repositories;
 
+import java.util.List;
+
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -23,5 +25,7 @@ public interface CountryRepository extends JpaRepository<Country, Integer>{
 	@Query(value = "UPDATE pais SET status = :status WHERE id_pais = :id"
 			, nativeQuery = true)
 	public void updateState(@Param("id") Integer id, @Param("status") Boolean status) throws DataAccessException;
+	
+	public List<Country> findByStatus(Boolean status);
 	
 }

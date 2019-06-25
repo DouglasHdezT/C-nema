@@ -10,7 +10,10 @@ import com.kdc.cnema.domain.audit.DeptoAudit;
 public interface DeptoAuditService{
 
 	public DeptoAudit findOneById(Integer id) throws DataAccessException;
+	
 	List<DeptoAudit> findAll() throws DataAccessException;
+	
 	DeptoAudit save(DeptoAudit deptoAudit) throws DataAccessException;
+	
 	void deleteById(Integer id) throws DataAccessException;
 }

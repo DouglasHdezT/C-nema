@@ -14,6 +14,8 @@ public interface MovieService {
 	
 	public List<Movie> findAll() throws DataAccessException;
 	
+	public List<Movie> findAllActive() throws DataAccessException;
+	
 	Movie save(Movie movie) throws DataAccessException;
 	
 	void deleteById(Integer id) throws DataAccessException;

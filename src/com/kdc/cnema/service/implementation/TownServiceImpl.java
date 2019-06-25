@@ -20,34 +20,34 @@ public class TownServiceImpl implements TownService{
 	
 	@Override
 	public Town findOneById(Integer id) throws DataAccessException {
-		// TODO Auto-generated method stub
 		return tRepo.findById(id).get();
 	}
 
 	@Override
 	public List<Town> findAll() throws DataAccessException {
-		// TODO Auto-generated method stub
 		return tRepo.findAll();
+	}
+	
+	@Override
+	public List<Town> findAllActive() throws DataAccessException {
+		return tRepo.findByStatus(true);
+	}
+	
+	@Override
+	public Town findOneByName(String name) throws DataAccessException {
+		return tRepo.findOneByName(name);
 	}
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public Town save(Town user) throws DataAccessException {
-		// TODO Auto-generated method stub
 		return tRepo.save(user);
 	}
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public void deleteById(Integer id) throws DataAccessException {
-		// TODO Auto-generated method stub
 		tRepo.deleteById(id);
-	}
-
-	@Override
-	public Town findOneByName(String name) throws DataAccessException {
-		// TODO Auto-generated method stub
-		return tRepo.findOneByName(name);
 	}
 
 	@Override
