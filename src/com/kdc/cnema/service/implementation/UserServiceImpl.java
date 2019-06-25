@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.kdc.cnema.domain.User;
 import com.kdc.cnema.repositories.UserRepository;
+import com.kdc.cnema.service.ProfileAuditService;
 import com.kdc.cnema.service.UserService;
 
 @Service
@@ -16,28 +17,27 @@ public class UserServiceImpl implements UserService{
 	
 	@Autowired
 	UserRepository uRepo;
+	
+	@Autowired
+	ProfileAuditService auditService;
 
 	@Override
 	public User findOneById(Integer id) throws DataAccessException {
-		// TODO Auto-generated method stub
 		return uRepo.findById(id).get();
 	}
 
 	@Override
 	public List<User> findAll() throws DataAccessException {
-		// TODO Auto-generated method stub
 		return uRepo.findAll();
 	}
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public User save(User user) throws DataAccessException {
-		// TODO Auto-generated method stub
 		return uRepo.save(user);
 	}
 	@Override
 	public void deleteById(Integer id) throws DataAccessException {
-		// TODO Auto-generated method stub
 		uRepo.deleteById(id);
 	
 	}
@@ -60,6 +60,7 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
+	@Transactional(rollbackFor = Exception.class)
 	public void updateStatus(Integer id, Boolean status) throws DataAccessException {
 		uRepo.updateState(id, status);
 		

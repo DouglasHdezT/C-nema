@@ -23,5 +23,6 @@ public interface UserService {
 	void updateLoggingState(Integer id, Boolean state) throws DataAccessException;
 	
 	void updateStatus(Integer id, Boolean status) throws DataAccessException;
+	
 }
 

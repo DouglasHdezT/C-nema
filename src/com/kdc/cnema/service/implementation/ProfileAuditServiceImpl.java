@@ -19,27 +19,23 @@ public class ProfileAuditServiceImpl implements ProfileAuditService{
 
 	@Override
 	public ProfileAudit findOneById(Integer id) throws DataAccessException {
-		// TODO Auto-generated method stub
 		return pARepo.findById(id).get();
 	}
 
 	@Override
 	public List<ProfileAudit> findAll() throws DataAccessException {
-		// TODO Auto-generated method stub
 		return pARepo.findAll();
 	}
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public ProfileAudit save(ProfileAudit profileAudit) throws DataAccessException {
-		// TODO Auto-generated method stub
 		return pARepo.save(profileAudit);
 	}
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public void deleteById(Integer id) throws DataAccessException {
-		// TODO Auto-generated method stub
 		pARepo.deleteById(id);
 	}
 

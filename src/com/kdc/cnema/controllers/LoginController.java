@@ -19,10 +19,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.kdc.cnema.domain.Country;
 import com.kdc.cnema.domain.User;
+import com.kdc.cnema.domain.audit.ProfileAudit;
 import com.kdc.cnema.dtos.GetTokenDTO;
 import com.kdc.cnema.dtos.LoginForm;
 import com.kdc.cnema.dtos.ResponseDTO;
 import com.kdc.cnema.service.CountryService;
+import com.kdc.cnema.service.ProfileAuditService;
 import com.kdc.cnema.service.UserService;
 import com.kdc.cnema.utils.JwtPayload;
 
@@ -32,6 +34,9 @@ public class LoginController {
 	
 	@Autowired
 	UserService userService;
+	
+	@Autowired
+	ProfileAuditService profileAuditService;
 	
 	@Autowired
 	CountryService countryService;
@@ -105,6 +110,12 @@ public class LoginController {
 					tempUser.setLogged(true);
 					
 					User user = userService.save(tempUser);
+					
+					ProfileAudit audit = new ProfileAudit();
+					audit.setArgument("Solo un admin puede activar la cuenta.");
+					audit.setStateChanged(false);
+					audit.setUser(user);
+					audit.setUserModifier("Admin Bot");
 					
 					message = JwtPayload.generateToken(new JwtPayload(user.getUsername(), new Date(), user.getType()+"", user.getId()+""));
 					responseCode = HttpStatus.OK;
