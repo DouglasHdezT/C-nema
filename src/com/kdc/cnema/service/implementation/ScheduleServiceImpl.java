@@ -28,6 +28,12 @@ public class ScheduleServiceImpl implements ScheduleService{
 		// TODO Auto-generated method stub
 		return sRepo.findAll();
 	}
+	
+	@Override
+	public List<Schedule> findAllActive() throws DataAccessException {
+		// TODO Auto-generated method stub
+		return sRepo.findByStatus(true);
+	}
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)
