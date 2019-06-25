@@ -64,6 +64,8 @@ public class UserServiceImpl implements UserService{
 	@Transactional(rollbackFor = Exception.class)
 	public void updateStatus(Integer id, Boolean status, ProfileAudit audit) throws DataAccessException {
 		
+		audit.setUser(findOneById(id));
+		
 		auditService.save(audit);
 		uRepo.updateState(id, status);
 		

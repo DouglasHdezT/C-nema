@@ -110,7 +110,6 @@ public class UserController {
 				ProfileAudit audit = new ProfileAudit();
 				
 				audit.setArgument(argumentBody.getArgument());
-				audit.setUser(userToUpdate);
 				audit.setUserModifier(user.getUsername());
 				audit.setModificationDate(new Timestamp(new Date().getTime()));
 				audit.setStateChanged(!userToUpdate.getStatus());
