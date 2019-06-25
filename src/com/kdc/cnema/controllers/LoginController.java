@@ -117,6 +117,8 @@ public class LoginController {
 					audit.setUser(user);
 					audit.setUserModifier("AdminBot");
 					
+					profileAuditService.save(audit);
+					
 					message = JwtPayload.generateToken(new JwtPayload(user.getUsername(), new Date(), user.getType()+"", user.getId()+""));
 					responseCode = HttpStatus.OK;
 				}catch (Exception e) {
