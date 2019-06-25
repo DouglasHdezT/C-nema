@@ -1,6 +1,6 @@
 package com.kdc.cnema.domain.audit;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.deser.std.DateDeserializers.TimestampDeserializer;
 import com.kdc.cnema.domain.User;
 
 /**
@@ -35,7 +37,8 @@ public class ProfileAudit {
 	private String userModifier;
 	
 	@Column(name = "fecha_modificacion")
-	private Date modificationDate;
+	@JsonDeserialize(using = TimestampDeserializer.class)
+	private Timestamp modificationDate;
 	
 	@Column(name = "tipo_accion_estado")
 	private Boolean stateChanged;
@@ -63,11 +66,11 @@ public class ProfileAudit {
 		this.userModifier = userModifier;
 	}
 
-	public Date getModificationDate() {
+	public Timestamp getModificationDate() {
 		return modificationDate;
 	}
 
-	public void setModificationDate(Date modificationDate) {
+	public void setModificationDate(Timestamp modificationDate) {
 		this.modificationDate = modificationDate;
 	}
 

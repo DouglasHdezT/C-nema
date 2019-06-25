@@ -1,6 +1,7 @@
 package com.kdc.cnema.domain;
 
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -18,6 +19,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.deser.std.DateDeserializers.TimestampDeserializer;
 import com.fasterxml.jackson.databind.deser.std.NumberDeserializers.BigDecimalDeserializer;
 
 /**
@@ -34,6 +36,11 @@ public class Reservation {
 	@GeneratedValue(generator = "reservacion_id_reservacion_seq", strategy = GenerationType.AUTO)
 	@SequenceGenerator(name = "reservacion_id_reservacion_seq" , sequenceName = "public.reservacion_id_reservacion_seq", allocationSize = 1)
 	private Integer id;
+	
+	@NotNull
+	@Column(name = "fecha_ingreso")
+	@JsonDeserialize(using = TimestampDeserializer.class)
+	private Timestamp timestamp;
 	
 	@Min(1)
 	@Max(15)

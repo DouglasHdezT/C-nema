@@ -115,7 +115,7 @@ public class LoginController {
 					audit.setArgument("Solo un admin puede activar la cuenta.");
 					audit.setStateChanged(false);
 					audit.setUser(user);
-					audit.setUserModifier("Admin Bot");
+					audit.setUserModifier("AdminBot");
 					
 					message = JwtPayload.generateToken(new JwtPayload(user.getUsername(), new Date(), user.getType()+"", user.getId()+""));
 					responseCode = HttpStatus.OK;

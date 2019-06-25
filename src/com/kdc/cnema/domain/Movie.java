@@ -19,9 +19,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.deser.std.DateDeserializers.DateDeserializer;
-import com.fasterxml.jackson.databind.deser.std.NumberDeserializers.BigDecimalDeserializer;
 
 /**
  * Clase que mapea la entidad "pelicula" en la base de datos del proyecto.

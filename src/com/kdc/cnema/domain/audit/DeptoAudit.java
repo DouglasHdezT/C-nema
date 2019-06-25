@@ -1,6 +1,6 @@
 package com.kdc.cnema.domain.audit;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +9,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.deser.std.DateDeserializers.TimestampDeserializer;
 
 /**
  * Clase que mapea la entidad "depto_auditoria" en la base de datos del proyecto.
@@ -29,7 +32,8 @@ public class DeptoAudit {
 	private String userModifier;
 	
 	@Column(name = "fecha_modificacion")
-	private Date modificationDate; 
+	@JsonDeserialize(using = TimestampDeserializer.class)
+	private Timestamp modificationDate; 
 	
 	@Column(name = "campo_modificacion")
 	private String modifiedField;
@@ -50,11 +54,11 @@ public class DeptoAudit {
 		this.userModifier = userModifier;
 	}
 
-	public Date getModificationDate() {
+	public Timestamp getModificationDate() {
 		return modificationDate;
 	}
 
-	public void setModificationDate(Date modificationDate) {
+	public void setModificationDate(Timestamp modificationDate) {
 		this.modificationDate = modificationDate;
 	}
 

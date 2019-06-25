@@ -45,14 +45,14 @@ public class Schedule {
 	@Column(name = "disponibles")
 	private Integer avialable;
 	
-	@JsonDeserialize(using = TimestampDeserializer.class)
 	@NotNull
 	@Column(name = "hora_inicio")
+	@JsonDeserialize(using = TimestampDeserializer.class)
 	private Timestamp startTime;
 	
-	@JsonDeserialize(using = TimestampDeserializer.class)
 	@NotNull
 	@Column(name = "hora_fin")
+	@JsonDeserialize(using = TimestampDeserializer.class)
 	private Timestamp endTime;
 	
 	@NotNull
