@@ -82,7 +82,7 @@ public class UserController {
 				code);
 	}
 	
-	@RequestMapping(value ="/users/update/")
+	@RequestMapping(value ="/users/update/", method = RequestMethod.POST)
 	public ResponseEntity<ResponseDTO> updateState(@RequestBody ArgumentDTO argumentBody, @RequestHeader("Authorization") String authHeader){
 		String message = "Default message";
 		HttpStatus code = HttpStatus.BAD_REQUEST;
@@ -161,7 +161,7 @@ public class UserController {
 
 			if(result.hasErrors()) {
 				code = HttpStatus.BAD_REQUEST;
-				message = "Campos de reservación con errores";
+				message = "Campos de reservaciÃ³n con errores";
 			}else {
 				
 				if(user == null || schedule == null) {
