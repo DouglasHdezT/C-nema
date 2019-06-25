@@ -107,17 +107,14 @@ public class LoginController {
 					tempUser.setType(0);
 					tempUser.setStatus(false);
 					tempUser.setPassword(passwordEncoder.encode(tempUser.getPassword()));
-					tempUser.setLogged(true);
-					
-					User user = userService.save(tempUser);
+					tempUser.setLogged(false);
 					
 					ProfileAudit audit = new ProfileAudit();
 					audit.setArgument("Solo un admin puede activar la cuenta.");
 					audit.setStateChanged(false);
-					audit.setUser(user);
 					audit.setUserModifier("AdminBot");
 					
-					profileAuditService.save(audit);
+					User user = userService.save(tempUser);
 					
 					message = JwtPayload.generateToken(new JwtPayload(user.getUsername(), new Date(), user.getType()+"", user.getId()+""));
 					responseCode = HttpStatus.OK;

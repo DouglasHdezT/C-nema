@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.dao.DataAccessException;
 
 import com.kdc.cnema.domain.User;
+import com.kdc.cnema.domain.audit.ProfileAudit;
 
 public interface UserService {
 	
@@ -17,6 +18,8 @@ public interface UserService {
 	List<User> findAll() throws DataAccessException;
 	
 	User save(User user) throws DataAccessException;
+	
+	User loginSave(User user, ProfileAudit audit) throws DataAccessException;
 	
 	void deleteById(Integer id) throws DataAccessException;
 	

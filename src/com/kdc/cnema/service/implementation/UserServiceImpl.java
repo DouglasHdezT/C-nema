@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.kdc.cnema.domain.User;
+import com.kdc.cnema.domain.audit.ProfileAudit;
 import com.kdc.cnema.repositories.UserRepository;
 import com.kdc.cnema.service.ProfileAuditService;
 import com.kdc.cnema.service.UserService;
@@ -64,6 +65,17 @@ public class UserServiceImpl implements UserService{
 	public void updateStatus(Integer id, Boolean status) throws DataAccessException {
 		uRepo.updateState(id, status);
 		
+	}
+
+	@Override
+	@Transactional(rollbackFor = Exception.class)
+	public User loginSave(User user, ProfileAudit audit) throws DataAccessException {
+		user = uRepo.save(user);
+		
+		audit.setUser(user);
+		auditService.save(audit);
+		
+		return user;
 	}
 
 }
