@@ -94,6 +94,30 @@ public class ScheduleController {
 		return new ResponseEntity<List<Schedule>>(schedules, code);
 	}
 	
+	@RequestMapping(value = "/schedules/all/active/{id}")
+	public ResponseEntity<List<Schedule>> getAllSchedulesActivePerMovie(@PathVariable("id") Integer id, @RequestHeader("Authorization") String authHeader){
+		List<Schedule> schedules = new ArrayList<>();
+		HttpStatus code = HttpStatus.BAD_REQUEST;
+		
+		try {
+			JwtPayload.validateToken(authHeader);
+			
+			schedules = scheduleService.findAllPerMovie(id);
+			code=HttpStatus.OK;
+		}catch (io.jsonwebtoken.SignatureException e) {
+			code = HttpStatus.FORBIDDEN;
+		}catch (io.jsonwebtoken.MalformedJwtException e) {
+			code = HttpStatus.FORBIDDEN;
+		}catch (MalformedAuthHeader e) {
+			code = HttpStatus.FORBIDDEN;
+		}catch (Exception e) {
+			e.printStackTrace();
+			code=HttpStatus.INTERNAL_SERVER_ERROR;
+		}
+		
+		return new ResponseEntity<List<Schedule>>(schedules, code);
+	}
+	
 	@RequestMapping(value = "/schedules/movie/{id}")
 	public ResponseEntity<List<Schedule>> getSchedulesPerMovie(@PathVariable("id") Integer id ,@RequestHeader("Authorization") String authHeader){
 		List<Schedule> schedules = new ArrayList<>();

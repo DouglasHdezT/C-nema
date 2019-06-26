@@ -17,7 +17,7 @@ public interface ScheduleRepository extends JpaRepository<Schedule, Integer>{
 			, nativeQuery = true)
 	public void updateState(@Param("id") Integer id, @Param("status") Boolean status) throws DataAccessException;
 	
-	@Query(value = "SELECT * FROM horario WHERE id_pelicula = :id"
+	@Query(value = "SELECT * FROM horario WHERE id_pelicula = :id AND status = true"
 			, nativeQuery = true)
 	public List<Schedule> findAllPerMovie(@Param("id") Integer id); 
 

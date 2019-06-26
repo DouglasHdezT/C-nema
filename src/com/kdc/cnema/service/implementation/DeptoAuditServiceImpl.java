@@ -37,7 +37,6 @@ public class DeptoAuditServiceImpl implements DeptoAuditService{
 	@Transactional(rollbackFor = Exception.class)
 	public void deleteById(Integer id) throws DataAccessException {
 		deptoAuditRepo.deleteById(id);
-		
 	}
 
 }

@@ -47,7 +47,6 @@ public class MovieServiceImpl implements MovieService{
 	@Transactional(rollbackFor = Exception.class)
 	public void deleteById(Integer id) throws DataAccessException {
 		mRepo.deleteById(id);
-		
 	}
 
 	@Override

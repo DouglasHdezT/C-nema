@@ -37,7 +37,6 @@ public class CategoryAuditServiceImpl implements CategoryAuditService{
 	@Transactional(rollbackFor = Exception.class)
 	public void deleteById(Integer id) throws DataAccessException {
 		categoryAuditRepo.deleteById(id);
-		
 	}
 
 }

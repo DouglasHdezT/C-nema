@@ -37,7 +37,6 @@ public class MovieAuditServiceImpl implements MovieAuditService{
 	@Transactional(rollbackFor = Exception.class)
 	public void deleteById(Integer id) throws DataAccessException {
 		movieAuditRepo.deleteById(id);
-		
 	}
 
 }

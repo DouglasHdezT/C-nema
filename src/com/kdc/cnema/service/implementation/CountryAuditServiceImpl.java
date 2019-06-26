@@ -37,7 +37,6 @@ public class CountryAuditServiceImpl implements CountryAuditService{
 	@Transactional(rollbackFor = Exception.class)
 	public void deleteById(Integer id) throws DataAccessException {
 		countryAuditRepo.deleteById(id);
-		
 	}
 
 }
