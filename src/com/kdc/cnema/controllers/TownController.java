@@ -119,7 +119,7 @@ public class TownController {
 				}
 				else {
 					town.setDepto(depto);
-					townService.save(town);
+					townService.save(town, user.getUsername());
 					message = "Municipio insertado con exito";
 					code = HttpStatus.OK;
 				}
@@ -162,7 +162,7 @@ public class TownController {
 				code = HttpStatus.NOT_FOUND;
 				message = "Categoria no encontrada";
 			}else {
-				townService.updateState(id, !town.getStatus());
+				townService.updateState(id, !town.getStatus(), user.getUsername());
 				code = HttpStatus.OK;
 				message = "Estado modificado con exito";
 			}
