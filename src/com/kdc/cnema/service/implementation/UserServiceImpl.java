@@ -1,5 +1,6 @@
 package com.kdc.cnema.service.implementation;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,6 +82,16 @@ public class UserServiceImpl implements UserService{
 		auditService.save(audit);
 		
 		return user;
+	}
+
+	@Override
+	@Transactional(rollbackFor = Exception.class)
+	public void updateBalance(User user, BigDecimal toChange) throws DataAccessException {
+		BigDecimal newValue = new BigDecimal(user.getCurrCredit().doubleValue() + toChange.doubleValue());
+		
+		user.setCurrCredit(newValue);
+		
+		uRepo.save(user);
 	}
 
 }

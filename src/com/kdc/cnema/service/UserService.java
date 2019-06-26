@@ -1,5 +1,6 @@
 package com.kdc.cnema.service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.dao.DataAccessException;
@@ -26,6 +27,8 @@ public interface UserService {
 	void updateLoggingState(Integer id, Boolean state) throws DataAccessException;
 	
 	void updateStatus(Integer id, Boolean status, ProfileAudit audit) throws DataAccessException;
+	
+	void updateBalance(User user, BigDecimal toChange) throws DataAccessException;
 	
 }
 

@@ -14,6 +14,8 @@ public interface ReservationService {
 	
 	List<Reservation> findAll() throws DataAccessException;
 	
+	List<Reservation> findAllPerUser(Integer id) throws DataAccessException;
+	
 	Reservation save(Reservation reservation, Schedule schedule, User user) throws DataAccessException;
 	
 	void deleteById(Integer id) throws DataAccessException;

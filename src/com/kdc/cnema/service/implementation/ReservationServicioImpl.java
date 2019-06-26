@@ -37,6 +37,11 @@ public class ReservationServicioImpl implements ReservationService{
 	public List<Reservation> findAll() throws DataAccessException {
 		return seRepo.findAll();
 	}
+	
+	@Override
+	public List<Reservation> findAllPerUser(Integer id) throws DataAccessException {
+		return seRepo.findAllPerUser(id);
+	}
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)

@@ -11,6 +11,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,6 +25,7 @@ import com.kdc.cnema.domain.Schedule;
 import com.kdc.cnema.domain.User;
 import com.kdc.cnema.domain.audit.ProfileAudit;
 import com.kdc.cnema.dtos.ArgumentDTO;
+import com.kdc.cnema.dtos.BalanceDTO;
 import com.kdc.cnema.dtos.ResponseDTO;
 import com.kdc.cnema.exceptions.MalformedAuthHeader;
 import com.kdc.cnema.service.ReservationService;
@@ -43,6 +45,9 @@ public class UserController {
 	
 	@Autowired
 	ReservationService reservationService;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	
 	/*
 	 * Admin methods
@@ -248,5 +253,53 @@ public class UserController {
 		}
 		
 		return new ResponseEntity<List<Reservation>>(reservations, code);
+	}
+	
+	@RequestMapping(value ="/users/balance/update", method = RequestMethod.POST)
+	public ResponseEntity<ResponseDTO> updateBalance(@RequestBody BalanceDTO balanceBody, @RequestHeader("Authorization") String authHeader){
+		String message = "Default message";
+		HttpStatus code = HttpStatus.BAD_REQUEST;
+		
+		try {
+			
+			JwtPayload.validateToken(authHeader);
+			JwtPayload payload = JwtPayload.decodeToken(authHeader.substring(7));
+			
+			User user = userService.findOneById(Integer.parseInt(payload.getUid()));
+			
+			if(user == null) {
+				
+				code = HttpStatus.NOT_FOUND;
+				message = "Usuario no encontrado";
+			
+			}else{
+				if(!passwordEncoder.matches(balanceBody.getPassword(), user.getPassword())) {
+					code = HttpStatus.FORBIDDEN;
+					message = "Contraseña incorrecta";
+				}else {
+					userService.updateBalance(user, balanceBody.getToChange());
+					
+					code = HttpStatus.OK;
+					message = "Usuario modificado";
+				}
+			}
+
+			
+		}catch (io.jsonwebtoken.SignatureException e) {
+			message = "Token invalido";
+			code = HttpStatus.FORBIDDEN;
+		}catch (io.jsonwebtoken.MalformedJwtException e) {
+			message = "Token invalido";
+			code = HttpStatus.FORBIDDEN;
+		}catch (MalformedAuthHeader e) {
+			message = "Token invalido";
+			code = HttpStatus.FORBIDDEN;
+		}catch (Exception e) {
+			e.printStackTrace();
+			message = "Error interno de servidor";
+			code = HttpStatus.INTERNAL_SERVER_ERROR;
+		}
+		
+		return new ResponseEntity<ResponseDTO>(new ResponseDTO(message), code);
 	}
 }
