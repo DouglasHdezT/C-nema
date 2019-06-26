@@ -68,7 +68,7 @@ public class CategoryController {
 				code);
 	}
 	
-	@RequestMapping("/countries/all/audits")
+	@RequestMapping("/categories/all/audits")
 	public ResponseEntity<List<CategoryAudit>> getAllAudits(@RequestHeader("Authorization") String authHeader){
 		List<CategoryAudit> audits =  new ArrayList<>();	
 		HttpStatus code = HttpStatus.BAD_REQUEST;

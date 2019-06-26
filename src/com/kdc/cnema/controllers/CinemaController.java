@@ -65,7 +65,7 @@ public class CinemaController {
 		return new ResponseEntity<List<Cinema>>(cinemas, code);
 	}
 	
-	@RequestMapping("/countries/all/audits")
+	@RequestMapping("/cinemas/all/audits")
 	public ResponseEntity<List<CinemaAudit>> getAllAudits(@RequestHeader("Authorization") String authHeader){
 		List<CinemaAudit> audits =  new ArrayList<>();	
 		HttpStatus code = HttpStatus.BAD_REQUEST;
