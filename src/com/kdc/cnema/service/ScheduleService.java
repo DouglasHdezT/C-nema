@@ -16,9 +16,11 @@ public interface ScheduleService {
 	
 	List<Schedule> findAllPerMovie(Integer id) throws DataAccessException;
 	
-	Schedule save(Schedule user) throws DataAccessException;
+	Schedule save(Schedule schedule, String username) throws DataAccessException;
+	
+	Schedule reserve(Schedule schedule) throws DataAccessException;
 	
 	void deleteById(Integer id) throws DataAccessException;
 	
-	void updateState(Integer id, Boolean state) throws DataAccessException;
+	void updateState(Integer id, Boolean state, String username) throws DataAccessException;
 }

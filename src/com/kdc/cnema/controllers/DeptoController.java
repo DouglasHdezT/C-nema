@@ -121,7 +121,7 @@ public class DeptoController {
 				}
 				else {
 					depto.setCountry(country);
-					deptoService.save(depto);
+					deptoService.save(depto, user.getUsername());
 					message = "Departamento insertada con exito";
 					code = HttpStatus.OK;
 				}
@@ -164,7 +164,7 @@ public class DeptoController {
 				code = HttpStatus.NOT_FOUND;
 				message = "Categoria no encontrada";
 			}else {
-				deptoService.updateState(id, !depto.getStatus());
+				deptoService.updateState(id, !depto.getStatus(), user.getUsername());
 				code = HttpStatus.OK;
 				message = "Estado modificado con exito";
 			}

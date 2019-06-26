@@ -16,9 +16,9 @@ public interface CategoryService {
 	
 	List<Category> findAllActive() throws DataAccessException;
 	
-	Category save(Category category) throws DataAccessException;
+	Category save(Category category, String username) throws DataAccessException;
 	
 	void deleteById(Integer id) throws DataAccessException;
 	
-	void updateState(Integer id, Boolean state) throws DataAccessException;
+	void updateState(Integer id, Boolean state, String username) throws DataAccessException;
 }

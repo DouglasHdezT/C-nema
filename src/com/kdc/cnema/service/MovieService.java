@@ -16,9 +16,9 @@ public interface MovieService {
 	
 	public List<Movie> findAllActive() throws DataAccessException;
 	
-	Movie save(Movie movie) throws DataAccessException;
+	Movie save(Movie movie, String username) throws DataAccessException;
 	
 	void deleteById(Integer id) throws DataAccessException;
 	
-	void updateState(Integer id, Boolean state) throws DataAccessException;
+	void updateState(Integer id, Boolean state, String username) throws DataAccessException;
 }

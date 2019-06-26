@@ -115,7 +115,7 @@ public class CinemaController {
 					code = HttpStatus.FORBIDDEN;
 				}
 				else{
-					cinemaService.save(cinema);
+					cinemaService.save(cinema, user.getUsername());
 					message = "Sala insertada con exito";
 					code = HttpStatus.OK;
 					}
@@ -150,7 +150,7 @@ public class CinemaController {
 				code = HttpStatus.NOT_FOUND;
 				message = "Categoria no encontrada";
 			}else {
-				cinemaService.updateState(id, !cinema.getStatus());
+				cinemaService.updateState(id, !cinema.getStatus(), user.getUsername());
 				code = HttpStatus.OK;
 				message = "Estado modificado con exito";
 			}

@@ -131,7 +131,7 @@ public class MovieController {
 					}
 					else {
 						movie.setCategory(category);
-						movieService.save(movie);
+						movieService.save(movie, user.getUsername());
 						message = "Pelicula insertada con exito";
 						code = HttpStatus.OK;
 					}
@@ -168,7 +168,7 @@ public class MovieController {
 				code = HttpStatus.NOT_FOUND;
 				message = "Categoria no encontrada";
 			}else {
-				movieService.updateState(id, !movie.getStatus());
+				movieService.updateState(id, !movie.getStatus(), user.getUsername());
 				code = HttpStatus.OK;
 				message = "Estado modificado con exito";
 			}

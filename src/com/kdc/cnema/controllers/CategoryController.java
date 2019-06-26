@@ -117,7 +117,7 @@ public class CategoryController {
 					message = "Categoria ya existe";
 					code = HttpStatus.CONFLICT;
 				}else {
-					cateogryService.save(category);
+					cateogryService.save(category, user.getUsername());
 					message = "Categoria insertada con exito";
 					code = HttpStatus.OK;
 				}
@@ -161,7 +161,7 @@ public class CategoryController {
 				code = HttpStatus.NOT_FOUND;
 				message = "Categoria no encontrada";
 			}else {
-				cateogryService.updateState(id, !category.getStatus());
+				cateogryService.updateState(id, !category.getStatus(), user.getUsername());
 				code = HttpStatus.OK;
 				message = "Estado modificado con exito";
 			}

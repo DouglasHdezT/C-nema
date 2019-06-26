@@ -14,9 +14,9 @@ public interface CinemaService {
 	
 	List<Cinema> findAllActive() throws DataAccessException;
 	
-	Cinema save(Cinema cinema) throws DataAccessException;
+	Cinema save(Cinema cinema, String username) throws DataAccessException;
 	
 	void deleteById(Integer id) throws DataAccessException;
 
-	void updateState(Integer id, Boolean state) throws DataAccessException;
+	void updateState(Integer id, Boolean state, String username) throws DataAccessException;
 }

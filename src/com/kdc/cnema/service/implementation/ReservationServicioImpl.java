@@ -59,7 +59,7 @@ public class ReservationServicioImpl implements ReservationService{
 		
 		reservation.setRemainBalance(user.getCurrCredit());
 				
-		schedule = scheduleService.save(schedule);
+		schedule = scheduleService.reserve(schedule);
 		user =  userService.save(user);
 		
 		reservation.setSchedule(schedule);

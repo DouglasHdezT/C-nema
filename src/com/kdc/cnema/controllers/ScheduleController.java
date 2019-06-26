@@ -205,7 +205,7 @@ public class ScheduleController {
 					schedule.setCinema(cinema);
 					schedule.setMovie(movie);
 					
-					scheduleService.save(schedule);
+					scheduleService.save(schedule, user.getUsername());
 					
 					message = "Horario insertado con exito";
 					code = HttpStatus.OK;
@@ -251,7 +251,7 @@ public class ScheduleController {
 				code = HttpStatus.NOT_FOUND;
 				message = "Categoria no encontrada";
 			}else {
-				scheduleService.updateState(id, !schedule.getStatus());
+				scheduleService.updateState(id, !schedule.getStatus(), user.getUsername());
 				code = HttpStatus.OK;
 				message = "Estado modificado con exito";
 			}

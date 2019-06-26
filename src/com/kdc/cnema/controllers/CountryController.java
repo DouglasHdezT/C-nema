@@ -109,7 +109,7 @@ public class CountryController {
 					message = "Pais ya existe";
 					code = HttpStatus.CONFLICT;
 				}else {
-					countryService.save(country);
+					countryService.save(country, user.getUsername());
 					message = "Categoria insertada con exito";
 					code = HttpStatus.OK;
 				}
@@ -153,7 +153,7 @@ public class CountryController {
 				code = HttpStatus.NOT_FOUND;
 				message = "Categoria no encontrada";
 			}else {
-				countryService.updateState(id, !country.getStatus());
+				countryService.updateState(id, !country.getStatus(), user.getUsername());
 				code = HttpStatus.OK;
 				message = "Estado modificado con exito";
 			}

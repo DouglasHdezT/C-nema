@@ -16,9 +16,9 @@ public interface TownService {
 	
 	List<Town> findAllActive() throws DataAccessException;
 	
-	Town save(Town user) throws DataAccessException;
+	Town save(Town town, String username) throws DataAccessException;
 	
 	void deleteById(Integer id) throws DataAccessException;
 	
-	void updateState(Integer id, Boolean state) throws DataAccessException;
+	void updateState(Integer id, Boolean state, String username) throws DataAccessException;
 }

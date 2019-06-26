@@ -18,9 +18,9 @@ public interface DeptoService {
 
 	List<Depto> findAllActive() throws DataAccessException;
 	
-	Depto save(Depto depto) throws DataAccessException;
+	Depto save(Depto depto, String username) throws DataAccessException;
 	
 	void deleteById(Integer id) throws DataAccessException;
 
-	void updateState(Integer id, Boolean state) throws DataAccessException;
+	void updateState(Integer id, Boolean state, String username) throws DataAccessException;
 }
