@@ -20,9 +20,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.kdc.cnema.domain.Depto;
 import com.kdc.cnema.domain.Town;
 import com.kdc.cnema.domain.User;
+import com.kdc.cnema.domain.audit.TownAudit;
 import com.kdc.cnema.dtos.ResponseDTO;
 import com.kdc.cnema.exceptions.MalformedAuthHeader;
 import com.kdc.cnema.service.DeptoService;
+import com.kdc.cnema.service.TownAuditService;
 import com.kdc.cnema.service.TownService;
 import com.kdc.cnema.service.UserService;
 import com.kdc.cnema.utils.JwtPayload;
@@ -35,10 +37,14 @@ public class TownController {
 	TownService townService;
 	
 	@Autowired
+	TownAuditService auditService;
+	
+	@Autowired
 	DeptoService deptoService;
 	
 	@Autowired
 	UserService userService;
+	
 	
 	@RequestMapping("/towns/all")
 	public ResponseEntity<List<Town>> getAllTowns(){
@@ -53,10 +59,39 @@ public class TownController {
 			code = HttpStatus.INTERNAL_SERVER_ERROR;
 		}
 		
+		return new ResponseEntity<List<Town>>(towns, code);
+	}
+	
+	@RequestMapping("/towns/all/audits")
+	public ResponseEntity<List<TownAudit>> getAllAudits(@RequestHeader("Authorization") String authHeader){
+		List<TownAudit> audits =  new ArrayList<>();	
+		HttpStatus code = HttpStatus.BAD_REQUEST;
 		
-		return new ResponseEntity<List<Town>>(
-				towns,
-				code);
+		try {
+			JwtPayload.validateToken(authHeader);
+			JwtPayload payload = JwtPayload.decodeToken(authHeader.substring(7));
+			
+			User user = userService.findOneById(Integer.parseInt(payload.getUid()));
+			
+			if(user != null && user.getType() == 0) {
+				code = HttpStatus.FORBIDDEN;
+			}else {
+				audits = auditService.findAll();
+				code = HttpStatus.OK;
+			}
+			
+		}catch (io.jsonwebtoken.SignatureException e) {
+			code = HttpStatus.FORBIDDEN;
+		}catch (io.jsonwebtoken.MalformedJwtException e) {
+			code = HttpStatus.FORBIDDEN;
+		}catch (MalformedAuthHeader e) {
+			code = HttpStatus.FORBIDDEN;
+		}catch (Exception e) {
+			e.printStackTrace();
+			code=HttpStatus.INTERNAL_SERVER_ERROR;
+		}
+		
+		return new ResponseEntity<List<TownAudit>>(audits, code);
 	}
 	
 	
@@ -110,7 +145,7 @@ public class TownController {
 
 				User user = userService.findOneById(Integer.parseInt(payload.getUid()));
 				
-				if(user.getType() == 0) {
+				if(user != null &&user.getType() == 0) {
 					message = "Usuario no autorizado";
 					code = HttpStatus.FORBIDDEN;
 				}else if(depto==null) {

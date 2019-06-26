@@ -20,9 +20,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.kdc.cnema.domain.Country;
 import com.kdc.cnema.domain.Depto;
 import com.kdc.cnema.domain.User;
+import com.kdc.cnema.domain.audit.DeptoAudit;
 import com.kdc.cnema.dtos.ResponseDTO;
 import com.kdc.cnema.exceptions.MalformedAuthHeader;
 import com.kdc.cnema.service.CountryService;
+import com.kdc.cnema.service.DeptoAuditService;
 import com.kdc.cnema.service.DeptoService;
 import com.kdc.cnema.service.UserService;
 import com.kdc.cnema.utils.JwtPayload;
@@ -35,17 +37,19 @@ public class DeptoController {
 	DeptoService deptoService;
 	
 	@Autowired
+	DeptoAuditService auditService;
+	
+	@Autowired
 	CountryService countryService;
 	
 	@Autowired
 	UserService userService;
 	
+	
 	@RequestMapping("/deptos/all")
 	public ResponseEntity<List<Depto>> getAllDeptos(){
 		List<Depto> deptos =  new ArrayList<>();	
 		HttpStatus code = HttpStatus.BAD_REQUEST;
-		
-		//System.out.println(authHeader);
 		
 		try {
 
@@ -58,11 +62,40 @@ public class DeptoController {
 		}
 		
 		
-		return new ResponseEntity<List<Depto>>(
-				deptos,
-				code);
+		return new ResponseEntity<List<Depto>>(deptos, code);
 	}
 	
+	@RequestMapping("/deptos/all/audits")
+	public ResponseEntity<List<DeptoAudit>> getAllAudits(@RequestHeader("Authorization") String authHeader){
+		List<DeptoAudit> audits =  new ArrayList<>();	
+		HttpStatus code = HttpStatus.BAD_REQUEST;
+		
+		try {
+			JwtPayload.validateToken(authHeader);
+			JwtPayload payload = JwtPayload.decodeToken(authHeader.substring(7));
+			
+			User user = userService.findOneById(Integer.parseInt(payload.getUid()));
+			
+			if(user != null && user.getType() == 0) {
+				code = HttpStatus.FORBIDDEN;
+			}else {
+				audits = auditService.findAll();
+				code = HttpStatus.OK;
+			}
+			
+		}catch (io.jsonwebtoken.SignatureException e) {
+			code = HttpStatus.FORBIDDEN;
+		}catch (io.jsonwebtoken.MalformedJwtException e) {
+			code = HttpStatus.FORBIDDEN;
+		}catch (MalformedAuthHeader e) {
+			code = HttpStatus.FORBIDDEN;
+		}catch (Exception e) {
+			e.printStackTrace();
+			code=HttpStatus.INTERNAL_SERVER_ERROR;
+		}
+		
+		return new ResponseEntity<List<DeptoAudit>>(audits, code);
+	}
 	
 	@RequestMapping("/deptos/{id}")
 	public ResponseEntity<Depto> getTown(@PathVariable(value = "id") Integer id, @RequestHeader("Authorization") String authHeader){
