@@ -23,7 +23,7 @@ import com.fasterxml.jackson.databind.deser.std.DateDeserializers.TimestampDeser
 public class DeptoAudit {
 
 	@Id
-	@Column(name = "id_categoria_auditoria")
+	@Column(name = "id_depto_auditoria")
 	@GeneratedValue(generator = "depto_auditoria_id_depto_auditoria_seq", strategy = GenerationType.AUTO)
 	@SequenceGenerator(name = "depto_auditoria_id_depto_auditoria_seq" , sequenceName = "public.depto_auditoria_id_depto_auditoria_seq", allocationSize = 1)
 	private Integer id;
