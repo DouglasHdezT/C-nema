@@ -51,11 +51,17 @@ public class ReservationServicioImpl implements ReservationService{
 				schedule.getAvialable() - 
 				reservation.getQuanReservations()
 			);
+		
+		BigDecimal aux = new BigDecimal(
+					
+					user.getCurrCredit().doubleValue() - (
+							reservation.getTotalPrice().doubleValue() - 
+							reservation.getGrandTotal().doubleValue()
+							)
+				
+				);
 	
-		user.setCurrCredit(new BigDecimal(
-					user.getCurrCredit().doubleValue() - 
-					reservation.getUsedBalance().doubleValue()
-				));;
+		user.setCurrCredit(aux);
 		
 		reservation.setRemainBalance(user.getCurrCredit());
 				
