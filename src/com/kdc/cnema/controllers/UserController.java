@@ -91,7 +91,7 @@ public class UserController {
 				code);
 	}
 	
-	@RequestMapping("/towns/all/audits")
+	@RequestMapping("/users/all/audits")
 	public ResponseEntity<List<ProfileAudit>> getAllAudits(@RequestHeader("Authorization") String authHeader){
 		List<ProfileAudit> audits =  new ArrayList<>();	
 		HttpStatus code = HttpStatus.BAD_REQUEST;
