@@ -23,7 +23,7 @@ import com.fasterxml.jackson.databind.deser.std.DateDeserializers.TimestampDeser
 public class TownAudit {
 
 	@Id
-	@Column(name = "id_categoria_auditoria")
+	@Column(name = "id_municipio_auditoria")
 	@GeneratedValue(generator = "municipio_auditoria_id_municipio_auditoria_seq", strategy = GenerationType.AUTO)
 	@SequenceGenerator(name = "municipio_auditoria_id_municipio_auditoria_seq" , sequenceName = "public.municipio_auditoria_id_municipio_auditoria_seq", allocationSize = 1)
 	private Integer id;
