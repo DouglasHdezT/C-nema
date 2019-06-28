@@ -28,6 +28,7 @@ import com.kdc.cnema.dtos.ArgumentDTO;
 import com.kdc.cnema.dtos.BalanceDTO;
 import com.kdc.cnema.dtos.ResponseDTO;
 import com.kdc.cnema.exceptions.MalformedAuthHeader;
+import com.kdc.cnema.service.ProfileAuditService;
 import com.kdc.cnema.service.ReservationService;
 import com.kdc.cnema.service.ScheduleService;
 import com.kdc.cnema.service.UserService;
@@ -39,6 +40,9 @@ public class UserController {
 	
 	@Autowired
 	UserService userService;
+	
+	@Autowired
+	ProfileAuditService auditService;
 	
 	@Autowired
 	ScheduleService scheduleService;
@@ -85,6 +89,38 @@ public class UserController {
 		return new ResponseEntity<List<User>>(
 				users,
 				code);
+	}
+	
+	@RequestMapping("/towns/all/audits")
+	public ResponseEntity<List<ProfileAudit>> getAllAudits(@RequestHeader("Authorization") String authHeader){
+		List<ProfileAudit> audits =  new ArrayList<>();	
+		HttpStatus code = HttpStatus.BAD_REQUEST;
+		
+		try {
+			JwtPayload.validateToken(authHeader);
+			JwtPayload payload = JwtPayload.decodeToken(authHeader.substring(7));
+			
+			User user = userService.findOneById(Integer.parseInt(payload.getUid()));
+			
+			if(user != null && user.getType() == 0) {
+				code = HttpStatus.FORBIDDEN;
+			}else {
+				audits = auditService.findAll();
+				code = HttpStatus.OK;
+			}
+			
+		}catch (io.jsonwebtoken.SignatureException e) {
+			code = HttpStatus.FORBIDDEN;
+		}catch (io.jsonwebtoken.MalformedJwtException e) {
+			code = HttpStatus.FORBIDDEN;
+		}catch (MalformedAuthHeader e) {
+			code = HttpStatus.FORBIDDEN;
+		}catch (Exception e) {
+			e.printStackTrace();
+			code=HttpStatus.INTERNAL_SERVER_ERROR;
+		}
+		
+		return new ResponseEntity<List<ProfileAudit>>(audits, code);
 	}
 	
 	@RequestMapping(value ="/users/update/", method = RequestMethod.POST)
