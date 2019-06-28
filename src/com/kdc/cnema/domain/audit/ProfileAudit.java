@@ -31,7 +31,7 @@ public class ProfileAudit {
 	@Column(name = "id_cuenta")
 	@GeneratedValue(generator = "cuentas_auditoria_id_cuenta_seq", strategy = GenerationType.AUTO)
 	@SequenceGenerator(name = "cuentas_auditoria_id_cuenta_seq" , sequenceName = "public.cuentas_auditoria_id_cuenta_seq", allocationSize = 1)
-	private Integer _id;
+	private Integer id;
 	
 	@Column(name = "usuario_modificacion")
 	private String userModifier;
@@ -50,12 +50,13 @@ public class ProfileAudit {
 	@JoinColumn(name ="id_usuario")
 	private User user;
 
-	public Integer get_id() {
-		return _id;
+
+	public Integer getId() {
+		return id;
 	}
 
-	public void set_id(Integer _id) {
-		this._id = _id;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getUserModifier() {

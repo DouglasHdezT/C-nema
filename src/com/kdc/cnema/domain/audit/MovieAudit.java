@@ -23,7 +23,7 @@ import com.fasterxml.jackson.databind.deser.std.DateDeserializers.TimestampDeser
 public class MovieAudit {
 	
 	@Id
-	@Column(name = "id_categoria_auditoria")
+	@Column(name = "id_pelicula_auditoria")
 	@GeneratedValue(generator = "pelicula_auditoria_id_pelicula_auditoria_seq", strategy = GenerationType.AUTO)
 	@SequenceGenerator(name = "pelicula_auditoria_id_pelicula_auditoria_seq" , sequenceName = "public.pelicula_auditoria_id_pelicula_auditoria_seq", allocationSize = 1)
 	private Integer id;
