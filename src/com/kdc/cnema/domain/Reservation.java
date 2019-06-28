@@ -59,7 +59,7 @@ public class Reservation {
 	
 	@JsonDeserialize(using = BigDecimalDeserializer.class)
 	@NotNull
-	@Column(name = "saldo_remanete_cuenta")
+	@Column(name = "saldo_remanente_cuenta")
 	private BigDecimal remainBalance;
 	
 	@JsonDeserialize(using = BigDecimalDeserializer.class)

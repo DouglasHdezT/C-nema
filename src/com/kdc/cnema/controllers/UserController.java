@@ -166,7 +166,7 @@ public class UserController {
 
 			if(result.hasErrors()) {
 				code = HttpStatus.BAD_REQUEST;
-				message = "Campos de reservación con errores";
+				message = "Campos de reservacion con errores";
 			}else {
 				
 				if(user == null || schedule == null) {
