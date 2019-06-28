@@ -67,12 +67,12 @@ public class Reservation {
 	@Column(name = "gran_total")
 	private BigDecimal grandTotal;
 	
-	@Min(1)
+	@Min(0)
 	@Max(15)
 	@Column(name = "cantidad_especial")
 	private Integer quanPremium;;
 	
-	@Min(1)
+	@Min(0)
 	@Max(15)
 	@Column(name = "cantidad_normal")
 	private Integer quanNormal;
