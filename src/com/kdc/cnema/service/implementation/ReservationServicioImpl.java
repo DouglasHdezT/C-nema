@@ -54,18 +54,14 @@ public class ReservationServicioImpl implements ReservationService{
 		
 		
 		
-		reservation.setGrandTotal(new BigDecimal(Math.min(
+		reservation.setGrandTotal(new BigDecimal(Math.abs(
 					reservation.getTotalPrice().doubleValue() - 
 					reservation.getUsedBalance().doubleValue()
-				, 0)));
+				)));
 		
 		BigDecimal aux = new BigDecimal(
-					
-					user.getCurrCredit().doubleValue() - (
-							reservation.getTotalPrice().doubleValue() - 
-							reservation.getGrandTotal().doubleValue()
-							)
-				
+					user.getCurrCredit().doubleValue() - 
+					reservation.getUsedBalance().doubleValue()
 				);
 	
 		user.setCurrCredit(aux);
