@@ -91,6 +91,16 @@ public class Reservation {
 	public void setId(Integer id) {
 		this.id = id;
 	}
+	
+	
+
+	public Timestamp getTimestamp() {
+		return timestamp;
+	}
+
+	public void setTimestamp(Timestamp timestamp) {
+		this.timestamp = timestamp;
+	}
 
 	public Integer getQuanReservations() {
 		return quanReservations;
