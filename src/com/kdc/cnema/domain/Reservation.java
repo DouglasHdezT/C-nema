@@ -37,7 +37,6 @@ public class Reservation {
 	@SequenceGenerator(name = "reservacion_id_reservacion_seq" , sequenceName = "public.reservacion_id_reservacion_seq", allocationSize = 1)
 	private Integer id;
 	
-	@NotNull
 	@Column(name = "fecha_ingreso")
 	@JsonDeserialize(using = TimestampDeserializer.class)
 	private Timestamp timestamp;
