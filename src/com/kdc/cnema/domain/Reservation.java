@@ -94,14 +94,6 @@ public class Reservation {
 	
 	
 
-	public Timestamp getTimestamp() {
-		return timestamp;
-	}
-
-	public void setTimestamp(Timestamp timestamp) {
-		this.timestamp = timestamp;
-	}
-
 	public Integer getQuanReservations() {
 		return quanReservations;
 	}
